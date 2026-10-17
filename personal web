@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="小林的个人网站：学习记录、作品与联系信息。">
+  <title>ccy｜个人网站</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --accent: #2458c6;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: #202630;
+      background: #f6f7fb;
+      font-family: system-ui, -apple-system, "PingFang SC",
+        "Microsoft YaHei", sans-serif;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+    }
+    .wrap { max-width: 880px; margin: auto; padding: 24px; }
+    nav { display: flex; flex-wrap: wrap; gap: 24px; }
+    a { color: var(--accent); text-underline-offset: 4px; }
+    a:hover { text-decoration-thickness: 2px; }
+    a:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
+    header { padding: 68px 0 40px; }
+    h1 { font-size: clamp(36px, 7vw, 58px); line-height: 1.2; }
+    h2 { margin-top: 0; }
+    .intro { color: #505b6b; font-size: 20px; }
+    section {
+      padding: 28px;
+      margin: 24px 0;
+      background: white;
+      border: 1px solid #e2e6ee;
+      border-radius: 16px;
+      scroll-margin-top: 24px;
+    }
+    article + article {
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid #e2e6ee;
+    }
+    footer { padding: 24px 0; color: #606b7a; font-size: 14px; }
+    @media (max-width: 540px) {
+      .wrap { padding: 18px; }
+      header { padding-top: 40px; }
+      section { padding: 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav aria-label="主导航">
+      <a href="#about">关于我</a>
+      <a href="#work">作品</a>
+      <a href="#contact">联系</a>
+    </nav>
+
+    <header>
+      <p>你好，欢迎来到我的个人网站</p>
+      <h1>我是小林。</h1>
+      <p class="intro">在这里记录学习、分享作品，也认识有趣的人。</p>
+      <a href="#work">看看我的作品 →</a>
+    </header>
+
+    <main>
+      <section id="about">
+        <h2>关于我</h2>
+        <p>
+          我是一名正在学习网页创作的学生，对AI感兴趣。
+          最近在学习如何把想法做成可以使用的小项目。
+        </p>
+        <p>这个网站会持续更新我的作品和学习记录。</p>
+      </section>
+
+      <section id="work">
+        <h2>我的作品</h2>
+        <article>
+          <h3>作品一：学习笔记</h3>
+          <p>整理自己的学习过程，记录遇到的问题和解决方法。</p>
+          <p>状态：正在整理，完成后会在这里添加链接。</p>
+        </article>
+      </section>
+
+      <section id="contact">
+        <h2>联系我</h2>
+        <p>欢迎交流作品、学习心得或合作想法。</p>
+        <p>
+          邮箱：
+          <a href="chenchangyi2008@icloud.com">hello@example.com</a>
+        </p>
+      </section>
+    </main>
+
+    <footer>© 2026 ccy · 用 GitHub Pages 发布</footer>
+  </div>
+</body>
+</html>
