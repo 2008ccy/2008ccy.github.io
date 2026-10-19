@@ -1,0 +1,33 @@
+---
+import { getEntry, render } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Footer from "@/components/Footer.astro";
+import config from "@/config";
+
+const contact = await getEntry("pages", "contact");
+if (!contact) throw new Error("缺少 src/content/pages/contact.md");
+const { Content } = await render(contact);
+---
+
+<Layout
+  title={`${contact.data.title}｜${config.site.title}`}
+  description={contact.data.description}
+>
+  <Header />
+  <Breadcrumb />
+  <Main pageTitle={contact.data.title} class="app-prose" indexForSearch>
+    <Content />
+    {
+      contact.data.email && (
+        <p>
+          邮箱：
+          <a href={`mailto:${contact.data.email}`}>{contact.data.email}</a>
+        </p>
+      )
+    }
+  </Main>
+  <Footer />
+</Layout>

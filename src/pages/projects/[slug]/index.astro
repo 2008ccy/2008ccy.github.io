@@ -1,0 +1,48 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCollection, render } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Footer from "@/components/Footer.astro";
+import config from "@/config";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects", ({ data }) => !data.draft);
+  return projects.map(project => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props as { project: CollectionEntry<"projects"> };
+const { Content } = await render(project);
+---
+
+<Layout
+  title={`${project.data.title}｜${config.site.title}`}
+  description={project.data.description}
+>
+  <Header />
+  <Breadcrumb />
+  <Main
+    pageTitle={project.data.title}
+    pageDesc={project.data.description}
+    class="app-prose"
+    indexForSearch
+  >
+    {project.data.status && <p>状态：{project.data.status}</p>}
+    <Content />
+    {
+      project.data.url && (
+        <p>
+          <a href={project.data.url} target="_blank" rel="noopener noreferrer">
+            访问作品 ↗
+          </a>
+        </p>
+      )
+    }
+  </Main>
+  <Footer />
+</Layout>

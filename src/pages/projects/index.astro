@@ -1,0 +1,58 @@
+---
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Footer from "@/components/Footer.astro";
+import config from "@/config";
+
+const locale = Astro.currentLocale ?? config.site.lang;
+const projects = (
+  await getCollection("projects", ({ data }) => !data.draft)
+).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Layout
+  title={`作品｜${config.site.title}`}
+  description="ccy 的网页作品与学习项目。"
+>
+  <Header />
+  <Breadcrumb />
+  <Main pageTitle="作品" pageDesc="在这里记录做过的项目。">
+    {
+      projects.length > 0 ? (
+        <ul class="grid gap-4 sm:grid-cols-2">
+          {projects.map(project => (
+            <li class="border-border rounded-xl border p-5">
+              <h2 class="text-xl font-semibold">
+                <a
+                  class="hover:text-accent"
+                  href={getRelativeLocaleUrl(locale, `projects/${project.id}`)}
+                >
+                  {project.data.title}
+                </a>
+              </h2>
+              <p class="text-muted-foreground mt-2">
+                {project.data.description}
+              </p>
+              {project.data.status && (
+                <p class="mt-2 text-sm">状态：{project.data.status}</p>
+              )}
+              <a
+                class="text-accent mt-4 inline-block underline underline-offset-4"
+                href={getRelativeLocaleUrl(locale, `projects/${project.id}`)}
+              >
+                查看详情 →
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="text-muted-foreground">作品正在整理中，欢迎稍后再来。</p>
+      )
+    }
+  </Main>
+  <Footer />
+</Layout>
