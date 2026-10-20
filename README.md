@@ -44,3 +44,11 @@ draft: false
 ## 发布
 
 此仓库的 `main` 分支推送后会运行 `.github/workflows/deploy.yml`，构建并部署到 GitHub Pages。首次使用工作流发布时，请在 GitHub 仓库的 **Settings → Pages → Build and deployment → Source** 选择 **GitHub Actions**。部署成功后访问 [https://2008ccy.github.io/](https://2008ccy.github.io/)。
+
+### 发布故障排查
+
+本项目使用 Astro 构建。在 Actions 中应查看 **Deploy to GitHub Pages** 工作流的结果。
+
+如果出现 **pages build and deployment / build (dynamic)**，且日志提示 `.astro` 文件的 `Invalid YAML front matter`，说明旧的 Jekyll 发布流程正在把 Astro 源码当作 YAML 解析。请确认 Pages 的 **Source** 已选择 **GitHub Actions**，然后向 `main` 提交更新以验证新的发布流程。切换发布来源不会清除历史提交的失败记录。
+
+需要手动部署时，在 **Actions → Deploy to GitHub Pages → Run workflow** 中选择 `main` 运行。
