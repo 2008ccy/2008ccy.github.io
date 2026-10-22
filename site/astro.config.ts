@@ -42,7 +42,7 @@ export default defineConfig({
       rehypePlugins: [rehypeCallouts, rehypeKatex],
     }),
     shikiConfig: {
-      themes: { light: "min-light", dark: "night-owl" },
+      themes: { light: "min-light" },
       defaultColor: false,
       wrap: false,
       transformers: [
