@@ -8,7 +8,7 @@ import Footer from "@/components/Footer.astro";
 import config from "@/config";
 
 const contact = await getEntry("pages", "contact");
-if (!contact) throw new Error("缺少 src/content/pages/contact.md");
+if (!contact) throw new Error("缺少 pages/contact.md");
 const { Content } = await render(contact);
 ---
 

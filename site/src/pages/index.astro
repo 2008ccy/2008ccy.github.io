@@ -11,7 +11,7 @@ import config from "@/config";
 
 const locale = Astro.currentLocale ?? config.site.lang;
 const home = await getEntry("pages", "home");
-if (!home) throw new Error("缺少 src/content/pages/home.md");
+if (!home) throw new Error("缺少 pages/home.md");
 const { Content } = await render(home);
 const projects = (
   await getCollection("projects", ({ data }) => !data.draft)

@@ -38,7 +38,7 @@ interface FeaturesConfig {
   lightAndDarkMode?: boolean;
   /**
    * Generate dynamic OG images per post and provide `/og.png` when the static
-   * `public/{site.ogImage}` file is absent. When false, that file is required
+   * `site/public/{site.ogImage}` file is absent. When false, that file is required
    * for the default layout OG image (build fails if missing).
    */
   dynamicOgImage?: boolean;
@@ -63,8 +63,8 @@ interface FeaturesConfig {
 
 interface SocialLink {
   /**
-   * Must match an SVG filename in src/assets/icons/socials/.
-   * e.g. "github" → src/assets/icons/socials/github.svg
+   * Must match an SVG filename in site/src/assets/icons/socials/.
+   * e.g. "github" → site/src/assets/icons/socials/github.svg
    */
   name: string;
   url: string;
@@ -78,8 +78,8 @@ interface SocialLink {
 
 interface ShareLink {
   /**
-   * Must match an SVG filename in src/assets/icons/socials/.
-   * e.g. "facebook" → src/assets/icons/socials/facebook.svg
+   * Must match an SVG filename in site/src/assets/icons/socials/.
+   * e.g. "facebook" → site/src/assets/icons/socials/facebook.svg
    */
   name: string;
   /** Base share URL. The post URL will be appended as a query param. */
