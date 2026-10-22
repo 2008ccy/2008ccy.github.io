@@ -3,7 +3,7 @@ title: "线性代数1.1"
 description: "线性方程组、二阶行列式与克拉默法则，附 Goodnotes 手写原稿。"
 pubDatetime: 2026-10-22T00:00:00+08:00
 tags: [线性代数, 学习笔记]
-draft: false
+draft: true
 ---
 
 ## 线性方程组、行列式与克拉默法则
