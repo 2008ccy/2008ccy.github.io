@@ -124,3 +124,9 @@
   overflow-y: hidden;
   padding-block: 0.5rem;
 }
+
+/* Let wide equations scroll from their first symbol instead of clipping it. */
+.app-prose .katex-display > .katex {
+  width: max-content;
+  min-width: 100%;
+}
