@@ -22,7 +22,6 @@ import { fileURLToPath } from "node:url";
 import { parse, stringify } from "yaml";
 
 const defaultHomepage = fileURLToPath(new URL("../../", import.meta.url));
-const assetPrefix = "/notes/note/handwrite_notes/";
 
 async function exists(path) {
   try {
@@ -88,7 +87,14 @@ function dateValue(value, path) {
   return value;
 }
 
-function formatNote(source, previous, path, modifiedTime, pdfPaths) {
+function formatNote(
+  source,
+  previous,
+  path,
+  modifiedTime,
+  pdfPaths,
+  assetPrefix
+) {
   const { metadata: incoming } = source;
   const existing = previous?.metadata ?? {};
   if (existing.draft !== undefined && typeof existing.draft !== "boolean") {
@@ -147,10 +153,9 @@ function formatNote(source, previous, path, modifiedTime, pdfPaths) {
     if (/^(?:[a-z][\w+.-]*:|\/\/)/i.test(url)) return url;
     const match = url.match(/^(.*?)([?#].*)?$/);
     const location = decodeURIComponent(match[1]);
-    const marker = "handwrite_notes/";
-    const index = location.indexOf(marker);
-    if (index < 0) return url;
-    const pdf = location.slice(index + marker.length);
+    const marker = location.match(/(?:handwrite_notes|handwrite_pdf)\//);
+    if (!marker) return url;
+    const pdf = location.slice(marker.index + marker[0].length);
     if (!pdf.toLowerCase().endsWith(".pdf")) return url;
     if (!pdfPaths.has(pdf))
       throw new Error(`笔记引用的手稿不存在：${path} → ${pdf}`);
@@ -204,18 +209,11 @@ async function assertRegularTarget(path) {
 
 export async function syncNotes({
   homepageRoot = defaultHomepage,
-  sourceRoot = resolve(homepageRoot, "../note"),
+  sourceRoot = resolve(homepageRoot, "../note_private"),
   dryRun = false,
 } = {}) {
   sourceRoot = await realpath(sourceRoot);
   homepageRoot = await realpath(homepageRoot);
-  const sourceNotes = resolve(sourceRoot, "md_web");
-  const sourcePdfs = resolve(sourceRoot, "handwrite_notes");
-  const targetNotes = resolve(homepageRoot, "notes/md_notes");
-  const targetPdfs = resolve(
-    homepageRoot,
-    "site/public/notes/note/handwrite_notes"
-  );
   const sourceRelative = relative(sourceRoot, homepageRoot);
   const homeRelative = relative(homepageRoot, sourceRoot);
   if (
@@ -224,40 +222,94 @@ export async function syncNotes({
   ) {
     throw new Error("源项目与 homepage 必须是相互独立的目录。");
   }
-  const markdown = (await filesIn(sourceNotes, [".md", ".mdx"])).filter(path =>
-    /^note_linalg_\d/.test(path.split(sep).pop())
-  );
-  const pdfs = await filesIn(sourcePdfs, [".pdf"]);
-  const pdfPaths = new Set(
-    pdfs.map(path => relative(sourcePdfs, path).split(sep).join("/"))
-  );
   const operations = [];
-  // Validate every note and PDF link before writing any destination file.
-  for (const path of markdown) {
-    const name = relative(sourceNotes, path);
-    const target = resolve(targetNotes, name);
-    await assertRegularTarget(target);
-    const old = (await exists(target))
-      ? await readFile(target, "utf8")
-      : undefined;
-    const text = formatNote(
-      splitNote(await readFile(path, "utf8"), path),
-      old === undefined ? undefined : splitNote(old, target),
-      name,
-      (await stat(path)).mtime,
-      pdfPaths
+  let markdownCount = 0;
+  let pdfCount = 0;
+  let subjects = 0;
+  // Preflight all subjects before writing any files.
+  for (const subject of ["linalg", "caculus"]) {
+    const subjectRoot = resolve(sourceRoot, `${subject}_note`);
+    if (!(await exists(subjectRoot))) continue;
+    subjects++;
+    const sourcePdfs = resolve(subjectRoot, "handwrite_pdf");
+    const pdfs = await filesIn(sourcePdfs, [".pdf"]);
+    const pdfPaths = new Set(
+      pdfs.map(path => relative(sourcePdfs, path).split(sep).join("/"))
     );
-    if (old !== text) operations.push({ target, text });
+    // Keep existing linear algebra PDF URLs working.
+    const assetPrefix =
+      subject === "linalg"
+        ? "/notes/note/handwrite_notes/"
+        : `/notes/${subject}_notes/handwrite_pdf/`;
+    const targetPdfs = resolve(
+      homepageRoot,
+      "site/public",
+      assetPrefix.slice(1)
+    );
+    pdfCount += pdfs.length;
+    const targets = new Set();
+    for (const folder of ["note_md", "web_md"]) {
+      const sourceNotes = resolve(subjectRoot, folder);
+      if (!(await exists(sourceNotes))) {
+        if (folder === "note_md")
+          throw new Error(`缺少原稿目录：${sourceNotes}`);
+        continue;
+      }
+      const markdown = (await filesIn(sourceNotes, [".md", ".mdx"])).filter(
+        path => !path.split(sep).pop().startsWith("_")
+      );
+      for (const path of markdown) {
+        const name = relative(sourceNotes, path);
+        const basename = path.split(sep).pop();
+        const namedSubject = basename.match(
+          /^(?:note|web)_(linalg|caculus)(?:_|\.)/
+        )?.[1];
+        if (namedSubject && namedSubject !== subject)
+          throw new Error(`文件学科与来源目录不一致：${path}`);
+        const kind = basename.startsWith("web")
+          ? "web_notes"
+          : basename.startsWith("note")
+            ? "md_notes"
+            : folder === "web_md"
+              ? "web_notes"
+              : "md_notes";
+        const target = resolve(
+          homepageRoot,
+          "note",
+          `${subject}_notes`,
+          kind,
+          name
+        );
+        if (targets.has(target))
+          throw new Error(`多个源文件对应同一目标：${target}`);
+        targets.add(target);
+        markdownCount++;
+        await assertRegularTarget(target);
+        const old = (await exists(target))
+          ? await readFile(target, "utf8")
+          : undefined;
+        const text = formatNote(
+          splitNote(await readFile(path, "utf8"), path),
+          old === undefined ? undefined : splitNote(old, target),
+          name,
+          (await stat(path)).mtime,
+          pdfPaths,
+          assetPrefix
+        );
+        if (old !== text) operations.push({ target, text });
+      }
+    }
+    for (const source of pdfs) {
+      const target = resolve(targetPdfs, relative(sourcePdfs, source));
+      await assertRegularTarget(target);
+      const same =
+        (await exists(target)) &&
+        (await stat(source)).size === (await stat(target)).size &&
+        (await hash(source)) === (await hash(target));
+      if (!same) operations.push({ source, target });
+    }
   }
-  for (const source of pdfs) {
-    const target = resolve(targetPdfs, relative(sourcePdfs, source));
-    await assertRegularTarget(target);
-    const same =
-      (await exists(target)) &&
-      (await stat(source)).size === (await stat(target)).size &&
-      (await hash(source)) === (await hash(target));
-    if (!same) operations.push({ source, target });
-  }
+  if (!subjects) throw new Error("未找到 linalg_note 或 caculus_note 源目录。");
   if (!dryRun) {
     for (const operation of operations) {
       await mkdir(dirname(operation.target), { recursive: true });
@@ -267,8 +319,8 @@ export async function syncNotes({
   }
   return {
     sourceRoot,
-    markdown: markdown.length,
-    pdfs: pdfs.length,
+    markdown: markdownCount,
+    pdfs: pdfCount,
     dryRun,
     changed: operations.map(operation =>
       relative(homepageRoot, operation.target)
@@ -290,7 +342,7 @@ async function main() {
       sourceRoot = resolve(args[++i]);
     else if (args[i] === "--help") {
       process.stdout.write(
-        "用法：node site/scripts/sync-notes.mjs [--dry-run] [--source /path/to/note]\n默认读取同级 note/md_web 中以 note_linalg_数字 开头的笔记，写入 notes/md_notes。只同步笔记和 PDF，不删除文件、不提交或发布。\n"
+        "用法：node site/scripts/sync-notes.mjs [--dry-run] [--source /path/to/note_private]\n默认读取同级 note_private/<学科>_note/note_md（可选 web_md），按文件名前缀写入 note/<学科>_notes/md_notes 或 web_notes。只同步笔记和 PDF，不删除文件、不提交或发布。\n"
       );
       return;
     } else throw new Error(`未知或不完整的参数：${args[i]}`);

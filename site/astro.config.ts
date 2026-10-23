@@ -20,8 +20,12 @@ import config from "./astro-paper.config";
 export default defineConfig({
   site: config.site.url,
   redirects: {
-    "/posts/linear-algebra-1-1": "/posts/web_notes/web_linalg_1_/",
-    "/posts/web_linalg_1_": "/posts/web_notes/web_linalg_1_/",
+    "/posts/web_notes/web_linalg_1_":
+      "/posts/linalg_notes/web_notes/web_linalg_1_/",
+    "/posts/web_notes/web_linalg_2":
+      "/posts/linalg_notes/web_notes/web_linalg_2/",
+    "/posts/linear-algebra-1-1": "/posts/linalg_notes/web_notes/web_linalg_1_/",
+    "/posts/web_linalg_1_": "/posts/linalg_notes/web_notes/web_linalg_1_/",
   },
   integrations: [
     mdx(),
