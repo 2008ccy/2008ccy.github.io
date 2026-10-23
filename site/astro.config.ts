@@ -5,6 +5,7 @@ import sitemap from "@astrojs/sitemap";
 import { unified } from "@astrojs/markdown-remark";
 import remarkToc from "remark-toc";
 import remarkMath from "remark-math";
+import remarkNoteLinks from "./src/utils/remarkNoteLinks";
 import rehypeKatex from "rehype-katex";
 import remarkCollapse from "remark-collapse";
 import rehypeCallouts from "rehype-callouts";
@@ -40,6 +41,7 @@ export default defineConfig({
     processor: unified({
       remarkPlugins: [
         remarkMath,
+        remarkNoteLinks,
         remarkToc,
         [remarkCollapse, { test: "Table of contents" }],
       ],

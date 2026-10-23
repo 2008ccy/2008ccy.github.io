@@ -209,9 +209,9 @@ export async function syncNotes({
 } = {}) {
   sourceRoot = await realpath(sourceRoot);
   homepageRoot = await realpath(homepageRoot);
-  const sourceNotes = resolve(sourceRoot, "output_notes");
+  const sourceNotes = resolve(sourceRoot, "md_web");
   const sourcePdfs = resolve(sourceRoot, "handwrite_notes");
-  const targetNotes = resolve(homepageRoot, "notes/note/output_notes");
+  const targetNotes = resolve(homepageRoot, "notes/md_notes");
   const targetPdfs = resolve(
     homepageRoot,
     "site/public/notes/note/handwrite_notes"
@@ -224,7 +224,9 @@ export async function syncNotes({
   ) {
     throw new Error("源项目与 homepage 必须是相互独立的目录。");
   }
-  const markdown = await filesIn(sourceNotes, [".md", ".mdx"]);
+  const markdown = (await filesIn(sourceNotes, [".md", ".mdx"])).filter(path =>
+    /^note_linalg_\d/.test(path.split(sep).pop())
+  );
   const pdfs = await filesIn(sourcePdfs, [".pdf"]);
   const pdfPaths = new Set(
     pdfs.map(path => relative(sourcePdfs, path).split(sep).join("/"))
@@ -288,7 +290,7 @@ async function main() {
       sourceRoot = resolve(args[++i]);
     else if (args[i] === "--help") {
       process.stdout.write(
-        "用法：node site/scripts/sync-notes.mjs [--dry-run] [--source /path/to/note]\n默认读取 homepage 同级的 note 项目。只同步笔记和 PDF，不删除文件、不提交或发布。\n"
+        "用法：node site/scripts/sync-notes.mjs [--dry-run] [--source /path/to/note]\n默认读取同级 note/md_web 中以 note_linalg_数字 开头的笔记，写入 notes/md_notes。只同步笔记和 PDF，不删除文件、不提交或发布。\n"
       );
       return;
     } else throw new Error(`未知或不完整的参数：${args[i]}`);
