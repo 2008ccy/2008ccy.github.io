@@ -28,7 +28,7 @@ featured: false
 5. 提交需要发布的 Markdown、PDF 和配置更新，然后推送。
    本机启用推送检查后，git push 到 main 前会自动运行完整构建；失败时会阻止推送。
    检查要求工作区没有未提交或未跟踪的文件，确保构建内容与准备推送的提交一致。
-   首次使用或更换电脑时，在 homepage/site/ 运行 pnpm hooks:install 启用检查。
+   首次使用或更换电脑时，在 homepage/site/ 运行 npm run hooks:install 启用检查。
    也可以在提交前运行 pnpm build 提前检查。
 
 PDF 链接规则：

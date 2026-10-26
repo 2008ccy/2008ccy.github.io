@@ -5,6 +5,7 @@ import {
   mkdir,
   readFile,
   realpath,
+  symlink,
   writeFile,
 } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -30,10 +31,11 @@ async function fixture() {
   await writeFile(join(repo, "site/package.json"), "{}\n");
   await writeFile(join(repo, "note.md"), "original\n");
   await writeFile(
-    join(bin, "pnpm"),
+    join(bin, "npm"),
     '#!/bin/sh\nprintf "%s\\n" "$PWD" "$*" "$ASTRO_TELEMETRY_DISABLED" > "$HOOK_TEST_LOG"\nexit "${HOOK_TEST_BUILD_EXIT:-0}"\n',
     { mode: 0o755 }
   );
+  await symlink(process.execPath, join(bin, "node"));
 
   function git(...args) {
     const result = spawnSync(
@@ -91,7 +93,7 @@ async function fixture() {
         encoding: "utf8",
         env: {
           ...process.env,
-          PATH: `${bin}:${process.env.PATH}`,
+          PATH: `${bin}:/usr/bin:/bin`,
           HOOK_TEST_LOG: log,
           HOOK_TEST_BUILD_EXIT: buildExit,
         },
@@ -104,13 +106,13 @@ async function fixture() {
   return { repo, log, sha, git, commit, run, noBuild };
 }
 
-test("a clean main push builds from site and proceeds on success", async () => {
+test("a clean main push builds via npm with a minimal GUI PATH and no pnpm", async () => {
   const f = await fixture();
   const result = await f.run();
   assert.equal(result.status, 0, result.stderr);
   assert.equal(
     await readFile(f.log, "utf8"),
-    `${join(f.repo, "site")}\nbuild\n1\n`
+    `${join(f.repo, "site")}\nrun build\n1\n`
   );
   assert.match(result.stderr, /推送检查通过/);
 });
