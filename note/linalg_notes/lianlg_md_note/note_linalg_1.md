@@ -491,6 +491,6 @@ $$
 
 ## 手写原稿
 
-[查看同名手写原稿（note_linalg_1.pdf，共 6 页）](/notes/note/handwrite_notes/note_linalg_1.pdf)
+[查看同名手写原稿（note_linalg_1.pdf，共 6 页）](/notes/linalg_notes/linalg_hand_note/note_linalg_1.pdf)
 
 摘录原稿保留了原有对角线箭头、排列对换示意、颜色、旁注和涂改。本文“原第 3～8 页”分别对应该摘录 PDF 的第 1～6 页。

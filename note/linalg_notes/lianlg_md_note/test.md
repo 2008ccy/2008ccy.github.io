@@ -161,4 +161,4 @@ $$
 
 ## 手写原稿
 
-[查看手写原稿（test.pdf）](/notes/note/handwrite_notes/test.pdf)
+[查看手写原稿（test.pdf）](/notes/linalg_notes/linalg_hand_note/test.pdf)

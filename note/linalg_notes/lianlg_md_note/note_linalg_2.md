@@ -488,6 +488,6 @@ $$
 
 ## 手写原稿
 
-[查看同名手写原稿（note_linalg_2.pdf，共 6 页）](/notes/note/handwrite_notes/note_linalg_2.pdf)
+[查看同名手写原稿（note_linalg_2.pdf，共 6 页）](/notes/linalg_notes/linalg_hand_note/note_linalg_2.pdf)
 
 摘录保留了原稿的主元圆圈、阶梯示意、分块布局、位值箭头、颜色及涂改。本文“原第 9～14 页”分别对应摘录 PDF 第 1～6 页。

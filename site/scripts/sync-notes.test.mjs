@@ -1,282 +1,131 @@
 import assert from "node:assert/strict";
-import { mkdtemp, mkdir, readFile, writeFile, access } from "node:fs/promises";
+import {
+  mkdtemp,
+  mkdir,
+  readFile,
+  writeFile,
+  readdir,
+  access,
+} from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { parse } from "yaml";
 import { syncNotes } from "./sync-notes.mjs";
+import { manuscriptFiles, manuscriptUrl } from "./manuscripts.mjs";
 
 async function fixture() {
-  // Keep temporary fixtures; project instructions forbid recursive deletion.
-  const root = await mkdtemp(join(tmpdir(), "homepage-sync-test-"));
-  const sourceRoot = join(root, "note");
-  const homepageRoot = join(root, "homepage");
-  await mkdir(join(sourceRoot, "linalg_note/note_md"), { recursive: true });
-  await mkdir(join(sourceRoot, "linalg_note/handwrite_pdf"));
-  await mkdir(join(homepageRoot, "note/linalg_notes/md_notes"), {
-    recursive: true,
-  });
-  return { sourceRoot, homepageRoot };
+  // Fixtures are retained because this project forbids recursive deletion.
+  const homepageRoot = await mkdtemp(join(tmpdir(), "homepage-local-notes-"));
+  for (const [subject, hand] of [
+    ["linalg", "linalg_hand_note"],
+    ["caculus", "cacu_hand_note"],
+  ]) {
+    await mkdir(join(homepageRoot, "note", `${subject}_notes`, hand), {
+      recursive: true,
+    });
+  }
+  return { homepageRoot };
 }
 
-const sourceNote = `---
-title: 最新标题
-description: 最新摘要
-pubDatetime: 2026-10-23T08:00:00+08:00
-draft: true
----
-# 最新标题
-
-新正文 $a_{11}$。
-
-[原稿](../handwrite_notes/lecture.pdf#page=2)
-
-[参考稿][pdf]
-
-[pdf]: <../handwrite_notes/lecture.pdf>
-
-\`\`\`markdown
-# 代码里的标题
-[示例](../handwrite_notes/missing.pdf)
-\`\`\`
-`;
-
-function metadata(text) {
-  return parse(text.split("---")[1]);
-}
-
-test("updates source text and links while retaining both published and draft states", async () => {
+test("updates legacy and relative manuscript links without changing prose or publication metadata", async () => {
   const options = await fixture();
+  const directory = join(options.homepageRoot, "note/linalg_notes");
+  await mkdir(join(directory, "lianlg_md_note"));
   await writeFile(
-    join(options.sourceRoot, "linalg_note/handwrite_pdf/lecture.pdf"),
-    "%PDF-fixture"
+    join(directory, "linalg_hand_note/note_linalg_1.pdf"),
+    "%PDF-original"
   );
-  for (const draft of [false, true]) {
-    const name = `note_linalg_${draft ? 2 : 1}.md`;
-    const dest = join(options.homepageRoot, "note/linalg_notes/md_notes", name);
-    await writeFile(
-      join(options.sourceRoot, "linalg_note/note_md", name),
-      sourceNote
-    );
-    await writeFile(
-      dest,
-      `---\ntitle: 原标题\ndescription: 原摘要\npubDatetime: 2026-10-20T12:00:00+08:00\ndraft: ${draft}\nfeatured: true\n---\n旧正文\n`
-    );
-  }
-  const result = await syncNotes(options);
-  assert.equal(result.changed.length, 3);
-  for (const draft of [false, true]) {
-    const text = await readFile(
-      join(
-        options.homepageRoot,
-        `note/linalg_notes/md_notes/note_linalg_${draft ? 2 : 1}.md`
-      ),
-      "utf8"
-    );
-    const meta = metadata(text);
-    assert.equal(meta.draft, draft);
-    assert.equal(meta.title, "最新标题");
-    assert.equal(meta.pubDatetime, "2026-10-20T12:00:00+08:00");
-    assert.equal(meta.featured, true);
-    assert.match(text, /新正文 \$a_\{11\}\$/);
-    assert.match(text, /\/notes\/note\/handwrite_notes\/lecture.pdf#page=2/);
-    assert.match(
-      text,
-      /\[pdf\]: <\/notes\/note\/handwrite_notes\/lecture.pdf>/
-    );
-    assert.match(
-      text,
-      /```markdown\n# 代码里的标题\n\[示例\]\(\.\.\/handwrite_notes\/missing.pdf\)/
-    );
-    assert.doesNotMatch(text, /^# 最新标题$/m);
-  }
-  assert.deepEqual((await syncNotes(options)).changed, []);
-  assert.equal(
-    await readFile(
-      join(options.sourceRoot, "linalg_note/note_md/note_linalg_1.md"),
-      "utf8"
-    ),
-    sourceNote
-  );
-});
-
-test("new notes are drafts; dry run leaves files untouched; same-name PDF is linked", async () => {
-  const options = await fixture();
-  await writeFile(
-    join(options.sourceRoot, "linalg_note/note_md/note_linalg_3.md"),
-    "# 新笔记\n\n正文。\n"
-  );
-  await writeFile(
-    join(options.sourceRoot, "linalg_note/handwrite_pdf/note_linalg_3.pdf"),
-    "%PDF-new"
-  );
-  const target = join(
-    options.homepageRoot,
-    "note/linalg_notes/md_notes/note_linalg_3.md"
-  );
+  const note = join(directory, "lianlg_md_note/note_linalg_1.md");
+  const before =
+    "---\ntitle: 保留标题\ndraft: false # 保留注释\n---\n# 保留一级标题\n编辑后的正文 $a_{11}$。\n[原稿](/notes/note/handwrite_notes/note_linalg_1.pdf#page=2)\n[ref]: ../handwrite_pdf/note_linalg_1.pdf\n```md\n[示例](../handwrite_pdf/missing.pdf)\n```\n";
+  await writeFile(note, before);
   assert.equal(
     (await syncNotes({ ...options, dryRun: true })).changed.length,
-    2
+    1
   );
-  await assert.rejects(access(target));
+  assert.equal(await readFile(note, "utf8"), before);
   await syncNotes(options);
-  const text = await readFile(target, "utf8");
-  const meta = metadata(text);
-  assert.equal(meta.title, "新笔记");
-  assert.equal(meta.draft, true);
-  assert.ok(meta.description);
-  assert.ok(!Number.isNaN(Date.parse(meta.pubDatetime)));
-  assert.match(text, /\/notes\/note\/handwrite_notes\/note_linalg_3.pdf/);
+  const after = await readFile(note, "utf8");
+  assert.equal(
+    after,
+    before
+      .replace(
+        "/notes/note/handwrite_notes/note_linalg_1.pdf",
+        "/notes/linalg_notes/linalg_hand_note/note_linalg_1.pdf"
+      )
+      .replace(
+        "../handwrite_pdf/note_linalg_1.pdf",
+        "/notes/linalg_notes/linalg_hand_note/note_linalg_1.pdf"
+      )
+  );
   assert.deepEqual((await syncNotes(options)).changed, []);
+  assert.deepEqual((await readdir(directory)).sort(), [
+    "lianlg_md_note",
+    "linalg_hand_note",
+  ]);
+  await assert.rejects(access(join(options.homepageRoot, "site/public")));
 });
 
-test("missing referenced PDFs fail validation before any destination writes", async () => {
+test("missing PDFs fail preflight before any link changes", async () => {
   const options = await fixture();
+  const directory = join(options.homepageRoot, "note/linalg_notes");
+  await writeFile(join(directory, "linalg_hand_note/a.pdf"), "%PDF-a");
+  const valid = join(directory, "a.md");
+  const body = "[valid](../handwrite_pdf/a.pdf)\n";
+  await writeFile(valid, body);
   await writeFile(
-    join(options.sourceRoot, "linalg_note/note_md/note_linalg_4.md"),
-    "# 第一篇\n正文\n"
-  );
-  await writeFile(
-    join(options.sourceRoot, "linalg_note/note_md/note_linalg_5.md"),
-    sourceNote
+    join(options.homepageRoot, "note/caculus_notes/b.md"),
+    "[missing](../handwrite_pdf/missing.pdf)\n"
   );
   await assert.rejects(syncNotes(options), /手稿不存在/);
+  assert.equal(await readFile(valid, "utf8"), body);
+});
+
+test("discovers nested manuscripts for both subjects, encodes Unicode and preserves fragments", async () => {
+  const options = await fixture();
+  await mkdir(
+    join(options.homepageRoot, "note/caculus_notes/cacu_hand_note/chapter")
+  );
+  const path = join(
+    options.homepageRoot,
+    "note/caculus_notes/cacu_hand_note/chapter/微积分 1.pdf"
+  );
+  await writeFile(path, "%PDF-caculus");
+  const files = await manuscriptFiles(options.homepageRoot);
+  assert.equal(files.length, 1);
+  assert.equal(files[0].source, path);
+  assert.equal(
+    manuscriptUrl(
+      "../cacu_hand_note/chapter/微积分%201.pdf#page=3",
+      "caculus",
+      files
+    ),
+    `/notes/caculus_notes/cacu_hand_note/chapter/${encodeURIComponent("微积分 1.pdf")}#page=3`
+  );
+  assert.equal(
+    manuscriptUrl(
+      "https://example.com/handwrite_pdf/missing.pdf",
+      "linalg",
+      files
+    ),
+    "https://example.com/handwrite_pdf/missing.pdf"
+  );
+  assert.throws(
+    () =>
+      manuscriptUrl(
+        "/notes/linalg_notes/linalg_hand_note/missing.pdf",
+        "linalg",
+        files
+      ),
+    /手稿不存在/
+  );
+});
+
+test("private import is rejected and local files are untouched", async () => {
+  const options = await fixture();
   await assert.rejects(
-    access(
-      join(options.homepageRoot, "note/linalg_notes/md_notes/note_linalg_4.md")
-    )
+    syncNotes({ ...options, sourceRoot: "/missing/note_private" }),
+    /已停用/
   );
-});
-
-test("files only present on the website are retained and omitted draft means published", async () => {
-  const options = await fixture();
-  const target = join(
-    options.homepageRoot,
-    "note/linalg_notes/md_notes/note_linalg_6.md"
-  );
-  await writeFile(
-    target,
-    "---\ntitle: 已发布\ndescription: 摘要\npubDatetime: 2026-10-20T12:00:00+08:00\n---\n旧正文\n"
-  );
-  await writeFile(
-    join(options.sourceRoot, "linalg_note/note_md/note_linalg_6.md"),
-    "# 更新\n新正文\n"
-  );
-  const extra = join(
-    options.homepageRoot,
-    "note/linalg_notes/md_notes/website-only.md"
-  );
-  await writeFile(extra, "keep me");
-  await syncNotes(options);
-  assert.equal(metadata(await readFile(target, "utf8")).draft, false);
-  assert.equal(await readFile(extra, "utf8"), "keep me");
-});
-
-test("invalid website draft values fail instead of changing publication status", async () => {
-  const options = await fixture();
-  const target = join(
-    options.homepageRoot,
-    "note/linalg_notes/md_notes/note_linalg_4.md"
-  );
-  await writeFile(target, '---\ndraft: "false"\n---\n正文\n');
-  await writeFile(
-    join(options.sourceRoot, "linalg_note/note_md/note_linalg_4.md"),
-    "# 标题\n"
-  );
-  await assert.rejects(syncNotes(options), /draft 必须/);
-  assert.match(await readFile(target, "utf8"), /draft: "false"/);
-});
-
-test("a source marked public is imported as a draft and Unicode PDF links are encoded", async () => {
-  const options = await fixture();
-  const body =
-    "---\ntitle: 新笔记\ndescription: 摘要\npubDatetime: 2026-10-23T08:00:00+08:00\ndraft: false\n---\n[原稿](../handwrite_notes/线性代数.pdf)\n";
-  await writeFile(
-    join(options.sourceRoot, "linalg_note/note_md/note_linalg_3.md"),
-    body
-  );
-  await writeFile(
-    join(options.sourceRoot, "linalg_note/handwrite_pdf/线性代数.pdf"),
-    "%PDF-unicode"
-  );
-  await syncNotes(options);
-  const text = await readFile(
-    join(options.homepageRoot, "note/linalg_notes/md_notes/note_linalg_3.md"),
-    "utf8"
-  );
-  assert.equal(metadata(text).draft, true);
-  assert.ok(
-    text.includes(
-      `/notes/note/handwrite_notes/${encodeURIComponent("线性代数.pdf")}`
-    )
-  );
-});
-
-test("both subjects route note and web prefixes and keep PDF namespaces separate", async () => {
-  const options = await fixture();
-  await mkdir(join(options.sourceRoot, "caculus_note/note_md"), {
-    recursive: true,
-  });
-  await mkdir(join(options.sourceRoot, "caculus_note/handwrite_pdf"));
-  for (const subject of ["linalg", "caculus"]) {
-    for (const kind of ["note", "web"]) {
-      await writeFile(
-        join(
-          options.sourceRoot,
-          `${subject}_note/note_md/${kind}_${subject}_1.md`
-        ),
-        "# 标题\n[手稿](../handwrite_pdf/shared.pdf#page=2)\n"
-      );
-    }
-    await writeFile(
-      join(options.sourceRoot, `${subject}_note/handwrite_pdf/shared.pdf`),
-      `%PDF-${subject}`
-    );
-  }
-  const preview = await syncNotes({ ...options, dryRun: true });
-  assert.equal(preview.markdown, 4);
-  assert.equal(preview.pdfs, 2);
-  await syncNotes(options);
-  for (const subject of ["linalg", "caculus"]) {
-    for (const kind of ["note", "web"]) {
-      const text = await readFile(
-        join(
-          options.homepageRoot,
-          `note/${subject}_notes/${kind === "note" ? "md" : "web"}_notes/${kind}_${subject}_1.md`
-        ),
-        "utf8"
-      );
-      assert.equal(metadata(text).draft, true);
-      assert.ok(
-        text.includes(
-          subject === "linalg"
-            ? "/notes/note/handwrite_notes/shared.pdf#page=2"
-            : "/notes/caculus_notes/handwrite_pdf/shared.pdf#page=2"
-        )
-      );
-    }
-  }
   assert.deepEqual((await syncNotes(options)).changed, []);
-});
-
-test("validation of the second subject prevents partial writes", async () => {
-  const options = await fixture();
-  await writeFile(
-    join(options.sourceRoot, "linalg_note/note_md/note_linalg_1.md"),
-    "# Valid\n"
-  );
-  await mkdir(join(options.sourceRoot, "caculus_note/note_md"), {
-    recursive: true,
-  });
-  await mkdir(join(options.sourceRoot, "caculus_note/handwrite_pdf"));
-  await writeFile(
-    join(options.sourceRoot, "caculus_note/note_md/web_caculus_1.md"),
-    "# Missing\n[pdf](../handwrite_pdf/missing.pdf)\n"
-  );
-  await assert.rejects(syncNotes(options), /手稿不存在/);
-  await assert.rejects(
-    access(
-      join(options.homepageRoot, "note/linalg_notes/md_notes/note_linalg_1.md")
-    )
-  );
 });
