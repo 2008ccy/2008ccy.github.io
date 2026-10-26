@@ -14,6 +14,8 @@
     "format:check": "prettier --check .",
     "format": "prettier --write .",
     "lint": "eslint .",
+    "hooks:install": "git -C .. config --local core.hooksPath .githooks",
+    "hooks:test": "node --test scripts/pre-push.test.mjs",
     "notes:sync": "node scripts/sync-notes.mjs",
     "notes:sync:test": "node --test scripts/sync-notes.test.mjs"
   },
