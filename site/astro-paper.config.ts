@@ -22,8 +22,7 @@ export default defineAstroPaperConfig({
     showArchives: true,
     showBackButton: true,
     editPost: {
-      enabled: true,
-      url: "https://github.com/2008ccy/2008ccy.github.io/edit/main/",
+      enabled: false,
     },
     search: "pagefind",
   },
