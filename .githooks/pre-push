@@ -1,0 +1,44 @@
+#!/bin/sh
+set -eu
+
+# Match the deployment workflow: only a push to main publishes the site.
+publish_commit=
+while read -r local_ref local_sha remote_ref remote_sha; do
+  case "$local_sha" in
+    *[!0]*) ;;
+    *) continue ;; # Deleting a ref does not need a build.
+  esac
+  if [ "$remote_ref" = refs/heads/main ]; then
+    publish_commit=$local_sha
+  fi
+done
+
+if [ -z "$publish_commit" ]; then
+  exit 0
+fi
+
+cd "$(git rev-parse --show-toplevel)"
+if [ "$(git rev-parse HEAD)" != "$publish_commit" ]; then
+  echo '推送检查：请先检出准备发布到 main 的提交，再重新推送。' >&2
+  exit 1
+fi
+
+# Building a locally corrected but uncommitted file could hide a broken commit.
+if [ -n "$(git status --porcelain --untracked-files=all)" ]; then
+  echo '推送检查：存在未提交或未跟踪的文件，请先处理并提交，再推送。' >&2
+  echo '这样可确保检查的内容与准备发布的提交一致。运行 git status 查看详情。' >&2
+  exit 1
+fi
+
+if ! command -v pnpm >/dev/null 2>&1; then
+  echo '推送检查：找不到 pnpm，请在已安装 Node.js 和 pnpm 的终端中推送。' >&2
+  exit 1
+fi
+
+echo '推送检查：正在运行完整网站构建……' >&2
+cd site
+if ! ASTRO_TELEMETRY_DISABLED=1 pnpm build; then
+  echo '推送检查失败：已阻止推送。请修复错误、提交修改后重试。' >&2
+  exit 1
+fi
+echo '推送检查通过，继续推送。' >&2
