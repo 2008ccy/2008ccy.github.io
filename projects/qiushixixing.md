@@ -4,6 +4,9 @@ description: "以浙江大学西迁为背景的历史互动叙事网页游戏，
 url: "https://2008ccy.github.io/qiushixixing/"
 featured: true
 order: 1
+category: "互动叙事"
+cover: "journey"
+tags: [网页游戏, 历史叙事, 交互设计]
 ---
 
 参考《求是西行》的文本交互形式制作的网页作品。玩家从 2026 年的校史馆走进浙江大学西迁往事，沿杭州、建德、泰和、宜山、遵义与湄潭等地点展开旅程，经历迁校、护书、求学与告别，最终回到当下。

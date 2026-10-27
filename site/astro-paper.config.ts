@@ -4,7 +4,7 @@ export default defineAstroPaperConfig({
   site: {
     url: "https://2008ccy.github.io/",
     title: "ccy｜个人网站",
-    description: "ccy 的个人网站：学习记录、作品与联系信息。",
+    description: "ccy 的个人空间：数学笔记、网页作品与 AI 学习探索。",
     author: "ccy",
     profile: "https://github.com/2008ccy",
     ogImage: "default-og.png",

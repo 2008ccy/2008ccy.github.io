@@ -14,11 +14,11 @@
 /* Fixed light appearance, including native browser controls. */
 :root {
   color-scheme: light;
-  --background: #ffffff;
-  --foreground: #000000;
-  --accent: #000000;
+  --background: #fafbf8;
+  --foreground: #25312b;
+  --accent: #2c6654;
   --accent-foreground: #ffffff;
-  --muted: #e6e6e6;
-  --muted-foreground: #4b5563;
-  --border: #e5e7eb;
+  --muted: #e8ece5;
+  --muted-foreground: #677169;
+  --border: #e0e6dc;
 }

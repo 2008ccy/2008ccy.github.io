@@ -4,6 +4,9 @@ description: "围绕语言模型的数据、微调、评测与部署，用领域
 url: "https://2008ccy.github.io/three_maps/"
 featured: true
 order: 2
+category: "AI 探索"
+cover: "map"
+tags: [语言模型, 知识地图, 学习实践]
 ---
 
 这是一个围绕“从预训练模型到领域助手”的学习与知识整理网站，以课程答疑助手为典型任务，将三张地图相互连接：

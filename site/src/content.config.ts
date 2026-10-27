@@ -45,6 +45,9 @@ const projects = defineCollection({
     featured: z.boolean().default(false),
     order: z.number().default(0),
     draft: z.boolean().default(false),
+    category: z.string().optional(),
+    cover: z.enum(["map", "journey", "generic"]).default("generic"),
+    tags: z.array(z.string()).default([]),
   }),
 });
 

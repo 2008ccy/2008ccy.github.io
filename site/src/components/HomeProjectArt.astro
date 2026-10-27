@@ -1,0 +1,242 @@
+---
+type Props = { kind: "map" | "journey" | "generic"; title: string };
+const { kind, title } = Astro.props;
+---
+
+<div class:list={["project-art", `art-${kind}`]} aria-hidden="true">
+  {
+    kind === "map" ? (
+      <>
+        <div class="art-topline">
+          <>
+            <span>EXPLORING INTELLIGENCE</span>
+            <span>AI EXPLORATION</span>
+          </>
+        </div>
+        <svg viewBox="0 0 520 230" fill="none">
+          <path
+            d="M120 115L260 64L400 115L260 178Z"
+            stroke="#8da997"
+            stroke-dasharray="4 5"
+          />
+          <path d="M120 115H400M260 64V178" stroke="#b4c6b6" />
+          <circle cx="260" cy="116" r="74" stroke="#acbfae" />
+          <circle
+            cx="260"
+            cy="116"
+            r="100"
+            stroke="#c6d4c5"
+            stroke-dasharray="2 7"
+          />
+          <circle cx="260" cy="116" r="41" fill="#2e5744" />
+          <path
+            d="M251 100L240 128M251 100L262 128M244 118H258M271 101V128"
+            stroke="#ecf1e5"
+            stroke-width="2.5"
+            stroke-linecap="round"
+          />
+          <g fill="#f9fbf6" stroke="#b6c8b5">
+            <rect x="68" y="93" width="104" height="44" rx="11" />
+            <rect x="348" y="93" width="104" height="44" rx="11" />
+            <rect x="210" y="43" width="100" height="34" rx="10" />
+            <rect x="210" y="162" width="100" height="34" rx="10" />
+          </g>
+          <g
+            fill="#48644f"
+            text-anchor="middle"
+            font-size="13"
+            font-family="system-ui, sans-serif"
+          >
+            <>
+              <text x="120" y="120">
+                领域地图
+              </text>
+              <text x="400" y="120">
+                生态地图
+              </text>
+            </>
+            <>
+              <text x="260" y="65">
+                模型原理
+              </text>
+              <text x="260" y="184">
+                认知地图
+              </text>
+            </>
+          </g>
+          <circle cx="320" cy="75" r="5" fill="#b38956" />
+          <circle cx="196" cy="151" r="4" fill="#749c6a" />
+        </svg>
+        <div class="art-bottomline">
+          <>
+            <span>连接知识，理解模型。</span>
+            <span>DATA → MODEL → IDEAS</span>
+          </>
+        </div>
+      </>
+    ) : kind === "journey" ? (
+      <>
+        <div class="art-topline">
+          <>
+            <span>AN INTERACTIVE JOURNEY</span>
+            <span>WEB EXPERIENCE</span>
+          </>
+        </div>
+        <svg viewBox="0 0 520 230" fill="none">
+          <path
+            d="M0 176L81 133L146 159L234 93L302 141L382 76L451 124L520 102V230H0Z"
+            fill="#d5d2b8"
+            opacity=".65"
+          />
+          <path
+            d="M0 210L76 175L147 198L225 151L307 188L388 142L462 172L520 153V230H0Z"
+            fill="#bbbea2"
+            opacity=".55"
+          />
+          <path
+            d="M98 98C159 63 123 160 213 129S291 65 333 106S386 167 432 133"
+            stroke="#927a4c"
+            stroke-width="1.5"
+            stroke-dasharray="5 6"
+          />
+          <g fill="#faf5e8" stroke="#927a4c" stroke-width="2">
+            <>
+              <circle cx="98" cy="98" r="5" />
+              <circle cx="213" cy="129" r="5" />
+              <circle cx="333" cy="106" r="5" />
+              <circle cx="432" cy="133" r="5" />
+            </>
+          </g>
+          <g
+            fill="#756746"
+            font-size="11"
+            text-anchor="middle"
+            font-family="system-ui, sans-serif"
+          >
+            <>
+              <text x="98" y="81">
+                杭州
+              </text>
+              <text x="213" y="153">
+                泰和
+              </text>
+              <text x="333" y="89">
+                遵义
+              </text>
+              <text x="432" y="157">
+                湄潭
+              </text>
+            </>
+          </g>
+          <text
+            x="260"
+            y="53"
+            text-anchor="middle"
+            fill="#5d6049"
+            font-family="serif"
+            font-size="27"
+            letter-spacing="10"
+          >
+            求是西行
+          </text>
+        </svg>
+        <div class="art-bottomline">
+          <>
+            <span>循着历史，走进故事。</span>
+            <span>READ · CHOOSE · EXPLORE</span>
+          </>
+        </div>
+      </>
+    ) : (
+      <>
+        <>
+          <div class="art-topline">
+            <>
+              <span>AN IDEA IN PROGRESS</span>
+              <span>WEB PROJECT</span>
+            </>
+          </div>
+          <div class="generic-title">
+            {title}
+            <span>从一个想法开始。</span>
+          </div>
+        </>
+      </>
+    )
+  }
+</div>
+
+<style>
+  .project-art {
+    position: relative;
+    overflow: hidden;
+    height: 17rem;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .art-map {
+    background: #e9efe2;
+    color: #647b61;
+  }
+  .art-journey {
+    background: #f0eadb;
+    color: #827651;
+  }
+  .art-generic {
+    background: #e8eeea;
+    color: #536a5c;
+  }
+  .art-topline,
+  .art-bottomline {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    font-family: ui-monospace, monospace;
+    font-size: 0.56rem;
+    letter-spacing: 0.09em;
+  }
+  .art-bottomline > :first-child {
+    font-family: var(--font-app);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+  }
+  svg {
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 2.75rem);
+    inset: 1.4rem 0;
+    transition: transform 0.5s ease;
+  }
+  :global(.project-card:hover) svg {
+    transform: scale(1.035);
+  }
+  .generic-title {
+    margin: auto;
+    text-align: center;
+    font-size: 1.6rem;
+  }
+  .generic-title span {
+    display: block;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+  }
+  @media (max-width: 600px) {
+    .project-art {
+      height: 14rem;
+      padding-inline: 1rem;
+    }
+    .art-bottomline > :last-child {
+      font-size: 0.5rem;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    svg {
+      transition: none;
+    }
+  }
+</style>

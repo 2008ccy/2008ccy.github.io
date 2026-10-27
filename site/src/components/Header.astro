@@ -11,6 +11,8 @@ import { useTranslations } from "@/i18n";
 import config from "@/config";
 
 const { site, features } = config;
+type Props = { wide?: boolean };
+const { wide = false } = Astro.props;
 
 const locale = Astro.currentLocale ?? config.site.lang;
 const t = useTranslations(locale);
@@ -41,16 +43,21 @@ const isActive = (path: string) => {
 </a>
 
 <header
-  class="app-layout flex flex-col items-center justify-between sm:flex-row"
+  class:list={[
+    "app-layout site-header flex flex-col items-center justify-between sm:flex-row",
+    { "site-header-wide": wide },
+  ]}
 >
   <div
     class="border-border bg-background relative flex w-full items-baseline justify-between border-b py-4 sm:items-center sm:py-6"
   >
     <a
       href={getRelativeLocaleUrl(locale, "")}
-      class="absolute py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:static sm:my-auto sm:text-2xl sm:leading-none"
+      class="site-brand absolute py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:static sm:my-auto sm:text-2xl sm:leading-none"
+      aria-label={`${site.title}，返回首页`}
     >
-      {site.title}
+      <span class="brand-mark" aria-hidden="true">c<span>·</span></span>
+      <span>{site.author}<span class="brand-caption"> / 学习与创造</span></span>
     </a>
     <nav
       id="nav-menu"
@@ -161,6 +168,84 @@ const isActive = (path: string) => {
     </nav>
   </div>
 </header>
+
+<style>
+  .site-header {
+    position: relative;
+    z-index: 10;
+  }
+  .site-header-wide {
+    max-width: 72rem;
+    padding-inline: 2rem;
+  }
+  .site-header > div {
+    background: transparent;
+    border-color: var(--border);
+  }
+  .site-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 1.25rem;
+    letter-spacing: -0.04em;
+  }
+  .brand-mark {
+    display: grid;
+    place-content: center;
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.65rem;
+    background: #2c5142;
+    color: #fff;
+    font-family: Georgia, serif;
+    font-size: 1.8rem;
+    line-height: 1;
+  }
+  .brand-mark > span {
+    position: absolute;
+    right: 0.25rem;
+    bottom: 0.2rem;
+    color: #cedd9e;
+    font-size: 1.4rem;
+  }
+  .brand-caption {
+    color: var(--muted-foreground);
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-left: 0.7rem;
+  }
+  #menu-items {
+    font-size: 0.85rem;
+  }
+  #menu-items :global(.active-nav) {
+    text-decoration: none;
+    color: var(--accent);
+  }
+  @media (min-width: 640px) {
+    #menu-items :global(.active-nav:not(.focus-outline)) {
+      background: #edf1e9;
+      border-radius: 0.5rem;
+    }
+  }
+  @media (max-width: 1000px) {
+    .brand-caption {
+      display: none;
+    }
+  }
+  @media (max-width: 639px) {
+    .site-header-wide {
+      padding-inline: 1.25rem;
+    }
+    #menu-items {
+      width: 100%;
+    }
+    .site-header > div {
+      align-items: center;
+    }
+  }
+</style>
 
 <script>
   function toggleNav() {

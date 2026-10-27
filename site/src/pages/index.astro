@@ -4,9 +4,13 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
-import Socials from "@/components/Socials.astro";
-import Card from "@/components/Card.astro";
+import HomeProjectArt from "@/components/HomeProjectArt.astro";
+import HomeExplore from "@/components/HomeExplore.astro";
+import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
+import IconSearch from "@/assets/icons/IconSearch.svg";
+import IconGithub from "@/assets/icons/socials/github.svg";
 import { getSortedPosts } from "@/utils/getSortedPosts";
+import { getPostUrl } from "@/utils/getPostPaths";
 import config from "@/config";
 
 const locale = Astro.currentLocale ?? config.site.lang;
@@ -21,106 +25,1152 @@ const visibleProjects =
   featuredProjects.length > 0 ? featuredProjects : projects;
 const posts = getSortedPosts(await getCollection("posts"));
 const homePath = getRelativeLocaleUrl(locale, "");
+const url = (path: string) => getRelativeLocaleUrl(locale, path);
+const aiProject = projects.find(project => project.data.cover === "map");
+const aiUrl = aiProject ? url(`projects/${aiProject.id}`) : url("projects");
+const exploreEntries = [
+  ...projects.map(project => ({
+    title: project.data.title,
+    description: project.data.description,
+    url: url(`projects/${project.id}`),
+    kind: "作品",
+    keywords: `${project.data.category ?? ""} ${project.data.tags.join(" ")}`,
+  })),
+  ...posts.map(post => ({
+    title: post.data.title,
+    description: post.data.description,
+    url: getPostUrl(post.id, post.filePath, locale),
+    kind: "笔记",
+    keywords: post.data.tags.join(" "),
+  })),
+  {
+    title: "关于我",
+    description: "认识 ccy，以及我正在学习的事情。",
+    url: url("about"),
+    kind: "页面",
+  },
+  {
+    title: "联系我",
+    description: "聊聊作品、学习心得或新的想法。",
+    url: url("contact"),
+    kind: "页面",
+  },
+];
+const dateFormatter = new Intl.DateTimeFormat("zh-CN", {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  timeZone: config.site.timezone,
+});
 ---
 
 <Layout
   title={`${home.data.title}｜${config.site.title}`}
   description={home.data.description}
 >
-  <Header />
+  <Header wide />
   <main
     id="main-content"
     data-layout="index"
     data-home-path={homePath}
-    class="app-layout"
+    class="home-layout"
   >
-    <section class="border-border border-b pt-10 pb-10">
-      <p class="text-accent mb-2 font-semibold">个人网站 / Portfolio</p>
-      <h1 class="mb-4 text-4xl font-bold sm:text-5xl">{home.data.title}</h1>
-      <p class="text-muted-foreground mb-5 text-lg">{home.data.description}</p>
-      <div class="app-prose"><Content /></div>
-      <div class="mt-5"><Socials /></div>
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-copy">
+        <p class="eyebrow hero-eyebrow">
+          <span class="status-dot" aria-hidden="true"></span> A CURIOUS MIND, ALWAYS
+          LEARNING
+        </p>
+        <h1 id="hero-heading">
+          <span class="hero-intro"
+            >{home.data.title}
+            <span class="intro-spark" aria-hidden="true">✳</span></span
+          >把想法，做成<br /><span class="hero-emphasis">有趣的作品。</span>
+        </h1>
+        <div class="hero-description"><Content /></div>
+        <div class="hero-actions">
+          <a class="button-primary" href="#selected-work"
+            >看看我的作品 <IconArrowRight aria-hidden="true" /></a
+          >
+          <a class="button-text" href={config.site.profile}>
+            <IconGithub aria-hidden="true" /> GitHub <span aria-hidden="true"
+              >↗</span
+            ></a
+          >
+        </div>
+        <div class="hero-interests">
+          <span>保持好奇</span><span aria-hidden="true">/</span><span>数学</span
+          ><span aria-hidden="true">/</span><span>网页创作</span><span
+            aria-hidden="true">/</span
+          ><span>AI 探索</span>
+        </div>
+      </div>
+      <div class="hero-aside">
+        <div class="curiosity-art" aria-hidden="true">
+          <div class="art-coordinate coordinate-top">
+            FIG. 01 — A LITTLE UNIVERSE
+          </div>
+          <svg class="orbit-lines" viewBox="0 0 420 350" fill="none">
+            <circle
+              cx="210"
+              cy="175"
+              r="135"
+              stroke="#dbe2d3"
+              stroke-dasharray="2 7"></circle>
+            <circle cx="210" cy="175" r="97" stroke="#d1dcc8"></circle>
+            <ellipse
+              cx="210"
+              cy="175"
+              rx="168"
+              ry="65"
+              transform="rotate(-35 210 175)"
+              stroke="#9eaf91"></ellipse>
+            <ellipse
+              cx="210"
+              cy="175"
+              rx="168"
+              ry="65"
+              transform="rotate(35 210 175)"
+              stroke="#afbd9f"></ellipse>
+            <ellipse
+              cx="210"
+              cy="175"
+              rx="65"
+              ry="143"
+              transform="rotate(-12 210 175)"
+              stroke="#c6d2ba"></ellipse>
+            <path d="M195 175H225M210 160V190" stroke="#b9c7af"></path>
+            <circle cx="75" cy="109" r="6" fill="#b28b58"></circle>
+            <circle cx="330" cy="250" r="5" fill="#628664"></circle>
+            <circle cx="240" cy="36" r="4" fill="#b4c698"></circle>
+            <circle cx="111" cy="284" r="3.5" fill="#95a884"></circle>
+          </svg>
+          <div class="orbit-center">
+            <span>c<span class="center-dot">·</span></span><small
+              >ccy's space</small
+            >
+          </div>
+          <div class="orbit-label label-math"><span>∑</span> 数学与思考</div>
+          <div class="orbit-label label-ai"><span>✳</span> AI 与好奇心</div>
+          <div class="orbit-label label-build">
+            <span>&lt;/&gt;</span> 网页与创造
+          </div>
+          <div class="art-coordinate coordinate-bottom">
+            <span class="tiny-cross">+</span> LEARN. CONNECT. CREATE. <span
+              class="tiny-cross">+</span
+            >
+          </div>
+        </div>
+        <button type="button" class="explore-trigger" data-open-explore hidden
+          ><span><IconSearch aria-hidden="true" /> 快速探索作品与笔记</span><kbd
+            >/</kbd
+          ></button
+        >
+        <noscript
+          ><a class="explore-trigger" href={url("search")}>搜索作品与笔记 →</a
+          ></noscript
+        >
+      </div>
     </section>
 
     <section
-      class="border-border border-b py-10"
+      id="selected-work"
+      class="work-section"
       aria-labelledby="projects-heading"
     >
-      <div class="mb-5 flex items-baseline justify-between gap-4">
-        <h2 id="projects-heading" class="text-2xl font-semibold">精选作品</h2>
-        <a
-          class="text-accent underline underline-offset-4"
-          href={getRelativeLocaleUrl(locale, "projects")}>全部作品 →</a
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">01 / SELECTED WORK</p><h2 id="projects-heading">
+            想法的形状<span class="heading-note">一些正在生长的作品</span>
+          </h2>
+        </div>
+        <a class="section-link" href={url("projects")}
+          >全部作品 <span aria-hidden="true">↗</span></a
         >
       </div>
       {
         visibleProjects.length > 0 ? (
-          <ul class="grid gap-4 sm:grid-cols-2">
-            {visibleProjects.slice(0, 4).map(project => (
-              <li class="border-border rounded-xl border p-5">
-                <h3 class="text-xl font-semibold">
-                  <a
-                    class="hover:text-accent"
-                    href={getRelativeLocaleUrl(
-                      locale,
-                      `projects/${project.id}`
-                    )}
-                  >
-                    {project.data.title}
-                  </a>
-                </h3>
-                <p class="text-muted-foreground mt-2">
-                  {project.data.description}
-                </p>
-                {project.data.status && (
-                  <p class="mt-2 text-sm">状态：{project.data.status}</p>
-                )}
+          <ul class="project-grid">
+            {visibleProjects.slice(0, 4).map((project, index) => (
+              <li class="project-card">
                 <a
-                  class="text-accent mt-4 inline-block underline underline-offset-4"
-                  href={getRelativeLocaleUrl(locale, `projects/${project.id}`)}
+                  class="project-cover-link"
+                  href={url(`projects/${project.id}`)}
+                  tabindex="-1"
+                  aria-hidden="true"
                 >
-                  查看详情 →
+                  <HomeProjectArt
+                    kind={project.data.cover}
+                    title={project.data.title}
+                  />
+                </a>
+                <div class="project-content">
+                  <div class="project-meta">
+                    <span>{project.data.category ?? "网页创作"}</span>
+                    <span>PROJECT / {String(index + 1).padStart(2, "0")}</span>
+                  </div>
+                  <h3>
+                    <a href={url(`projects/${project.id}`)}>
+                      {project.data.title}
+                      <span class="project-arrow" aria-hidden="true">
+                        ↗
+                      </span>
+                    </a>
+                  </h3>
+                  <p class="project-description">{project.data.description}</p>
+                  {project.data.status && (
+                    <p class="project-status">{project.data.status}</p>
+                  )}
+                  {project.data.tags.length > 0 && (
+                    <ul class="project-tags" aria-label="作品主题">
+                      {project.data.tags.map(tag => (
+                        <li>{tag}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="empty-copy">作品正在整理中，欢迎稍后再来。</p>
+        )
+      }
+    </section>
+
+    <section class="ai-section" aria-labelledby="ai-heading">
+      <div class="ai-copy">
+        <p class="eyebrow">02 / CURRENT CURIOSITY</p><h2 id="ai-heading">
+          从数学基础，<br />走向 AI 的世界<span aria-hidden="true">✳</span>
+        </h2><p>
+          模型如何理解世界？知识如何彼此连接？<br
+            class="desktop-break"
+          />从课程笔记到模型地图，记录我一步步探索的过程。
+        </p><a href={aiUrl}
+          >看看我的 AI 学习地图 <span aria-hidden="true">↗</span></a
+        >
+      </div>
+      <div class="learning-path" aria-label="我的学习路径">
+        <a href={url("posts")}
+          ><span class="path-number">01</span><span
+            ><strong>打好基础</strong><small
+              >线性代数 · 课程笔记 · 数学思考</small
+            ></span
+          ><span class="path-arrow" aria-hidden="true">↗</span></a
+        >
+        <a href={aiUrl}
+          ><span class="path-number">02</span><span
+            ><strong>连接知识</strong><small>模型原理 · RAG · 微调与评测</small
+            ></span
+          ><span class="path-arrow" aria-hidden="true">↗</span></a
+        >
+        <a href={url("projects")}
+          ><span class="path-number">03</span><span
+            ><strong>动手创造</strong><small
+              >网页作品 · 交互实验 · 实践记录</small
+            ></span
+          ><span class="path-arrow" aria-hidden="true">↗</span></a
+        >
+      </div>
+    </section>
+
+    <section class="notes-section" aria-labelledby="posts-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">03 / NOTES & THOUGHTS</p><h2 id="posts-heading">
+            沿途的记录<span class="heading-note">学过的，想过的，留下来</span>
+          </h2>
+        </div>
+        <a class="section-link" href={url("posts")}
+          >全部笔记 <span aria-hidden="true">↗</span></a
+        >
+      </div>
+      {
+        posts.length > 0 ? (
+          <ul class="notes-list">
+            {posts.slice(0, config.posts.perIndex).map((post, index) => (
+              <li>
+                <a
+                  class="note-row"
+                  href={getPostUrl(post.id, post.filePath, locale)}
+                >
+                  <span class="note-index" aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <div class="note-content">
+                    <p class="note-category">
+                      {post.data.tags.slice(0, 2).join(" / ")}
+                    </p>
+                    <h3>{post.data.title}</h3>
+                    <p class="note-description">{post.data.description}</p>
+                  </div>
+                  <time datetime={post.data.pubDatetime.toISOString()}>
+                    {dateFormatter.format(post.data.pubDatetime)}
+                  </time>
+                  <span class="note-arrow" aria-hidden="true">
+                    ↗
+                  </span>
                 </a>
               </li>
             ))}
           </ul>
         ) : (
-          <p class="text-muted-foreground">作品正在整理中，欢迎稍后再来。</p>
+          <p class="empty-copy">文章正在准备中，之后会在这里分享学习记录。</p>
         )
       }
     </section>
 
-    <section class="py-10" aria-labelledby="posts-heading">
-      <div class="mb-5 flex items-baseline justify-between gap-4">
-        <h2 id="posts-heading" class="text-2xl font-semibold">近期文章</h2>
-        <a
-          class="text-accent underline underline-offset-4"
-          href={getRelativeLocaleUrl(locale, "posts")}>全部文章 →</a
+    <section class="contact-section" aria-labelledby="contact-heading">
+      <span class="contact-spark" aria-hidden="true">✳</span><div>
+        <p class="eyebrow">GOOD IDEAS START WITH A HELLO</p><h2
+          id="contact-heading"
         >
-      </div>
-      {
-        posts.length > 0 ? (
-          <ul>
-            {posts.slice(0, config.posts.perIndex).map(post => (
-              <Card variant="h3" {...post} />
-            ))}
-          </ul>
-        ) : (
-          <p class="text-muted-foreground">
-            文章正在准备中。之后会在这里分享学习记录。
-          </p>
-        )
-      }
+          有想法，就来聊聊。
+        </h2><p>关于学习、作品，或者任何有趣的事。</p>
+      </div><a class="contact-link" href={url("contact")}
+        >打个招呼 <span aria-hidden="true">↗</span></a
+      >
     </section>
   </main>
-  <Footer />
+  <Footer class="home-footer" />
+  <HomeExplore entries={exploreEntries} searchUrl={url("search")} />
 </Layout>
 
 <script>
   document.addEventListener("astro:page-load", () => {
-    const indexLayout = (document.querySelector("#main-content") as HTMLElement)
-      ?.dataset;
-    if (indexLayout?.layout)
-      sessionStorage.setItem("backUrl", indexLayout.homePath ?? "/");
+    const indexLayout =
+      document.querySelector<HTMLElement>("#main-content")?.dataset;
+    if (indexLayout?.layout === "index") {
+      try {
+        sessionStorage.setItem("backUrl", indexLayout.homePath ?? "/");
+      } catch {
+        /* Navigation also works when storage is unavailable. */
+      }
+    }
   });
 </script>
+
+<style>
+  .home-layout {
+    max-width: 72rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  .eyebrow {
+    color: #66735d;
+    font-family: ui-monospace, "SFMono-Regular", monospace;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    line-height: 1.5;
+  }
+  .hero {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    padding: 4.5rem 0 4rem;
+  }
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 0.61rem;
+  }
+  .status-dot {
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: #708d54;
+    box-shadow: 0 0 0 4px #e9eedf;
+  }
+  h1 {
+    font-size: clamp(2.5rem, 4.4vw, 3.6rem);
+    font-weight: 600;
+    letter-spacing: -0.055em;
+    line-height: 1.3;
+    margin: 1.6rem 0 1.4rem;
+  }
+  .hero-intro {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.15rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    margin-bottom: 1rem;
+  }
+  .intro-spark {
+    color: #9c885a;
+    font-size: 1.4rem;
+  }
+  .hero-emphasis {
+    color: #3d6a50;
+  }
+  .hero-description {
+    color: var(--muted-foreground);
+    max-width: 28.5rem;
+    font-size: 0.91rem;
+    line-height: 1.95;
+  }
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.8rem;
+    margin-top: 1.7rem;
+    font-size: 0.8rem;
+  }
+  .button-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0.9rem 1.2rem;
+    border-radius: 0.55rem;
+    background: #2d5141;
+    color: #fff;
+    transition:
+      background 0.2s,
+      transform 0.2s;
+  }
+  .button-primary:hover {
+    background: #1e3d30;
+    transform: translateY(-2px);
+  }
+  .button-primary :global(svg) {
+    width: 1rem;
+    height: 1rem;
+  }
+  .button-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #5a665c;
+  }
+  .button-text:hover {
+    color: var(--accent);
+  }
+  .button-text :global(svg) {
+    width: 1rem;
+    height: 1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+  }
+  .hero-interests {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: 1.9rem;
+    color: #66735d;
+    font-size: 0.67rem;
+  }
+  .hero-interests > [aria-hidden] {
+    color: #c1caba;
+  }
+  .hero-aside {
+    min-width: 0;
+  }
+  .curiosity-art {
+    position: relative;
+    height: 22rem;
+    background-image: radial-gradient(#a4b29a45 0.6px, transparent 0.6px);
+    background-size: 17px 17px;
+    border-radius: 50%;
+  }
+  .orbit-lines {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  .orbit-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    place-content: center;
+    text-align: center;
+    width: 7rem;
+    height: 7rem;
+    border: 1px solid #d4dfca;
+    border-radius: 50%;
+    background: #f0f4e9;
+    box-shadow: 0 0 0 10px #fafbf880;
+  }
+  .orbit-center > span {
+    color: #3b5c45;
+    font-family: Georgia, serif;
+    font-size: 5rem;
+    line-height: 0.85;
+    font-style: italic;
+    padding-right: 0.35rem;
+  }
+  .center-dot {
+    color: #a38c55;
+    font-size: 3.7rem;
+  }
+  .orbit-center small {
+    color: #75816e;
+    font-family: ui-monospace, monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.08em;
+    margin-top: 0.65rem;
+  }
+  .orbit-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: absolute;
+    padding: 0.55rem 0.8rem;
+    border: 1px solid #dce3d4;
+    border-radius: 0.6rem;
+    background: #fafbf8ed;
+    font-size: 0.7rem;
+    color: #53634f;
+    box-shadow: 0 5px 12px #273b2806;
+  }
+  .orbit-label > span {
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    color: #6b855d;
+  }
+  .label-math {
+    left: 1%;
+    top: 35%;
+    transform: rotate(-6deg);
+  }
+  .label-ai {
+    right: 1%;
+    top: 24%;
+    transform: rotate(6deg);
+  }
+  .label-build {
+    right: 4%;
+    bottom: 16%;
+    transform: rotate(-4deg);
+  }
+  .label-build > span {
+    font-family: ui-monospace, monospace;
+    font-size: 0.8rem;
+  }
+  .art-coordinate {
+    position: absolute;
+    color: #88947d;
+    font-family: ui-monospace, monospace;
+    font-size: 0.48rem;
+    letter-spacing: 0.12em;
+  }
+  .coordinate-top {
+    top: -0.35rem;
+    left: 1rem;
+  }
+  .coordinate-bottom {
+    bottom: -0.25rem;
+    left: 10%;
+    right: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .tiny-cross {
+    font-size: 1rem;
+    color: #acb79f;
+  }
+  .explore-trigger {
+    width: 88%;
+    margin: 1.5rem auto 0;
+    padding: 0.75rem 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: 0.65rem;
+    font-size: 0.72rem;
+    color: #66735d;
+    background: #fff8;
+  }
+  .explore-trigger:not([hidden]) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .explore-trigger > span {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+  .explore-trigger :global(svg) {
+    width: 1rem;
+    height: 1rem;
+  }
+  .explore-trigger kbd {
+    border: 1px solid var(--border);
+    border-radius: 0.2rem;
+    padding: 0 0.4rem;
+    font-size: 0.7rem;
+  }
+  .explore-trigger:hover {
+    border-color: #b4c3aa;
+    background: #fff;
+    color: var(--accent);
+  }
+  .work-section {
+    border-top: 1px solid var(--border);
+    padding-top: 2.25rem;
+    scroll-margin-top: 2rem;
+  }
+  .section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .section-heading h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    margin-top: 0.6rem;
+  }
+  .heading-note {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    color: #66735d;
+    margin-left: 1rem;
+  }
+  .section-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 0.75rem;
+    color: #66755c;
+    padding-bottom: 0.25rem;
+    white-space: nowrap;
+  }
+  .section-link:hover {
+    color: var(--accent);
+  }
+  .section-link > span {
+    font-size: 1rem;
+  }
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 0.85rem;
+    background: #fff9;
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
+  }
+  .project-card:hover {
+    border-color: #b8c6ad;
+    box-shadow: 0 7px 24px #324a2d08;
+  }
+  .project-cover-link {
+    display: block;
+  }
+  .project-content {
+    padding: 1.4rem 1.5rem 1.5rem;
+  }
+  .project-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    color: #66735d;
+    font-size: 0.63rem;
+  }
+  .project-meta > :first-child {
+    color: #577348;
+  }
+  .project-meta > :last-child {
+    font-family: ui-monospace, monospace;
+    font-size: 0.57rem;
+    letter-spacing: 0.08em;
+  }
+  .project-content h3 {
+    font-size: 1.2rem;
+    font-weight: 550;
+    letter-spacing: -0.02em;
+    margin-top: 0.6rem;
+  }
+  .project-content h3 a {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+  }
+  .project-content h3 a:hover {
+    color: var(--accent);
+  }
+  .project-arrow {
+    display: grid;
+    place-content: center;
+    flex-shrink: 0;
+    width: 1.85rem;
+    height: 1.85rem;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: background 0.2s;
+  }
+  .project-card:hover .project-arrow {
+    background: #edf2e8;
+  }
+  .project-description {
+    font-size: 0.78rem;
+    line-height: 1.9;
+    color: #677169;
+    margin-top: 0.65rem;
+  }
+  .project-status {
+    font-size: 0.7rem;
+    color: var(--accent);
+    margin-top: 0.5rem;
+  }
+  .project-tags {
+    display: flex;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+    margin-top: 1.15rem;
+  }
+  .project-tags li {
+    padding: 0.2rem 0.55rem;
+    background: #f1f3ed;
+    border-radius: 0.3rem;
+    color: #626e58;
+    font-size: 0.6rem;
+  }
+  .ai-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    margin-top: 3rem;
+    border: 1px solid #dce4d2;
+    border-radius: 0.85rem;
+    padding: 2.5rem;
+    background: #eff3e7;
+  }
+  .ai-copy .eyebrow {
+    color: #637255;
+  }
+  .ai-copy h2 {
+    position: relative;
+    display: inline-block;
+    font-size: 1.8rem;
+    line-height: 1.5;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    margin-top: 0.8rem;
+  }
+  .ai-copy h2 > span {
+    position: absolute;
+    right: -2.7rem;
+    top: 0.1rem;
+    font-size: 2.8rem;
+    font-weight: 400;
+    color: #93a97c;
+  }
+  .ai-copy > p:not(.eyebrow) {
+    font-size: 0.75rem;
+    line-height: 1.95;
+    margin-top: 0.85rem;
+    color: #637255;
+  }
+  .ai-copy > a {
+    display: inline-flex;
+    gap: 1.2rem;
+    align-items: center;
+    color: #426336;
+    font-size: 0.73rem;
+    margin-top: 1.35rem;
+  }
+  .ai-copy > a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
+  }
+  .learning-path {
+    min-width: 0;
+  }
+  .learning-path > a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid #d7dfce;
+  }
+  .learning-path > a:last-child {
+    border-bottom: 0;
+  }
+  .path-number {
+    font-family: Georgia, serif;
+    font-size: 0.9rem;
+    color: #637255;
+  }
+  .learning-path strong {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  .learning-path small {
+    display: block;
+    font-size: 0.65rem;
+    color: #637255;
+    margin-top: 0.35rem;
+  }
+  .path-arrow {
+    margin-left: auto;
+    color: #809271;
+    transition: transform 0.2s;
+  }
+  .learning-path a:hover .path-arrow {
+    transform: translate(2px, -2px);
+    color: var(--accent);
+  }
+  .notes-section {
+    margin-top: 3.75rem;
+  }
+  .notes-list {
+    border-top: 1px solid var(--border);
+  }
+  .note-row {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.4rem 0.3rem;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+  .note-row:hover {
+    background: #f0f3eb;
+  }
+  .note-index {
+    color: #a0ad96;
+    font-family: Georgia, serif;
+    font-size: 0.85rem;
+  }
+  .note-content {
+    flex: 1;
+    min-width: 0;
+  }
+  .note-category {
+    color: #66735d;
+    font-size: 0.58rem;
+    letter-spacing: 0.03em;
+  }
+  .note-content h3 {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    font-weight: 500;
+    margin-top: 0.3rem;
+  }
+  .note-row:hover h3 {
+    color: var(--accent);
+  }
+  .note-description {
+    color: #677169;
+    font-size: 0.7rem;
+    margin-top: 0.3rem;
+    line-height: 1.7;
+  }
+  time {
+    color: #66735d;
+    font-family: ui-monospace, monospace;
+    font-size: 0.65rem;
+    white-space: nowrap;
+  }
+  .note-arrow {
+    color: #829275;
+    font-size: 1rem;
+  }
+  .contact-section {
+    margin: 3.75rem 0 3.25rem;
+    padding: 2.3rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1.7rem;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .contact-spark {
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: #7c956b;
+    line-height: 1;
+  }
+  .contact-section .eyebrow {
+    font-size: 0.58rem;
+  }
+  .contact-section h2 {
+    font-size: 1.65rem;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    margin-top: 0.5rem;
+  }
+  .contact-section p:last-child {
+    color: #677169;
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+  }
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 2.2rem;
+    margin-left: auto;
+    border: 1px solid #bdcbb1;
+    padding: 0.8rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+  .contact-link:hover {
+    background: #edf2e7;
+  }
+  .empty-copy {
+    padding-block: 2rem;
+    color: var(--muted-foreground);
+    font-size: 0.85rem;
+  }
+  :global(.home-footer) {
+    max-width: 72rem;
+    padding-inline: 2rem;
+    color: #66735d;
+    font-size: 0.65rem;
+  }
+  :global(.home-footer > div) {
+    border-top: 0;
+    padding-top: 0;
+    padding-bottom: 1.5rem;
+  }
+  :global(.home-footer svg) {
+    width: 1rem;
+    height: 1rem;
+  }
+  @media (max-width: 1000px) {
+    .hero {
+      gap: 1.5rem;
+      padding-top: 3rem;
+    }
+    .hero-eyebrow {
+      font-size: 0.53rem;
+      letter-spacing: 0.08em;
+    }
+    .curiosity-art {
+      height: 19rem;
+    }
+    .hero-description {
+      font-size: 0.83rem;
+    }
+    .hero-interests {
+      gap: 0.5rem;
+      font-size: 0.6rem;
+    }
+    .label-math {
+      left: -2%;
+    }
+    .label-ai {
+      right: -2%;
+    }
+    .orbit-label {
+      font-size: 0.6rem;
+      padding: 0.45rem 0.6rem;
+    }
+    .ai-section {
+      gap: 2rem;
+      padding: 2rem;
+    }
+    .heading-note {
+      margin-left: 0.65rem;
+      font-size: 0.65rem;
+    }
+  }
+  @media (max-width: 767px) {
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      padding: 2.5rem 0 2.5rem;
+    }
+    h1 {
+      font-size: clamp(2.6rem, 7vw, 3.5rem);
+    }
+    .hero-eyebrow {
+      font-size: 0.6rem;
+    }
+    .hero-description {
+      max-width: 33rem;
+      font-size: 0.87rem;
+    }
+    .hero-aside {
+      width: min(26rem, 100%);
+      margin: 0 auto;
+    }
+    .curiosity-art {
+      height: 18rem;
+    }
+    .hero-interests {
+      margin-top: 1.4rem;
+    }
+    .orbit-label {
+      font-size: 0.68rem;
+    }
+    .label-math {
+      left: 2%;
+    }
+    .label-ai {
+      right: 2%;
+    }
+    .orbit-center {
+      width: 6rem;
+      height: 6rem;
+    }
+    .orbit-center > span {
+      font-size: 4rem;
+    }
+    .center-dot {
+      font-size: 3rem;
+    }
+    .heading-note {
+      display: none;
+    }
+    .project-content {
+      padding: 1.1rem;
+    }
+    .project-content h3 {
+      font-size: 1rem;
+    }
+    .ai-section {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    .ai-copy h2 {
+      font-size: 1.7rem;
+    }
+    .learning-path > a {
+      padding-block: 1rem;
+    }
+    .contact-section {
+      gap: 1rem;
+    }
+    .contact-section h2 {
+      font-size: 1.4rem;
+    }
+    .contact-spark {
+      font-size: 2.8rem;
+    }
+    .contact-link {
+      gap: 1rem;
+    }
+  }
+  @media (max-width: 600px) {
+    .home-layout {
+      padding-inline: 1.25rem;
+    }
+    .project-grid {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    .section-heading h2 {
+      font-size: 1.45rem;
+    }
+    .section-link {
+      font-size: 0.68rem;
+      gap: 0.5rem;
+    }
+    .project-content {
+      padding: 1.2rem;
+    }
+    .project-content h3 {
+      font-size: 1.15rem;
+    }
+    .project-description {
+      font-size: 0.78rem;
+    }
+    .work-section {
+      padding-top: 1.75rem;
+    }
+    .ai-section {
+      margin-top: 2rem;
+      padding: 1.5rem;
+    }
+    .ai-copy h2 {
+      font-size: 1.65rem;
+    }
+    .notes-section {
+      margin-top: 2.5rem;
+    }
+    .note-row {
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      padding-block: 1.1rem;
+    }
+    .note-index {
+      align-self: flex-start;
+      padding-top: 1.3rem;
+      font-size: 0.75rem;
+    }
+    .note-content {
+      flex-basis: calc(100% - 3.5rem);
+    }
+    .note-content h3 {
+      font-size: 0.85rem;
+    }
+    .note-description {
+      font-size: 0.67rem;
+    }
+    time {
+      margin-left: 1.7rem;
+      font-size: 0.6rem;
+    }
+    .note-arrow {
+      margin-left: auto;
+    }
+    .contact-section {
+      flex-wrap: wrap;
+      margin-block: 2.5rem 1.5rem;
+      gap: 0.9rem;
+      padding-block: 1.75rem;
+    }
+    .contact-spark {
+      font-size: 2.5rem;
+    }
+    .contact-section .eyebrow {
+      font-size: 0.48rem;
+      letter-spacing: 0.07em;
+    }
+    .contact-section h2 {
+      font-size: 1.35rem;
+    }
+    .contact-section p:last-child {
+      font-size: 0.66rem;
+    }
+    .contact-link {
+      margin-left: 3.4rem;
+      padding: 0.65rem 0.85rem;
+      gap: 1.75rem;
+      font-size: 0.7rem;
+    }
+    :global(.home-footer) {
+      padding-inline: 1.25rem;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      transition: none !important;
+    }
+    :global(html) {
+      scroll-behavior: auto;
+    }
+  }
+</style>
