@@ -9,7 +9,7 @@ draft: false
 featured: false
 ---
 
-# 线性代数：Laplace 展开、Vandermonde 行列式与矩阵的秩
+
 
 > 来源：`线性代数10.22.pdf` 的 PDF 第 15～20 页（按文件页序）。摘录 `note_linalg_3.pdf` 第 1～6 页依次对应原第 15～20 页。按原稿顺序整理，已核算并完善适用条件与记号；补写的证明已注明。
 
