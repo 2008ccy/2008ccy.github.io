@@ -3,7 +3,7 @@
 title: " 线性代数：Laplace 展开、Vandermonde 行列式与矩阵的秩"
 description: "包含Laplace 展开、Vandermonde 行列式与矩阵的秩等技巧性较强且十分重要的内容"
 pubDatetime: 2026-10-26T16:20:00+08:00
-tags: [线性代数， 课程笔记]
+tags: [线性代数，课程笔记]
 # 默认允许发布；暂不公开时改为 true。
 draft: false
 featured: false
