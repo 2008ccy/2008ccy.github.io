@@ -3,8 +3,7 @@ import type { Page } from "astro";
 import type { CollectionEntry } from "astro:content";
 import Card from "./Card.astro";
 import Pagination from "./Pagination.astro";
-import { getUniqueTags } from "@/utils/getUniqueTags";
-import { slugifyAll } from "@/utils/slugify";
+import { getNextTagOptions } from "@/utils/filterPostPage";
 
 type Props = {
   posts: CollectionEntry<"posts">[];
@@ -12,11 +11,10 @@ type Props = {
   postsUrl: string;
 };
 const { posts, page, postsUrl } = Astro.props;
-const tags = getUniqueTags(posts).map(tag => ({
-  ...tag,
-  count: posts.filter(post => slugifyAll(post.data.tags).includes(tag.tag))
-    .length,
-}));
+const tagEntries = posts.map(post => ({ tags: post.data.tags }));
+const rootOptions = getNextTagOptions(tagEntries, []);
+const depth = Math.max(1, ...posts.map(post => post.data.tags.length));
+const levelNames = ["一级标签", "二级标签", "三级标签", "四级标签", "五级标签"];
 ---
 
 <div
@@ -26,35 +24,52 @@ const tags = getUniqueTags(posts).map(tag => ({
   data-posts-url={postsUrl}
 >
   <div class="tag-filter" data-filter-controls hidden>
-    <p id="tag-filter-label">按标签筛选</p>
+    <p id="tag-filter-label">按标签逐级筛选</p>
     <div class="filter-options" role="group" aria-labelledby="tag-filter-label">
-      <button
-        type="button"
-        data-tag-filter=""
-        data-tag-name="全部文章"
-        aria-pressed="true">全部文章 <span>({posts.length})</span></button
-      >
       {
-        tags.map(({ tag, tagName, count }) => (
-          <button
-            type="button"
-            data-tag-filter={tag}
-            data-tag-name={tagName}
-            aria-pressed="false"
-          >
-            {tagName} <span>({count})</span>
-          </button>
-        ))
+        Array.from({ length: depth }, (_, index) => {
+          const label = levelNames[index] ?? `第 ${index + 1} 级标签`;
+          return (
+            <div class="hierarchy-step">
+              {index > 0 && (
+                <span class="level-separator" aria-hidden="true">
+                  ›
+                </span>
+              )}
+              <label class="filter-level">
+                <span>{label}</span>
+                <select
+                  data-tag-level={index}
+                  aria-label={label}
+                  disabled={index > 0}
+                >
+                  <option value="">
+                    {index > 0 ? "请先选择上一级" : "全部"}
+                  </option>
+                  {index === 0 &&
+                    rootOptions.map(option => (
+                      <option value={option.label}>
+                        {option.label} ({option.count})
+                      </option>
+                    ))}
+                </select>
+              </label>
+            </div>
+          );
+        })
       }
     </div>
-    <p
-      class="result-summary"
-      data-filter-summary
-      role="status"
-      aria-live="polite"
-    >
-      共 {posts.length} 篇文章
-    </p>
+    <div class="summary-row">
+      <p
+        class="result-summary"
+        data-filter-summary
+        role="status"
+        aria-live="polite"
+      >
+        共 {posts.length} 篇文章
+      </p>
+      <button type="button" data-clear-filter hidden>清除筛选</button>
+    </div>
   </div>
 
   <ul data-post-items>
@@ -63,14 +78,13 @@ const tags = getUniqueTags(posts).map(tag => ({
         <Card
           {...post}
           hidden={index < page.start || index >= page.start + page.size}
-          filterTags={slugifyAll(post.data.tags)}
+          filterTags={post.data.tags}
         />
       ))
     }
   </ul>
   <div class="empty-result" data-filter-empty hidden={posts.length > 0}>
     <p data-empty-message>文章正在准备中，欢迎稍后再来。</p>
-    <button type="button" data-clear-filter hidden>查看全部文章</button>
   </div>
 
   <div data-static-pagination><Pagination {page} /></div>
@@ -87,7 +101,12 @@ const tags = getUniqueTags(posts).map(tag => ({
 </div>
 
 <script>
-  import { filterPostPage } from "@/utils/filterPostPage";
+  import {
+    filterPostPage,
+    getNextTagOptions,
+    parseTagPath,
+    resolveLegacyTagPath,
+  } from "@/utils/filterPostPage";
 
   let controller: AbortController | undefined;
   function setupPostList() {
@@ -98,14 +117,16 @@ const tags = getUniqueTags(posts).map(tag => ({
     if (!root) return;
 
     const controls = root.querySelector<HTMLElement>("[data-filter-controls]")!;
-    const buttons = Array.from(
-      root.querySelectorAll<HTMLButtonElement>("[data-tag-filter]")
+    const selects = Array.from(
+      root.querySelectorAll<HTMLSelectElement>("[data-tag-level]")
     );
     const entries = Array.from(
       root.querySelectorAll<HTMLElement>("[data-post-tags]")
     ).map(element => ({
       element,
-      tags: JSON.parse(element.dataset.postTags ?? "[]") as string[],
+      tags: parseTagPath(
+        JSON.parse(element.dataset.postTags ?? "[]") as string[]
+      ),
     }));
     const summary = root.querySelector<HTMLElement>("[data-filter-summary]")!;
     const empty = root.querySelector<HTMLElement>("[data-filter-empty]")!;
@@ -122,7 +143,7 @@ const tags = getUniqueTags(posts).map(tag => ({
     const pageSize = Number(root.dataset.pageSize) || 4;
     const initialPage = Number(root.dataset.initialPage) || 1;
     const postsUrl = root.dataset.postsUrl!;
-    let currentTag = "";
+    let currentPath: string[] = [];
     let currentPage = initialPage;
 
     function rememberList() {
@@ -133,31 +154,47 @@ const tags = getUniqueTags(posts).map(tag => ({
       }
     }
 
-    function render(tag: string, page: number, updateUrl = false) {
-      const result = filterPostPage(entries, tag, page, pageSize);
-      currentTag = tag;
+    function render(selection: string[], page: number, updateUrl = false) {
+      currentPath = parseTagPath(selection);
+      const result = filterPostPage(entries, currentPath, page, pageSize);
       currentPage = result.currentPage;
       const visible = new Set(result.items.map(item => item.element));
       entries.forEach(({ element }) => {
         element.hidden = !visible.has(element);
       });
-      buttons.forEach(button =>
-        button.setAttribute(
-          "aria-pressed",
-          String((button.dataset.tagFilter ?? "") === tag)
-        )
-      );
-      const tagName =
-        buttons.find(button => button.dataset.tagFilter === tag)?.dataset
-          .tagName ?? tag;
-      summary.textContent = tag
-        ? `${tagName} · ${result.total} 篇文章`
-        : `共 ${result.total} 篇文章`;
+      selects.forEach((select, level) => {
+        const ready = level <= currentPath.length;
+        const options = ready
+          ? getNextTagOptions(entries, currentPath.slice(0, level))
+          : [];
+        const placeholder = !ready
+          ? "请先选择上一级"
+          : level > 0 && options.length === 0
+            ? "无下级标签"
+            : "全部";
+        select.replaceChildren(
+          new Option(placeholder, ""),
+          ...options.map(
+            option =>
+              new Option(`${option.label} (${option.count})`, option.label)
+          )
+        );
+        const selected = currentPath[level] ?? "";
+        if (selected && !options.some(option => option.label === selected))
+          select.add(new Option(`${selected}（无匹配）`, selected));
+        select.value = selected;
+        select.disabled = !ready || options.length === 0;
+      });
+      summary.textContent =
+        currentPath.length > 0
+          ? `${currentPath.join(" › ")} · ${result.total} 篇文章`
+          : `共 ${result.total} 篇文章`;
       empty.hidden = result.total !== 0;
-      clear.hidden = !tag;
-      emptyMessage.textContent = tag
-        ? "没有符合该标签的文章，请选择其他标签或查看全部文章。"
-        : "文章正在准备中，欢迎稍后再来。";
+      clear.hidden = currentPath.length === 0;
+      emptyMessage.textContent =
+        currentPath.length > 0
+          ? "没有符合该标签层级的文章，请调整分类或清除筛选。"
+          : "文章正在准备中，欢迎稍后再来。";
       pagination.hidden = result.lastPage <= 1;
       previous.disabled = result.currentPage <= 1;
       next.disabled = result.currentPage >= result.lastPage;
@@ -166,8 +203,10 @@ const tags = getUniqueTags(posts).map(tag => ({
         const url = new URL(location.href);
         url.pathname = postsUrl;
         url.hash = "";
-        if (tag) url.searchParams.set("tag", tag);
-        else url.searchParams.delete("tag");
+        url.searchParams.delete("tag");
+        if (currentPath.length > 0)
+          url.searchParams.set("tags", currentPath.join(","));
+        else url.searchParams.delete("tags");
         if (result.currentPage > 1)
           url.searchParams.set("page", String(result.currentPage));
         else url.searchParams.delete("page");
@@ -179,29 +218,35 @@ const tags = getUniqueTags(posts).map(tag => ({
 
     function readUrl() {
       const url = new URL(location.href);
-      const tag = url.searchParams.get("tag") ?? "";
+      const selection = url.searchParams.has("tags")
+        ? parseTagPath(url.searchParams.get("tags") ?? "")
+        : resolveLegacyTagPath(entries, url.searchParams.get("tag") ?? "");
       const isMainList =
         url.pathname.replace(/\/+$/, "") === postsUrl.replace(/\/+$/, "");
       const page = url.searchParams.has("page")
         ? Number(url.searchParams.get("page"))
-        : tag || isMainList
+        : selection.length > 0 || isMainList
           ? 1
           : initialPage;
-      render(tag, page);
+      render(selection, page);
     }
 
-    buttons.forEach(button =>
-      button.addEventListener(
-        "click",
-        () => render(button.dataset.tagFilter ?? "", 1, true),
+    selects.forEach((select, level) =>
+      select.addEventListener(
+        "change",
+        () => {
+          const selection = currentPath.slice(0, level);
+          if (select.value) selection.push(select.value);
+          render(selection, 1, true);
+        },
         { signal }
       )
     );
-    clear.addEventListener("click", () => render("", 1, true), { signal });
+    clear.addEventListener("click", () => render([], 1, true), { signal });
     previous.addEventListener(
       "click",
       () => {
-        render(currentTag, currentPage - 1, true);
+        render(currentPath, currentPage - 1, true);
         root.scrollIntoView({ block: "start" });
       },
       { signal }
@@ -209,7 +254,7 @@ const tags = getUniqueTags(posts).map(tag => ({
     next.addEventListener(
       "click",
       () => {
-        render(currentTag, currentPage + 1, true);
+        render(currentPath, currentPage + 1, true);
         root.scrollIntoView({ block: "start" });
       },
       { signal }
@@ -247,46 +292,72 @@ const tags = getUniqueTags(posts).map(tag => ({
   #tag-filter-label {
     font-size: 0.85rem;
     color: var(--muted-foreground);
-    margin-bottom: 0.65rem;
+    margin-bottom: 0.85rem;
   }
   .filter-options {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    align-items: flex-end;
+    gap: 0.75rem;
   }
-  .filter-options button {
+  .hierarchy-step {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.75rem;
+    min-width: 0;
+  }
+  .filter-level {
+    display: grid;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+  }
+  .filter-level > span {
+    color: var(--muted-foreground);
+  }
+  .filter-level select {
+    width: 10.5rem;
+    max-width: 100%;
     border: 1px solid var(--border);
     border-radius: 0.3rem;
-    padding: 0.4rem 0.75rem;
+    background: var(--background);
+    color: var(--foreground);
+    padding: 0.5rem 0.6rem;
     font-size: 0.85rem;
   }
-  .filter-options button[aria-pressed="true"] {
-    border-color: var(--foreground);
-    background: var(--muted);
+  .filter-level select:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
   }
-  .filter-options button:hover {
-    border-color: var(--foreground);
-  }
-  .filter-options span {
-    margin-left: 0.2rem;
+  .filter-level select:disabled {
     color: var(--muted-foreground);
-    font-size: 0.75rem;
+    background: #f6f6f6;
+  }
+  .level-separator {
+    color: var(--muted-foreground);
+    padding-bottom: 0.4rem;
+    font-size: 1.2rem;
+  }
+  .summary-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 0.9rem;
   }
   .result-summary {
     color: var(--muted-foreground);
     font-size: 0.8rem;
-    margin-top: 0.85rem;
+  }
+  [data-clear-filter] {
+    flex-shrink: 0;
+    font-size: 0.8rem;
+    text-decoration: underline;
+    text-underline-offset: 0.25rem;
   }
   .empty-result {
     color: var(--muted-foreground);
     padding-block: 1.5rem;
     font-size: 0.9rem;
-  }
-  [data-clear-filter] {
-    margin-top: 1rem;
-    color: var(--foreground);
-    text-decoration: underline;
-    text-underline-offset: 0.25rem;
   }
   .filter-pagination:not([hidden]) {
     display: flex;
@@ -302,5 +373,22 @@ const tags = getUniqueTags(posts).map(tag => ({
   .filter-pagination button:disabled {
     opacity: 0.45;
     cursor: default;
+  }
+  @media (max-width: 600px) {
+    .filter-options {
+      gap: 0.65rem;
+    }
+    .hierarchy-step {
+      flex: 1 1 9rem;
+      gap: 0.5rem;
+    }
+    .filter-level {
+      flex: 1;
+      min-width: 0;
+    }
+    .filter-level select {
+      width: 100%;
+      min-width: 0;
+    }
   }
 </style>

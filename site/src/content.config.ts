@@ -2,6 +2,7 @@ import { defineCollection } from "astro:content";
 import { z } from "astro/zod";
 import { glob } from "astro/loaders";
 import config from "@/config";
+import { parseTagPath } from "@/utils/filterPostPage";
 
 export const BLOG_PATH = "../note";
 
@@ -22,7 +23,10 @@ const posts = defineCollection({
       title: z.string(),
       featured: z.boolean().optional(),
       draft: z.boolean().optional(),
-      tags: z.array(z.string()).default(["others"]),
+      tags: z
+        .union([z.array(z.string()), z.string()])
+        .default(["others"])
+        .transform(parseTagPath),
       ogImage: image().or(z.string()).optional(),
       description: z.string(),
       canonicalURL: z.string().optional(),

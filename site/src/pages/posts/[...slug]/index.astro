@@ -149,8 +149,23 @@ const ogImage = ogImageUrl
 
     <BackToTopButton />
 
-    <ul class="mt-4 mb-8 flex flex-wrap gap-4 sm:my-8">
-      {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />)}
+    <ul
+      class="mt-4 mb-8 flex flex-wrap items-center gap-2 sm:my-8"
+      aria-label="文章标签层级"
+    >
+      {
+        tags.map((tag, index) => (
+          <>
+            {index > 0 && <li aria-hidden="true">›</li>}
+            <Tag
+              tag={slugifyStr(tag)}
+              tagName={tag}
+              path={tags.slice(0, index + 1)}
+              size="sm"
+            />
+          </>
+        ))
+      }
     </ul>
 
     <ShareLinks />
