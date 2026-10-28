@@ -3,7 +3,7 @@
 title: "线性代数：复数与一元多项式"
 description: "包含复数与一元多项式（类似强基内容）"
 pubDatetime: 2026-10-26T16:40:00+08:00
-tags: [ 课程笔记]
+tags: [ 线性代数，课程笔记]
 # 默认允许发布；暂不公开时改为 true。
 draft: false
 featured: false

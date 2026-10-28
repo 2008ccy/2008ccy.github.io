@@ -3,7 +3,7 @@
 title: "线性代数：矩阵等价、矩阵运算、转置与伴随矩阵"
 description: "包含矩阵的运算，比较困难"
 pubDatetime: 2026-10-26T16:50:00+08:00
-tags: [ 课程笔记]
+tags: [线性代数， 课程笔记]
 # 默认允许发布；暂不公开时改为 true。
 draft: false
 featured: false

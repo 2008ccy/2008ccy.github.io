@@ -5,7 +5,7 @@ title: >-
 description: >-
   线性代数：逆矩阵与伴随矩阵的性质的知识点、推导和手写原稿。
 pubDatetime: 2026-10-28T13:40:00+08:00
-tags: [ 课程笔记]
+tags: [线性代数， 课程笔记]
 # 默认允许发布；暂不公开时改为 true。
 draft: false
 featured: false
