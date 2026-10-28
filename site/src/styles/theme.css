@@ -15,10 +15,10 @@
 :root {
   color-scheme: light;
   --background: #ffffff;
-  --foreground: #252a27;
-  --accent: #2c6654;
+  --foreground: #000000;
+  --accent: #000000;
   --accent-foreground: #ffffff;
-  --muted: #f1f3f1;
-  --muted-foreground: #626b65;
-  --border: #e5e8e5;
+  --muted: #e6e6e6;
+  --muted-foreground: #4b5563;
+  --border: #e5e7eb;
 }
