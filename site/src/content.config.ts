@@ -6,7 +6,14 @@ import config from "@/config";
 export const BLOG_PATH = "../note";
 
 const posts = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: `./${BLOG_PATH}` }),
+  loader: glob({
+    pattern: [
+      "**/[^_]*.{md,mdx}",
+      "!**/lianlg_md_note/**",
+      "!**/cacu_md_note/**",
+    ],
+    base: `./${BLOG_PATH}`,
+  }),
   schema: ({ image }) =>
     z.object({
       author: z.string().default(config.site.author),

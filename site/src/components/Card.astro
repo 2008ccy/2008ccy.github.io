@@ -6,14 +6,27 @@ import Datetime from "./Datetime.astro";
 
 type Props = {
   variant?: "h2" | "h3";
+  hidden?: boolean;
+  filterTags?: string[];
 } & CollectionEntry<"posts">;
 
-const { variant: Heading = "h2", id, data, filePath } = Astro.props;
+const {
+  variant: Heading = "h2",
+  hidden = false,
+  filterTags,
+  id,
+  data,
+  filePath,
+} = Astro.props;
 
 const { title, description, ...props } = data;
 ---
 
-<li class="my-6">
+<li
+  class="my-6"
+  hidden={hidden}
+  data-post-tags={filterTags ? JSON.stringify(filterTags) : undefined}
+>
   <a
     href={getPostUrl(id, filePath, Astro.currentLocale)}
     class:list={[

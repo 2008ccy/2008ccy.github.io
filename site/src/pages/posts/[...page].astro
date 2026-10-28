@@ -1,13 +1,13 @@
 ---
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
 import Main from "@/components/Main.astro";
-import Card from "@/components/Card.astro";
+import PostList from "@/components/PostList.astro";
 import Footer from "@/components/Footer.astro";
-import Pagination from "@/components/Pagination.astro";
 import { getSortedPosts } from "@/utils/getSortedPosts";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
@@ -21,6 +21,7 @@ const { page } = Astro.props;
 
 const locale = Astro.currentLocale ?? config.site.lang;
 const t = useTranslations(locale);
+const posts = getSortedPosts(await getCollection("posts"));
 ---
 
 <Layout title={`${t.pages.postsTitle} | ${config.site.title}`}>
@@ -29,20 +30,8 @@ const t = useTranslations(locale);
   <Breadcrumb />
 
   <Main pageTitle={t.pages.postsTitle} pageDesc={t.pages.postsDesc}>
-    {
-      page.data.length > 0 ? (
-        <ul>
-          {page.data.map(data => (
-            <Card {...data} />
-          ))}
-        </ul>
-      ) : (
-        <p class="text-muted-foreground">文章正在准备中，欢迎稍后再来。</p>
-      )
-    }
+    <PostList {posts} {page} postsUrl={getRelativeLocaleUrl(locale, "posts")} />
   </Main>
-
-  <Pagination {page} />
 
   <Footer noMarginTop={page.lastPage > 1} />
 </Layout>

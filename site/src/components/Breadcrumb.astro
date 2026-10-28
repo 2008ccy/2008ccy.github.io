@@ -35,14 +35,9 @@ const navLabels: Record<string, string> = {
   search: t.nav.search,
 };
 
-// if breadcrumb is Home > Posts > [page] <etc>
-// replace Posts with localized "Posts (page number)"
+// Filters and pagination are shown within the article list itself.
 if (breadcrumbList[0] === "posts") {
-  breadcrumbList.splice(
-    0,
-    2,
-    `${t.nav.posts} (${t.pagination.page.toLowerCase()} ${breadcrumbList[1] || 1})`
-  );
+  breadcrumbList.splice(0, 2, t.nav.posts);
 }
 
 // if breadcrumb is Home > Tags > [tag] > [page] <etc>

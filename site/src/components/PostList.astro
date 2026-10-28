@@ -1,0 +1,306 @@
+---
+import type { Page } from "astro";
+import type { CollectionEntry } from "astro:content";
+import Card from "./Card.astro";
+import Pagination from "./Pagination.astro";
+import { getUniqueTags } from "@/utils/getUniqueTags";
+import { slugifyAll } from "@/utils/slugify";
+
+type Props = {
+  posts: CollectionEntry<"posts">[];
+  page: Page<CollectionEntry<"posts">>;
+  postsUrl: string;
+};
+const { posts, page, postsUrl } = Astro.props;
+const tags = getUniqueTags(posts).map(tag => ({
+  ...tag,
+  count: posts.filter(post => slugifyAll(post.data.tags).includes(tag.tag))
+    .length,
+}));
+---
+
+<div
+  data-post-list
+  data-page-size={page.size}
+  data-initial-page={page.currentPage}
+  data-posts-url={postsUrl}
+>
+  <div class="tag-filter" data-filter-controls hidden>
+    <p id="tag-filter-label">按标签筛选</p>
+    <div class="filter-options" role="group" aria-labelledby="tag-filter-label">
+      <button
+        type="button"
+        data-tag-filter=""
+        data-tag-name="全部文章"
+        aria-pressed="true">全部文章 <span>({posts.length})</span></button
+      >
+      {
+        tags.map(({ tag, tagName, count }) => (
+          <button
+            type="button"
+            data-tag-filter={tag}
+            data-tag-name={tagName}
+            aria-pressed="false"
+          >
+            {tagName} <span>({count})</span>
+          </button>
+        ))
+      }
+    </div>
+    <p
+      class="result-summary"
+      data-filter-summary
+      role="status"
+      aria-live="polite"
+    >
+      共 {posts.length} 篇文章
+    </p>
+  </div>
+
+  <ul data-post-items>
+    {
+      posts.map((post, index) => (
+        <Card
+          {...post}
+          hidden={index < page.start || index >= page.start + page.size}
+          filterTags={slugifyAll(post.data.tags)}
+        />
+      ))
+    }
+  </ul>
+  <div class="empty-result" data-filter-empty hidden={posts.length > 0}>
+    <p data-empty-message>文章正在准备中，欢迎稍后再来。</p>
+    <button type="button" data-clear-filter hidden>查看全部文章</button>
+  </div>
+
+  <div data-static-pagination><Pagination {page} /></div>
+  <nav
+    class="filter-pagination"
+    aria-label="文章分页"
+    data-filter-pagination
+    hidden
+  >
+    <button type="button" data-page-prev aria-label="上一页">← 上一页</button>
+    <span data-page-label></span>
+    <button type="button" data-page-next aria-label="下一页">下一页 →</button>
+  </nav>
+</div>
+
+<script>
+  import { filterPostPage } from "@/utils/filterPostPage";
+
+  let controller: AbortController | undefined;
+  function setupPostList() {
+    controller?.abort();
+    controller = new AbortController();
+    const { signal } = controller;
+    const root = document.querySelector<HTMLElement>("[data-post-list]");
+    if (!root) return;
+
+    const controls = root.querySelector<HTMLElement>("[data-filter-controls]")!;
+    const buttons = Array.from(
+      root.querySelectorAll<HTMLButtonElement>("[data-tag-filter]")
+    );
+    const entries = Array.from(
+      root.querySelectorAll<HTMLElement>("[data-post-tags]")
+    ).map(element => ({
+      element,
+      tags: JSON.parse(element.dataset.postTags ?? "[]") as string[],
+    }));
+    const summary = root.querySelector<HTMLElement>("[data-filter-summary]")!;
+    const empty = root.querySelector<HTMLElement>("[data-filter-empty]")!;
+    const emptyMessage = root.querySelector<HTMLElement>(
+      "[data-empty-message]"
+    )!;
+    const clear = root.querySelector<HTMLButtonElement>("[data-clear-filter]")!;
+    const pagination = root.querySelector<HTMLElement>(
+      "[data-filter-pagination]"
+    )!;
+    const previous = root.querySelector<HTMLButtonElement>("[data-page-prev]")!;
+    const next = root.querySelector<HTMLButtonElement>("[data-page-next]")!;
+    const pageLabel = root.querySelector<HTMLElement>("[data-page-label]")!;
+    const pageSize = Number(root.dataset.pageSize) || 4;
+    const initialPage = Number(root.dataset.initialPage) || 1;
+    const postsUrl = root.dataset.postsUrl!;
+    let currentTag = "";
+    let currentPage = initialPage;
+
+    function rememberList() {
+      try {
+        sessionStorage.setItem("backUrl", location.pathname + location.search);
+      } catch {
+        /* Browsing also works without session storage. */
+      }
+    }
+
+    function render(tag: string, page: number, updateUrl = false) {
+      const result = filterPostPage(entries, tag, page, pageSize);
+      currentTag = tag;
+      currentPage = result.currentPage;
+      const visible = new Set(result.items.map(item => item.element));
+      entries.forEach(({ element }) => {
+        element.hidden = !visible.has(element);
+      });
+      buttons.forEach(button =>
+        button.setAttribute(
+          "aria-pressed",
+          String((button.dataset.tagFilter ?? "") === tag)
+        )
+      );
+      const tagName =
+        buttons.find(button => button.dataset.tagFilter === tag)?.dataset
+          .tagName ?? tag;
+      summary.textContent = tag
+        ? `${tagName} · ${result.total} 篇文章`
+        : `共 ${result.total} 篇文章`;
+      empty.hidden = result.total !== 0;
+      clear.hidden = !tag;
+      emptyMessage.textContent = tag
+        ? "没有符合该标签的文章，请选择其他标签或查看全部文章。"
+        : "文章正在准备中，欢迎稍后再来。";
+      pagination.hidden = result.lastPage <= 1;
+      previous.disabled = result.currentPage <= 1;
+      next.disabled = result.currentPage >= result.lastPage;
+      pageLabel.textContent = `${result.currentPage} / ${result.lastPage}`;
+      if (updateUrl) {
+        const url = new URL(location.href);
+        url.pathname = postsUrl;
+        url.hash = "";
+        if (tag) url.searchParams.set("tag", tag);
+        else url.searchParams.delete("tag");
+        if (result.currentPage > 1)
+          url.searchParams.set("page", String(result.currentPage));
+        else url.searchParams.delete("page");
+        if (url.href !== location.href)
+          history.pushState(history.state, "", url);
+      }
+      rememberList();
+    }
+
+    function readUrl() {
+      const url = new URL(location.href);
+      const tag = url.searchParams.get("tag") ?? "";
+      const isMainList =
+        url.pathname.replace(/\/+$/, "") === postsUrl.replace(/\/+$/, "");
+      const page = url.searchParams.has("page")
+        ? Number(url.searchParams.get("page"))
+        : tag || isMainList
+          ? 1
+          : initialPage;
+      render(tag, page);
+    }
+
+    buttons.forEach(button =>
+      button.addEventListener(
+        "click",
+        () => render(button.dataset.tagFilter ?? "", 1, true),
+        { signal }
+      )
+    );
+    clear.addEventListener("click", () => render("", 1, true), { signal });
+    previous.addEventListener(
+      "click",
+      () => {
+        render(currentTag, currentPage - 1, true);
+        root.scrollIntoView({ block: "start" });
+      },
+      { signal }
+    );
+    next.addEventListener(
+      "click",
+      () => {
+        render(currentTag, currentPage + 1, true);
+        root.scrollIntoView({ block: "start" });
+      },
+      { signal }
+    );
+    root.addEventListener(
+      "click",
+      event => {
+        if (
+          event.target instanceof Element &&
+          event.target.closest("[data-post-tags] a")
+        )
+          rememberList();
+      },
+      { signal }
+    );
+    window.addEventListener("popstate", readUrl, { signal });
+    readUrl();
+    controls.hidden = false;
+    root.querySelector<HTMLElement>("[data-static-pagination]")!.hidden = true;
+  }
+
+  document.addEventListener("astro:page-load", setupPostList);
+  document.addEventListener("astro:before-swap", () => controller?.abort());
+</script>
+
+<style>
+  [data-post-list] {
+    scroll-margin-top: 1.5rem;
+  }
+  .tag-filter {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  #tag-filter-label {
+    font-size: 0.85rem;
+    color: var(--muted-foreground);
+    margin-bottom: 0.65rem;
+  }
+  .filter-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .filter-options button {
+    border: 1px solid var(--border);
+    border-radius: 0.3rem;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.85rem;
+  }
+  .filter-options button[aria-pressed="true"] {
+    border-color: var(--foreground);
+    background: var(--muted);
+  }
+  .filter-options button:hover {
+    border-color: var(--foreground);
+  }
+  .filter-options span {
+    margin-left: 0.2rem;
+    color: var(--muted-foreground);
+    font-size: 0.75rem;
+  }
+  .result-summary {
+    color: var(--muted-foreground);
+    font-size: 0.8rem;
+    margin-top: 0.85rem;
+  }
+  .empty-result {
+    color: var(--muted-foreground);
+    padding-block: 1.5rem;
+    font-size: 0.9rem;
+  }
+  [data-clear-filter] {
+    margin-top: 1rem;
+    color: var(--foreground);
+    text-decoration: underline;
+    text-underline-offset: 0.25rem;
+  }
+  .filter-pagination:not([hidden]) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-block: 2rem;
+    font-size: 0.9rem;
+  }
+  .filter-pagination button {
+    padding: 0.3rem 0.25rem;
+  }
+  .filter-pagination button:disabled {
+    opacity: 0.45;
+    cursor: default;
+  }
+</style>
