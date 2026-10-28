@@ -1,0 +1,130 @@
+---
+import { fileURLToPath } from "node:url";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Main from "@/components/Main.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import { getAssetPath } from "@/utils/withBase";
+import { examPapers, examSubjects } from "../../../scripts/exam-papers.mjs";
+import config from "@/config";
+
+const root = fileURLToPath(new URL("../../../../", import.meta.url));
+const papers = await examPapers(root);
+---
+
+<Layout
+  title={`题库｜${config.site.title}`}
+  description="按微积分、线性代数分类整理的考试真题。"
+>
+  <Header />
+  <Breadcrumb />
+  <Main pageTitle="题库" pageDesc="按学科整理的考试真题。" indexForSearch>
+    <nav aria-label="题库学科" class="subject-nav">
+      {
+        examSubjects.map(subject => (
+          <a href={`#${subject.id}`}>{subject.title}</a>
+        ))
+      }
+    </nav>
+    {
+      examSubjects.map(subject => {
+        const subjectPapers = papers.filter(
+          paper => paper.subject === subject.id
+        );
+        return (
+          <section id={subject.id} aria-labelledby={`${subject.id}-heading`}>
+            <div class="subject-heading">
+              <>
+                <h2 id={`${subject.id}-heading`}>{subject.title}</h2>
+                <span>{subjectPapers.length} 份试卷</span>
+              </>
+            </div>
+            {subjectPapers.length > 0 ? (
+              <ul class="paper-list">
+                {subjectPapers.map(paper => (
+                  <li>
+                    <a
+                      href={getAssetPath(
+                        `test/files/${paper.route.split("/").map(encodeURIComponent).join("/")}`
+                      )}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span class="paper-title">{paper.title}</span>
+                      <span class="paper-format">
+                        {paper.mediaType === "application/pdf" ? "PDF" : "图片"}{" "}
+                        ↗
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p class="empty-copy">暂无试卷，后续会在这里补充。</p>
+            )}
+          </section>
+        );
+      })
+    }
+  </Main>
+  <Footer />
+</Layout>
+
+<style>
+  .subject-nav {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+  }
+  a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 0.25rem;
+  }
+  section {
+    border-top: 1px solid var(--border);
+    padding-block: 1.5rem 2rem;
+    scroll-margin-top: 1.5rem;
+  }
+  .subject-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  .subject-heading > span,
+  .paper-format {
+    color: var(--muted-foreground);
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+  .paper-list {
+    margin-top: 1rem;
+  }
+  .paper-list li + li {
+    border-top: 1px solid var(--border);
+  }
+  .paper-list a {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.25rem;
+    padding-block: 0.9rem;
+    font-size: 0.95rem;
+  }
+  .paper-title {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .empty-copy {
+    color: var(--muted-foreground);
+    font-size: 0.9rem;
+    margin-top: 1rem;
+  }
+</style>

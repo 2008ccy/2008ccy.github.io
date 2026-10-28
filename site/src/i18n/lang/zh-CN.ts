@@ -5,6 +5,7 @@ export default {
     home: "首页",
     projects: "作品",
     posts: "文章",
+    tests: "题库",
     tags: "标签",
     about: "关于我",
     contact: "联系",
