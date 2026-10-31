@@ -1,0 +1,11 @@
+{
+  "线性代数 (原书第6版 · 中文版)Introduction to Linear Algebra (吉尔伯特·斯特朗(Gilbert Strang)著, 刘余, 黄晔辉,杨晶 译) (z-library.sk, 1lib.sk, z-lib.sk).pdf": {
+    "draft": true,
+    "title": "线性代数 · Introduction to Linear Algebra",
+    "author": "吉尔伯特·斯特朗（Gilbert Strang）著；刘余、黄晔辉、杨晶 译",
+    "edition": "原书第 6 版 · 中文版",
+    "category": "线性代数",
+    "description": "配合线性代数学习与课程笔记阅读。",
+    "route": "introduction-to-linear-algebra-6e-zh.pdf"
+  }
+}

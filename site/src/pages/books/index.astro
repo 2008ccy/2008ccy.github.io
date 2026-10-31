@@ -1,0 +1,179 @@
+---
+import { fileURLToPath } from "node:url";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Main from "@/components/Main.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import { getAssetPath } from "@/utils/withBase";
+import { booksRepositoryUrl, libraryBooks } from "../../../scripts/books.mjs";
+import config from "@/config";
+
+const root = fileURLToPath(new URL("../../../../", import.meta.url));
+const books = await libraryBooks(root);
+const categories = [...new Set(books.map(book => book.category))];
+const bookUrl = (route: string) =>
+  getAssetPath(
+    `books/files/${route.split("/").map(encodeURIComponent).join("/")}`
+  );
+---
+
+<Layout
+  title={`书库｜${config.site.title}`}
+  description="收集值得阅读的好书，按主题整理，随时翻阅。"
+>
+  <Header />
+  <Breadcrumb />
+  <Main
+    pageTitle="书库"
+    pageDesc="收集值得阅读的好书，慢慢读，慢慢积累。"
+    indexForSearch
+  >
+    <div class="library-heading">
+      <span>共 {books.length} 本书</span>
+      <a href={booksRepositoryUrl} target="_blank" rel="noopener noreferrer"
+        >GitHub 书库 ↗</a
+      >
+    </div>
+    {
+      categories.length > 1 && (
+        <nav aria-label="书籍分类" class="category-nav">
+          {categories.map((category, index) => (
+            <a href={`#category-${index}`}>{category}</a>
+          ))}
+        </nav>
+      )
+    }
+    {
+      categories.map((category, index) => (
+        <section
+          id={`category-${index}`}
+          aria-labelledby={`category-${index}-heading`}
+        >
+          <h2 id={`category-${index}-heading`}>{category}</h2>
+          <ul class="book-list">
+            {books
+              .filter(book => book.category === category)
+              .map(book => (
+                <li>
+                  <h3>
+                    <a
+                      href={bookUrl(book.route)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {book.title}
+                    </a>
+                  </h3>
+                  {book.author && <p class="book-author">{book.author}</p>}
+                  <p class="book-meta">
+                    {[
+                      book.edition,
+                      "PDF",
+                      `${(book.bytes / 1024 / 1024).toFixed(1)} MB`,
+                    ]
+                      .filter(Boolean)
+                      .join(" · ")}
+                  </p>
+                  {book.description && (
+                    <p class="book-description">{book.description}</p>
+                  )}
+                  <div class="book-actions">
+                    <a
+                      href={bookUrl(book.route)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`在线阅读《${book.title}》`}
+                    >
+                      在线阅读 ↗
+                    </a>
+                    <a
+                      href={bookUrl(book.route)}
+                      download
+                      aria-label={`下载《${book.title}》PDF`}
+                    >
+                      下载 PDF ↓
+                    </a>
+                  </div>
+                </li>
+              ))}
+          </ul>
+        </section>
+      ))
+    }
+    {
+      books.length === 0 && (
+        <p class="empty-copy">书籍正在整理中，后续会在这里补充。</p>
+      )
+    }
+  </Main>
+  <Footer />
+</Layout>
+
+<style>
+  a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 0.25rem;
+  }
+  .library-heading {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    color: var(--muted-foreground);
+    font-size: 0.85rem;
+  }
+  .category-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+  section {
+    border-top: 1px solid var(--border);
+    padding-block: 1.5rem 2rem;
+    scroll-margin-top: 1.5rem;
+  }
+  h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  .book-list {
+    margin-top: 1rem;
+  }
+  .book-list li {
+    padding-block: 0.75rem 1.25rem;
+  }
+  .book-list li + li {
+    border-top: 1px solid var(--border);
+    padding-top: 1.25rem;
+  }
+  h3 {
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+  }
+  .book-author,
+  .book-meta,
+  .book-description,
+  .empty-copy {
+    color: var(--muted-foreground);
+    font-size: 0.85rem;
+    line-height: 1.8;
+    margin-top: 0.5rem;
+  }
+  .book-meta {
+    font-size: 0.8rem;
+  }
+  .book-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
+</style>

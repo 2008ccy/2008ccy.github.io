@@ -31,3 +31,6 @@ site/public/pagefind
 
 # docker compose
 compose.override.yaml
+
+# Keep this textbook local until publication is requested.
+/books/线性代数 (原书第6版 · 中文版)Introduction to Linear Algebra (吉尔伯特·斯特朗(Gilbert Strang)著, 刘余, 黄晔辉,杨晶 译) (z-library.sk, 1lib.sk, z-lib.sk).pdf

@@ -15,11 +15,11 @@ const papers = await examPapers(root);
 
 <Layout
   title={`题库｜${config.site.title}`}
-  description="按微积分、线性代数分类整理的考试真题。"
+  description="按微积分、线性代数分类整理的试卷与参考答案。"
 >
   <Header />
   <Breadcrumb />
-  <Main pageTitle="题库" pageDesc="按学科整理的考试真题。" indexForSearch>
+  <Main pageTitle="题库" pageDesc="按学科整理的试卷与参考答案。" indexForSearch>
     <nav aria-label="题库学科" class="subject-nav">
       {
         examSubjects.map(subject => (
@@ -37,7 +37,7 @@ const papers = await examPapers(root);
             <div class="subject-heading">
               <>
                 <h2 id={`${subject.id}-heading`}>{subject.title}</h2>
-                <span>{subjectPapers.length} 份试卷</span>
+                <span>{subjectPapers.length} 份资料</span>
               </>
             </div>
             {subjectPapers.length > 0 ? (

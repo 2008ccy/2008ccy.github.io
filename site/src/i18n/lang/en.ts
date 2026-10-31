@@ -5,6 +5,7 @@ export default {
     home: "Home",
     posts: "Posts",
     tests: "Exam Papers",
+    books: "Library",
     projects: "Projects",
     tags: "Tags",
     about: "About",
