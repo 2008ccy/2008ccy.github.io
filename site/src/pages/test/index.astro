@@ -10,7 +10,7 @@ import { examPapers, examSubjects } from "../../../scripts/exam-papers.mjs";
 import config from "@/config";
 
 const root = fileURLToPath(new URL("../../../../", import.meta.url));
-const papers = await examPapers(root);
+const papers = (await examPapers(root)).filter(paper => !paper.hidden);
 ---
 
 <Layout

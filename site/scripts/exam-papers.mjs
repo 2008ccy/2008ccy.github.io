@@ -1,4 +1,4 @@
-import { lstat } from "node:fs/promises";
+import { lstat, readFile } from "node:fs/promises";
 import { basename, extname, relative, resolve, sep } from "node:path";
 import { filesIn } from "./manuscripts.mjs";
 
@@ -16,6 +16,18 @@ const mediaTypes = {
 };
 
 export async function examPapers(homepageRoot) {
+  let hidden = [];
+  try {
+    const catalog = JSON.parse(
+      await readFile(resolve(homepageRoot, "test/catalog.json"), "utf8")
+    );
+    hidden = catalog.hidden ?? [];
+    if (!Array.isArray(hidden) || hidden.some(path => typeof path !== "string"))
+      throw new Error("test/catalog.json 的 hidden 必须是文件相对路径数组");
+  } catch (error) {
+    if (error.code !== "ENOENT") throw error;
+  }
+  const hiddenRoutes = new Set(hidden);
   const papers = [];
   for (const subject of examSubjects) {
     const directory = resolve(homepageRoot, "test", subject.id);
@@ -38,6 +50,7 @@ export async function examPapers(homepageRoot) {
         source,
         route: `${subject.id}/${filename}`,
         mediaType: mediaTypes[extension.toLowerCase()],
+        hidden: hiddenRoutes.has(`${subject.id}/${filename}`),
       });
     }
   }

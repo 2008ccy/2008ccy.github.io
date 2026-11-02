@@ -5,6 +5,7 @@ export interface ExamPaper {
   source: string;
   route: string;
   mediaType: string;
+  hidden: boolean;
 }
 export const examSubjects: { id: string; title: string }[];
 export function examPapers(homepageRoot: string): Promise<ExamPaper[]>;
