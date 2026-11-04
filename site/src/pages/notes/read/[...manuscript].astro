@@ -1,0 +1,150 @@
+---
+import type { GetStaticPaths } from "astro";
+import { basename, resolve } from "node:path";
+import PostLayout from "@/layouts/PostLayout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { getAssetPath } from "@/utils/withBase";
+import {
+  manuscriptReadings,
+  type ManuscriptReading,
+} from "../../../../scripts/manuscript-pages.mjs";
+import type { Manuscript } from "../../../../scripts/manuscripts.mjs";
+import config from "@/config";
+
+type Props = { file: Manuscript; reading: ManuscriptReading };
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const root = resolve(process.cwd(), "..");
+  return (await manuscriptReadings(root)).map(({ file, reading }) => ({
+    params: { manuscript: file.route.replace(/\.pdf$/i, "") },
+    props: { file, reading },
+  }));
+};
+
+const { file, reading } = Astro.props;
+const title = basename(file.route, ".pdf");
+const subject = file.subject === "cacu" ? "微积分" : "线性代数";
+const fileUrl = getAssetPath(
+  `notes/${file.route.split("/").map(encodeURIComponent).join("/")}`
+);
+---
+
+<PostLayout
+  title={`${title}｜${config.site.title}`}
+  description={`${subject}手写原稿 ${title}，共 ${reading.pages.length} 页。`}
+>
+  <Header />
+  <nav class="app-layout breadcrumb mt-8 mb-6" aria-label="面包屑">
+    <a href={getAssetPath("")}>首页</a><span aria-hidden="true">»</span>
+    <a href={getAssetPath("posts/")}>文章</a><span aria-hidden="true">»</span>
+    <span aria-current="page">{title}</span>
+  </nav>
+  <main id="main-content" class="app-layout pb-8" data-manuscript-reader>
+    <h1 class="text-accent text-2xl font-bold sm:text-3xl">{title}</h1>
+    <p class="reading-meta">{subject}手写原稿 · 共 {reading.pages.length} 页</p>
+    <nav class="reading-nav" aria-label="手稿页码">
+      {
+        reading.pages.map((_, index) => (
+          <a href={`#page-${index + 1}`} aria-label={`跳到第 ${index + 1} 页`}>
+            {index + 1}
+          </a>
+        ))
+      }
+      <a href={fileUrl} download>下载 PDF</a>
+    </nav>
+    <article aria-label={title}>
+      {
+        reading.pages.map((page, index) => (
+          <section
+            id={`page-${index + 1}`}
+            class="manuscript-page"
+            aria-labelledby={`page-${index + 1}-heading`}
+          >
+            <h2 id={`page-${index + 1}-heading`}>第 {index + 1} 页</h2>
+            <img
+              src={getAssetPath(page.src)}
+              width={page.width}
+              height={page.height}
+              alt={`${title}，第 ${index + 1} 页`}
+              loading={index === 0 ? "eager" : "lazy"}
+              decoding="async"
+            />
+          </section>
+        ))
+      }
+    </article>
+    <nav class="reading-footer" aria-label="阅读导航">
+      <a href={getAssetPath("posts/")}>← 返回文章列表</a>
+      <a href="#main-content">回到顶部 ↑</a>
+    </nav>
+  </main>
+  <Footer />
+</PostLayout>
+
+<script>
+  function positionManuscript() {
+    if (document.querySelector("[data-manuscript-reader]") && !location.hash)
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }
+  positionManuscript();
+  document.addEventListener("astro:page-load", positionManuscript);
+</script>
+
+<style>
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--muted-foreground);
+  }
+  .reading-meta {
+    margin-top: 0.75rem;
+    color: var(--muted-foreground);
+    font-size: 0.9rem;
+  }
+  .reading-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-block: 1.5rem 2rem;
+  }
+  .reading-nav a {
+    border: 1px solid var(--border);
+    border-radius: 0.25rem;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.85rem;
+  }
+  .manuscript-page {
+    margin-bottom: 2rem;
+    scroll-margin-top: 1rem;
+  }
+  h2 {
+    font-size: 0.85rem;
+    color: var(--muted-foreground);
+    margin-bottom: 0.75rem;
+  }
+  .manuscript-page img {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: white;
+    border: 1px solid var(--border);
+  }
+  .reading-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.9rem;
+  }
+  a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 0.25rem;
+  }
+</style>

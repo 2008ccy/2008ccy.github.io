@@ -228,4 +228,4 @@ $$
 
 ## 手写原稿
 
-[查看手写原稿（note_linalg_6.pdf，共 5 页）](/notes/linalg_notes/linalg_hand_note/note_linalg_6.pdf)
+[查看手写原稿（note_linalg_6.pdf，共 5 页）](/notes/read/linalg_notes/linalg_hand_note/note_linalg_6/)

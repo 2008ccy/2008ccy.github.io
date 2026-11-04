@@ -11,7 +11,12 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 import { syncNotes } from "./sync-notes.mjs";
-import { manuscriptFiles, manuscriptUrl } from "./manuscripts.mjs";
+import {
+  manuscriptFiles,
+  manuscriptUrl,
+  manuscriptReaderUrl,
+  publishedManuscripts,
+} from "./manuscripts.mjs";
 
 async function fixture() {
   // Fixtures are retained because this project forbids recursive deletion.
@@ -136,4 +141,58 @@ test("private import is rejected and local files are untouched", async () => {
     /已停用/
   );
   assert.deepEqual((await syncNotes(options)).changed, []);
+});
+
+test("reader links preserve encoded paths, map PDF page anchors and validate targets", async () => {
+  const options = await fixture();
+  await writeFile(
+    join(options.homepageRoot, "note/cacu_notes/cacu_hand_note/微积分 1.pdf"),
+    "%PDF-1"
+  );
+  const files = await manuscriptFiles(options.homepageRoot);
+  const reader = `/notes/read/cacu_notes/cacu_hand_note/${encodeURIComponent("微积分 1")}/`;
+  assert.equal(
+    manuscriptReaderUrl(
+      "../cacu_hand_note/微积分%201.pdf#page=3",
+      "cacu",
+      files
+    ),
+    `${reader}#page-3`
+  );
+  assert.equal(
+    manuscriptReaderUrl(`${reader}#page-3`, "cacu", files),
+    `${reader}#page-3`
+  );
+  assert.equal(
+    manuscriptReaderUrl("https://example.com/a.pdf", "cacu", files),
+    "https://example.com/a.pdf"
+  );
+  assert.throws(
+    () =>
+      manuscriptReaderUrl(
+        "/notes/read/cacu_notes/cacu_hand_note/missing/",
+        "cacu",
+        files
+      ),
+    /手稿不存在/
+  );
+});
+
+test("local-only manuscripts are excluded from deployments but retained for editing", async () => {
+  const options = await fixture();
+  const directory = join(
+    options.homepageRoot,
+    "note/cacu_notes/cacu_hand_note"
+  );
+  await writeFile(join(directory, "full.pdf"), "%PDF-full");
+  await writeFile(join(directory, "excerpt.pdf"), "%PDF-excerpt");
+  await writeFile(
+    join(options.homepageRoot, "note/manuscripts.json"),
+    JSON.stringify({ localOnly: ["cacu_notes/cacu_hand_note/full.pdf"] })
+  );
+  assert.equal((await manuscriptFiles(options.homepageRoot)).length, 2);
+  assert.deepEqual(
+    (await publishedManuscripts(options.homepageRoot)).map(file => file.route),
+    ["cacu_notes/cacu_hand_note/excerpt.pdf"]
+  );
 });

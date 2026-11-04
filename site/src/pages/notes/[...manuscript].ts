@@ -1,11 +1,11 @@
 import type { APIRoute, GetStaticPaths } from "astro";
 import { readFile } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
-import { manuscriptFiles } from "../../../scripts/manuscripts.mjs";
+import { resolve } from "node:path";
+import { publishedManuscripts } from "../../../scripts/manuscripts.mjs";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const root = fileURLToPath(new URL("../../../../", import.meta.url));
-  return (await manuscriptFiles(root)).map(file => ({
+  const root = resolve(process.cwd(), "..");
+  return (await publishedManuscripts(root)).map(file => ({
     params: { manuscript: file.route },
     props: { source: file.source },
   }));

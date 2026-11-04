@@ -9,6 +9,14 @@ export function filesIn(
   extensions: string[]
 ): Promise<string[]>;
 export function manuscriptFiles(homepageRoot: string): Promise<Manuscript[]>;
+export function publishedManuscripts(
+  homepageRoot: string
+): Promise<Manuscript[]>;
+export function manuscriptReaderUrl(
+  url: string,
+  subject: string,
+  files: Manuscript[]
+): string;
 export function manuscriptUrl(
   url: string,
   subject: string,

@@ -1,4 +1,4 @@
-import { readdir, lstat } from "node:fs/promises";
+import { readdir, lstat, readFile } from "node:fs/promises";
 import { resolve, relative, sep, extname } from "node:path";
 
 export const subjects = {
@@ -40,6 +40,55 @@ export async function manuscriptFiles(homepageRoot) {
     }
   }
   return result;
+}
+
+// Local source PDFs may remain available for editing without entering deployments.
+export async function publishedManuscripts(homepageRoot) {
+  let localOnly = [];
+  try {
+    const catalog = JSON.parse(
+      await readFile(resolve(homepageRoot, "note/manuscripts.json"), "utf8")
+    );
+    localOnly = catalog.localOnly ?? [];
+    if (
+      !Array.isArray(localOnly) ||
+      localOnly.some(route => typeof route !== "string")
+    )
+      throw new Error(
+        "note/manuscripts.json 的 localOnly 必须是手稿相对路径数组"
+      );
+  } catch (error) {
+    if (error.code !== "ENOENT") throw error;
+  }
+  return (await manuscriptFiles(homepageRoot)).filter(
+    file => !localOnly.includes(file.route)
+  );
+}
+
+export function manuscriptReaderUrl(url, subject, files) {
+  if (/^(?:[a-z][\w+.-]*:|\/\/)/i.test(url)) return url;
+  const reader = url.match(/^\/notes\/read\/(.+?)(?:\/)?([?#].*)?$/);
+  let canonical;
+  if (reader) {
+    canonical = manuscriptUrl(
+      `/notes/${reader[1]}.pdf${reader[2] ?? ""}`,
+      subject,
+      files
+    );
+  } else {
+    canonical = manuscriptUrl(url, subject, files);
+  }
+  if (
+    !/^\/notes\/(?:linalg|cacu)_notes\/(?:linalg|cacu)_hand_note\//.test(
+      canonical
+    ) ||
+    !/\.pdf(?:[?#]|$)/i.test(canonical)
+  )
+    return url;
+  return canonical
+    .replace(/^\/notes\//, "/notes/read/")
+    .replace(/\.pdf(?=[?#]|$)/i, "/")
+    .replace(/#page=(\d+).*$/, "#page-$1");
 }
 
 // Leave remote links intact; validate recognized local manuscript references.

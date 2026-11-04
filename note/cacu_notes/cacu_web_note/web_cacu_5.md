@@ -1,48 +1,311 @@
 ---
-# 修改标题、摘要和实际发布时间；保留信息区开头及末尾的 ---。
-title: >-
-  你的笔记标题
-description: >-
-  用一句话概括这篇笔记。
-pubDatetime: 2026-10-23T09:00:00+08:00
-tags: [学习记录, 课程笔记]
-# 默认允许发布；暂不公开时改为 true。
+title: 微积分：重要极限、子列与柯西收敛准则
+description: 构造自然常数 e，证明调和数减对数收敛，整理子列、聚点定理与柯西准则。
+pubDatetime: 2026-11-04T14:15:31+08:00
+tags: [微积分, 课程笔记]
 draft: false
 featured: false
 ---
 
-<!--
-使用步骤（本注释不会显示在网页中）：
-1. 复制本文件到 homepage/note/linalg_notes/linalg_web_note/，重命名为 web_linalg_3.md 等正式文件名。
-   文件名不要以下划线开头；_template.md 本身不会发布。
-2. 修改上方标题、摘要、实际发布时间。标题和摘要只修改缩进的文字行，保留行首两个空格，
-   不需要添加引号；保留 title: >-、description: >- 和信息区完整的两行 ---。
-3. 在下方“原稿正文粘贴区”内粘贴原稿 Markdown，直接粘贴，不要包在代码块中。
-   如果原稿开头有 --- 信息区，只粘贴其结束 --- 之后的正文。
-   原稿的 # 标题、公式、表格、文末 PDF 链接都可保留。
-4. 将原稿链接指向的 PDF 一同放入：
-   homepage/note/linalg_notes/linalg_hand_note/
-   例如原稿链接为 ../linalg_hand_note/note_linalg_3.pdf，
-   则 PDF 应放到 homepage/note/linalg_notes/linalg_hand_note/note_linalg_3.pdf。
-   若已同步到此目录，无需重复复制。
-5. 提交需要发布的 Markdown、PDF 和配置更新，然后推送。
-   本机启用推送检查后，git push 到 main 前会自动运行完整构建；失败时会阻止推送。
-   检查要求工作区没有未提交或未跟踪的文件，确保构建内容与准备推送的提交一致。
-   首次使用或更换电脑时，在 homepage/site/ 运行 npm run hooks:install 启用检查。
-   也可以在提交前运行 pnpm build 提前检查。
+> 来源：`微积分11.4.pdf` 的 PDF 第 27～32 页，按文件页序。原第 27 页标注课堂日期“9.28”。文末站内阅读稿为原样摘录，摘录第 1～6 页依次对应原稿第 27～32 页。
 
-PDF 链接规则：
-- 保留原稿的 [查看手写原稿](/notes/linalg_notes/linalg_hand_note/note_linalg_3.pdf) 即可。
-  网站构建时会自动转换为 /notes/linalg_notes/linalg_hand_note/note_linalg_3.pdf。
-- 也支持 ../../linalg_hand_note/、handwrite_notes/ 和同目录下的子路径。
-- 已是 /notes/... 的网站 PDF 地址会保留。
-- 如果原稿没有 PDF 链接，请在粘贴区末尾补充上面的链接并填写实际 PDF 文件名。
-- 自动转换链接不会自动上传 PDF；必须把文件放到上述目录并一同提交。
-- PDF 文件名必须与原稿链接一致（包含大小写），发布前请点击核对。
--->
+## **1. 重要极限与自然常数 e（原第 27～28 页）**
 
-<!-- ===== 原稿正文粘贴区：开始 ===== -->
+研究数列
 
-<!-- 将完整的原稿正文粘贴在这里，可保留原稿末尾的手写 PDF 链接。 -->
+$$
+b_n=\left(1+\frac1n\right)^n.
+$$
 
-<!-- ===== 原稿正文粘贴区：结束 ===== -->
+先证其单调递增且有上界，再由单调收敛定理定义其极限为 $e$。
+
+### **1.1 方法一：二项式展开证明单调性**
+
+由二项式公式，
+
+$$
+b_n=2+\sum_{j=2}^n\frac1{j!}
+\prod_{\ell=1}^{j-1}\left(1-\frac\ell n\right).
+$$
+
+把 $n$ 换成 $n+1$ 后，对每个已有的 $j$，各因子均增大，且还多出一个正项，因此
+
+$$
+b_{n+1}>b_n.
+$$
+
+又因各因子不大于 $1$，
+
+$$
+\begin{aligned}
+b_n
+&\leq 1+1+\frac1{2!}+\cdots+\frac1{n!}\\
+&\leq 2+\frac12+\frac1{2^2}+\cdots+\frac1{2^{n-1}}\\
+&=3-\frac1{2^{n-1}}<3.
+\end{aligned}
+$$
+
+其中用到 $j!\geq 2^{j-1}$。故 $\{b_n\}$ 收敛。
+
+### **1.2 方法二：幂差分解证明单调性并估计上界**
+
+若 $0<a<b$，则
+
+$$
+\frac{b^{n+1}-a^{n+1}}{b-a}
+=b^n+b^{n-1}a+\cdots+a^n<(n+1)b^n,
+$$
+
+因此
+
+$$
+a^{n+1}>b^n\bigl((n+1)a-nb\bigr).
+$$
+
+取
+
+$$
+a=1+\frac1{n+1},\qquad b=1+\frac1n,
+$$
+
+此时 $(n+1)a-nb=1$，故
+
+$$
+\left(1+\frac1{n+1}\right)^{n+1}
+>\left(1+\frac1n\right)^n.
+$$
+
+同一个不等式取 $a=1$、$b=1+1/(2n)$，得到
+
+$$
+1>\left(1+\frac1{2n}\right)^n
+\left(n+1-n\left(1+\frac1{2n}\right)\right)
+=\frac12\left(1+\frac1{2n}\right)^n.
+$$
+
+所以
+
+$$
+b_{2n}=\left(1+\frac1{2n}\right)^{2n}<4.
+$$
+
+结合递增性，全部项都有上界 $4$，同样可知收敛。
+
+### **1.3 方法三：算术平均与几何平均不等式**
+
+令
+
+$$
+c_n=\left(1+\frac1n\right)^{n+1}.
+$$
+
+对 $n+1$ 个数 $n/(n+1)$ 及另一个数 $1$ 应用均值不等式：
+
+$$
+\begin{aligned}
+\frac1{c_n}
+&=\left(\frac n{n+1}\right)^{n+1}\cdot1\\
+&<\left(\frac{(n+1)\frac n{n+1}+1}{n+2}\right)^{n+2}
+=\left(\frac{n+1}{n+2}\right)^{n+2}
+=\frac1{c_{n+1}}.
+\end{aligned}
+$$
+
+故 $c_n$ 严格递减。对 $n$ 个数 $1+1/n$ 和一个数 $1$ 同样应用均值不等式，得
+
+$$
+\begin{aligned}
+b_n
+&=\left(1+\frac1n\right)^n\cdot1\\
+&<\left(\frac{n(1+1/n)+1}{n+1}\right)^{n+1}
+=\left(1+\frac1{n+1}\right)^{n+1}
+=b_{n+1}.
+\end{aligned}
+$$
+
+于是 $b_n$ 递增、$c_n$ 递减，并且 $b_n<c_n$。由
+
+$$
+c_n=b_n\left(1+\frac1n\right),
+$$
+
+两者极限相同，记为 $e$。得到重要估计
+
+$$
+\left(1+\frac1n\right)^n<e
+<\left(1+\frac1n\right)^{n+1}.
+$$
+
+因而 $e$ 是前一数列所有项的上确界，也是后一数列所有项的下确界。
+
+### **1.4 对数不等式旁记**
+
+原稿在第 28 页末记有
+
+$$
+\frac{x}{1+x}<\ln(1+x)<x\qquad(x>-1,\ x\neq 0).
+$$
+
+当 $x=0$ 时三项均为 $0$，应改用等号。
+
+## **2. 调和数减对数的收敛性（原第 29 页）**
+
+设
+
+$$
+a_n=1+\frac12+\cdots+\frac1n-\ln n.
+$$
+
+证明 $\{a_n\}$ 收敛。由上一节的 $e$ 的两侧估计取对数可得
+
+$$
+\frac1{n+1}<\ln\left(1+\frac1n\right)<\frac1n.
+$$
+
+因此
+
+$$
+a_{n+1}-a_n
+=\frac1{n+1}-\ln\left(1+\frac1n\right)<0,
+$$
+
+即数列严格递减。另一方面，将右侧不等式从 $j=1$ 加到 $n$：
+
+$$
+\begin{aligned}
+1+\frac12+\cdots+\frac1n
+&>\sum_{j=1}^n\ln\left(1+\frac1j\right)\\
+&=\ln\left(2\cdot\frac32\cdots\frac{n+1}{n}\right)\\
+&=\ln(n+1)>\ln n.
+\end{aligned}
+$$
+
+所以 $a_n>0$。由单调收敛定理，$\{a_n\}$ 收敛。本页仅要求证明收敛，不求其极限的闭式。
+
+## **3. 子列及其极限（原第 30 页）**
+
+### **3.1 定义**
+
+从无穷数列 $\{a_n\}$ 中按原有次序取出无穷多项，得到
+
+$$
+a_{n_1},a_{n_2},\ldots,a_{n_k},\ldots,
+\qquad n_1<n_2<\cdots<n_k<\cdots,
+$$
+
+称为原数列的一个子列，记为 $\{a_{n_k}\}$。因为下标严格递增，有 $n_k\geq k$。
+
+### **3.2 用所有子列判别收敛**
+
+数列 $a_n\to a$，当且仅当它的每个子列都收敛到同一个数 $a$。
+
+必要性：对任意 $\varepsilon>0$，存在 $N$ 使 $n>N$ 时 $|a_n-a|<\varepsilon$。当 $k>N$ 时，$n_k\geq k>N$，故 $|a_{n_k}-a|<\varepsilon$。
+
+充分性：原数列自身就是一个子列，故结论直接成立。
+
+### **3.3 奇偶子列判别**
+
+原数列收敛，当且仅当奇数项子列与偶数项子列都收敛，且极限相同。
+
+必要性由子列定理得到。反之，设
+
+$$
+a_{2k}\to a,\qquad a_{2k+1}\to a.
+$$
+
+对任意 $\varepsilon>0$，选 $K$ 使 $k>K$ 时这两个子列都与 $a$ 相差小于 $\varepsilon$。取 $N=2K+1$，则每个 $n>N$ 无论奇偶，其对应的子列下标均大于 $K$，因此 $|a_n-a|<\varepsilon$。
+
+## **4. 有界数列的收敛子列定理（原第 31 页）**
+
+**定理 1.6（魏尔斯特拉斯定理）：** 每个有界实数数列都存在一个收敛子列。
+
+若一个有界数列不收敛，则能找到两个极限不同的收敛子列。原稿还记有“或一个子列极限不存在”的说法，它可作为非收敛的现象描述，但在有界情形下，两个不同的子列极限已经可以作为完整判据。
+
+**整理补充：** 取一个收敛子列趋于 $a$。若原数列不趋于 $a$，就有 $\varepsilon_0>0$ 以及无穷多项满足 $|a_n-a|\geq\varepsilon_0$。从这些项组成的有界子列再抽取收敛子列，其极限必与 $a$ 不同。
+
+## **5. 柯西收敛准则（原第 31 页）**
+
+**定理 1.7：** 实数数列 $\{a_n\}$ 收敛的充分必要条件是
+
+$$
+\forall\varepsilon>0,\ \exists N\in\mathbb N^+,\
+\forall n,m>N,\quad |a_n-a_m|<\varepsilon.
+$$
+
+等价地，可写成
+
+$$
+\forall\varepsilon>0,\ \exists N\in\mathbb N^+,\
+\forall n>N,\ \forall p\in\mathbb N^+,\quad
+|a_{n+p}-a_n|<\varepsilon.
+$$
+
+这里的 $N$ 必须对所有正整数 $p$ 同时有效。
+
+### **5.1 正弦项加权和的例题**
+
+对固定 $\theta\in\mathbb R$，设
+
+$$
+a_n=\frac{\sin\theta}{2}+
+\frac{\sin(\theta^2)}{2^2}+\cdots+
+\frac{\sin(\theta^n)}{2^n}.
+$$
+
+证明 $\{a_n\}$ 收敛。对 $m>n$，
+
+$$
+\begin{aligned}
+|a_m-a_n|
+&=\left|\sum_{j=n+1}^m\frac{\sin(\theta^j)}{2^j}\right|\\
+&\leq\sum_{j=n+1}^m\frac1{2^j}
+=\frac1{2^n}\left(1-\frac1{2^{m-n}}\right)
+<\frac1{2^n}.
+\end{aligned}
+$$
+
+对任意 $\varepsilon>0$，选 $N$ 使 $2^{-N}<\varepsilon$，则 $m>n>N$ 时上述差小于 $\varepsilon$；交换 $m,n$ 同样成立，故由柯西准则可知收敛。
+
+## **6. 发散的柯西判据及调和数列（原第 32 页）**
+
+**定理 1.8：** 实数数列发散，当且仅当
+
+$$
+\exists\varepsilon_0>0,\ \forall N\in\mathbb N^+,\
+\exists n>N,\ \exists p\in\mathbb N^+,\quad
+|a_{n+p}-a_n|\geq\varepsilon_0.
+$$
+
+这是柯西收敛条件的逻辑否定。
+
+**例：** 证明调和部分和
+
+$$
+H_n=1+\frac12+\cdots+\frac1n
+$$
+
+发散。对任意 $p\geq 1$，
+
+$$
+H_{n+p}-H_n
+=\frac1{n+1}+\cdots+\frac1{n+p}
+\geq\frac p{n+p}.
+$$
+
+取 $p=n$ 时，由实际各项比较可进一步得到
+
+$$
+H_{2n}-H_n\geq\frac12.
+$$
+
+取 $\varepsilon_0=1/3$。对任意 $N$，令 $n=N+1$、$p=n$，便有
+
+$$
+|H_{n+p}-H_n|\geq\frac12>\varepsilon_0.
+$$
+
+因此该数列不满足柯西条件，故发散。
+
+## **手写原稿**
+
+[在本站阅读手写原稿（原稿第 27～32 页）](/notes/read/cacu_notes/cacu_hand_note/note_cacu_5/)

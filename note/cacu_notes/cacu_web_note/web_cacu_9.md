@@ -1,48 +1,198 @@
 ---
-# 修改标题、摘要和实际发布时间；保留信息区开头及末尾的 ---。
-title: >-
-  你的笔记标题
-description: >-
-  用一句话概括这篇笔记。
-pubDatetime: 2026-10-23T09:00:00+08:00
-tags: [学习记录, 课程笔记]
-# 默认允许发布；暂不公开时改为 true。
+title: 微积分：微分、变量代换与误差估计
+description: 可导与连续的关系、微分定义及运算、摆线、变量代换和线性误差估计。
+pubDatetime: 2026-11-04T14:15:31+08:00
+tags: [微积分, 课程笔记]
 draft: false
 featured: false
 ---
 
-<!--
-使用步骤（本注释不会显示在网页中）：
-1. 复制本文件到 homepage/note/linalg_notes/linalg_web_note/，重命名为 web_linalg_3.md 等正式文件名。
-   文件名不要以下划线开头；_template.md 本身不会发布。
-2. 修改上方标题、摘要、实际发布时间。标题和摘要只修改缩进的文字行，保留行首两个空格，
-   不需要添加引号；保留 title: >-、description: >- 和信息区完整的两行 ---。
-3. 在下方“原稿正文粘贴区”内粘贴原稿 Markdown，直接粘贴，不要包在代码块中。
-   如果原稿开头有 --- 信息区，只粘贴其结束 --- 之后的正文。
-   原稿的 # 标题、公式、表格、文末 PDF 链接都可保留。
-4. 将原稿链接指向的 PDF 一同放入：
-   homepage/note/linalg_notes/linalg_hand_note/
-   例如原稿链接为 ../linalg_hand_note/note_linalg_3.pdf，
-   则 PDF 应放到 homepage/note/linalg_notes/linalg_hand_note/note_linalg_3.pdf。
-   若已同步到此目录，无需重复复制。
-5. 提交需要发布的 Markdown、PDF 和配置更新，然后推送。
-   本机启用推送检查后，git push 到 main 前会自动运行完整构建；失败时会阻止推送。
-   检查要求工作区没有未提交或未跟踪的文件，确保构建内容与准备推送的提交一致。
-   首次使用或更换电脑时，在 homepage/site/ 运行 npm run hooks:install 启用检查。
-   也可以在提交前运行 pnpm build 提前检查。
+> 来源：`微积分11.4.pdf` 的 PDF 第 62～65 页，按文件页序，含首尾。文末站内阅读稿为原样摘录，摘录第 1～4 页依次对应原稿第 62～65 页。第 62 页标有“10.28”，并接续上一组关于可导与邻域连续的讨论。依确认，略去原第 64 页上部的草稿续算。
 
-PDF 链接规则：
-- 保留原稿的 [查看手写原稿](/notes/linalg_notes/linalg_hand_note/note_linalg_3.pdf) 即可。
-  网站构建时会自动转换为 /notes/linalg_notes/linalg_hand_note/note_linalg_3.pdf。
-- 也支持 ../../linalg_hand_note/、handwrite_notes/ 和同目录下的子路径。
-- 已是 /notes/... 的网站 PDF 地址会保留。
-- 如果原稿没有 PDF 链接，请在粘贴区末尾补充上面的链接并填写实际 PDF 文件名。
-- 自动转换链接不会自动上传 PDF；必须把文件放到上述目录并一同提交。
-- PDF 文件名必须与原稿链接一致（包含大小写），发布前请点击核对。
--->
+## **1. 一点可导与邻域内连续（原第 62 页）**
 
-<!-- ===== 原稿正文粘贴区：开始 ===== -->
+若 $f$ 在 $x_0$ 可导，则 $f$ 在 $x_0$ 连续。但一点可导不能推出在某邻域每一点都可导或连续。
 
-<!-- 将完整的原稿正文粘贴在这里，可保留原稿末尾的手写 PDF 链接。 -->
+原稿再举
 
-<!-- ===== 原稿正文粘贴区：结束 ===== -->
+$$
+f(x)=x^2D(x),
+\qquad
+D(x)=\begin{cases}1,&x\in\mathbb Q,\\0,&x\notin\mathbb Q\end{cases}
+$$
+
+为例。它满足
+
+$$
+f'(0)=\lim_{h\to0}\frac{h^2D(h)}h=0,
+$$
+
+却在每个非零点不连续。
+
+二阶可导的情形不同：按通常定义，$f''(x_0)$ 存在要求 $f'$ 在 $x_0$ 的某邻域有定义，并在 $x_0$ 可导。因此 $f'$ 在 $x_0$ 连续，$f$ 在该邻域可导并连续；但不能保证 $f'$ 在整个邻域内处处连续。这是第 59 页讨论的续写。
+
+## **2. 微分的定义（原第 63 页）**
+
+设 $y=f(x)$ 在 $x_0$ 的某邻域内有定义。令
+
+$$
+\Delta y=f(x_0+\Delta x)-f(x_0).
+$$
+
+若存在与 $\Delta x$ 无关的常数 $A$，使
+
+$$
+\Delta y=A\Delta x+o(\Delta x)
+\qquad(\Delta x\to0),
+$$
+
+则称 $f$ 在 $x_0$ 可微，称线性主部 $A\Delta x$ 为 $y$ 在 $x_0$ 的微分，记为 $dy=A\Delta x$。
+
+### **2.1 一元函数可微的充要条件**
+
+一元函数在一点可微，当且仅当在该点可导，且 $A=f'(x_0)$。
+
+**整理补充证明：** 若可微，把定义式除以 $\Delta x$ 后取极限，得导数等于 $A$。反之，若可导，令
+
+$$
+\varepsilon(\Delta x)
+=\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}-f'(x_0)\to0,
+$$
+
+则 $\Delta y=f'(x_0)\Delta x+\varepsilon(\Delta x)\Delta x$，余项为 $o(\Delta x)$。
+
+取 $dx=\Delta x$，便有微分基本公式
+
+$$
+\boxed{dy=f'(x_0)\,dx,\qquad d(f(x))=f'(x)\,dx.}
+$$
+
+## **3. 微分的四则运算法则（原第 63 页）**
+
+设 $u,v$ 在所考察点可微，则
+
+$$
+\begin{aligned}
+d(u\pm v)&=du\pm dv,\\
+d(uv)&=u\,dv+v\,du,\\
+d\left(\frac uv\right)&=\frac{v\,du-u\,dv}{v^2}
+\quad(v\neq 0).
+\end{aligned}
+$$
+
+## **4. 摆线与对数螺线（原第 64 页）**
+
+### **4.1 外摆线／旋轮线**
+
+原稿以“摆线”为标题，把图中的外侧滚动曲线标作“最速降线”，并记录参数方程
+
+$$
+\begin{cases}
+x=a(t-\sin t),\\
+y=a(1-\cos t).
+\end{cases}
+$$
+
+这里通常取 $a>0$。这组方程表示圆在直线上无滑动滚动时，圆周上一点形成的普通摆线（旋轮线）；原稿图形见第 64 页。
+
+原稿另画了“内摆线”示意图，并标注“补充”，没有写参数方程；图中圆与曲线的相对位置保留于原第 64 页，不据示意图擅自补写具体参数。
+
+### **4.2 对数螺线**
+
+原稿记录极坐标方程
+
+$$
+r=ae^{b\theta},
+$$
+
+其中 $a,b$ 为常数。通常取 $a>0$；$b=0$ 时退化为定半径曲线。
+
+## **5. 变量代换例题：令 $x=\ln t$（原第 64 页）**
+
+对微分方程
+
+$$
+\frac{d^2y}{dx^2}-\frac{dy}{dx}+e^{2x}y=0,
+$$
+
+作代换 $x=\ln t$，$t>0$，将 $y$ 视为 $t$ 的函数。由于 $dt/dx=t$，
+
+$$
+\frac{dy}{dx}=t\frac{dy}{dt}.
+$$
+
+再求一阶，
+
+$$
+\begin{aligned}
+\frac{d^2y}{dx^2}
+&=t\frac d{dt}\left(t\frac{dy}{dt}\right)\\
+&=t\frac{dy}{dt}+t^2\frac{d^2y}{dt^2}.
+\end{aligned}
+$$
+
+同时 $e^{2x}=t^2$。代回原方程，两项 $t\,dy/dt$ 抵消，得
+
+$$
+t^2\frac{d^2y}{dt^2}+t^2y=0.
+$$
+
+由 $t>0$ 可除以 $t^2$，于是
+
+$$
+\boxed{\frac{d^2y}{dt^2}+y=0.}
+$$
+
+原稿本题到这里结束。**整理补充：** 若继续求解，则 $y=C_1\cos t+C_2\sin t$；换回 $t=e^x$，得 $y=C_1\cos(e^x)+C_2\sin(e^x)$。
+
+## **6. 微分近似公式（原第 65 页）**
+
+当 $|\Delta x|$ 较小时，用微分近似增量：
+
+$$
+\Delta y\approx f'(x_0)\Delta x,
+$$
+
+于是
+
+$$
+\boxed{f(x_0+\Delta x)
+\approx f(x_0)+f'(x_0)\Delta x.}
+$$
+
+精确表述仍是 $\Delta y=f'(x_0)\Delta x+o(\Delta x)$；近似精度取决于余项，不能将近似号无条件改成等号。
+
+## **7. 误差与误差限（原第 65 页）**
+
+设 $x^*$ 为真值，$x_0$ 为近似值，记
+
+$$
+\Delta x=x^*-x_0.
+$$
+
+绝对误差为 $|\Delta x|$。若已知 $|\Delta x|\leq\delta_x$，称 $\delta_x$ 为绝对误差限。以近似值作分母时，近似相对误差为 $\Delta x/x_0$，近似相对误差限为 $\delta_x/|x_0|$，要求 $x_0\neq 0$。
+
+对于 $y=f(x)$，由线性化，
+
+$$
+|\Delta y|\approx|dy|
+=|f'(x_0)\Delta x|
+\leq|f'(x_0)|\delta_x.
+$$
+
+因此一阶估计为
+
+$$
+\delta_y\approx|f'(x_0)|\delta_x,
+\qquad
+\frac{\delta_y}{|f(x_0)|}
+\approx\left|\frac{f'(x_0)}{f(x_0)}\right|\delta_x,
+$$
+
+其中后一式要求 $f(x_0)\neq 0$。
+
+**整理补充：** 若把相对误差严格定义为 $|x^*-x_0|/|x^*|$，则分母应为真值，而非近似值。原稿的 $|x_0|$ 分母属于常用近似估计；在 $|x_0|>\delta_x$ 时，也可由 $|x^*|\geq|x_0|-\delta_x$ 得到严格上界 $\delta_x/(|x_0|-\delta_x)$。
+
+## **手写原稿**
+
+[在本站阅读手写原稿（原稿第 62～65 页）](/notes/read/cacu_notes/cacu_hand_note/note_cacu_9/)

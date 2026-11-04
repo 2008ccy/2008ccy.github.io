@@ -1,6 +1,9 @@
 import { fileURLToPath } from "node:url";
 import { relative, sep } from "node:path";
-import { manuscriptFiles, manuscriptUrl } from "../../scripts/manuscripts.mjs";
+import {
+  publishedManuscripts,
+  manuscriptReaderUrl,
+} from "../../scripts/manuscripts.mjs";
 
 interface MarkdownNode {
   type: string;
@@ -15,15 +18,10 @@ export default function remarkNoteLinks() {
     const path = relative(root, file.path).split(sep).join("/");
     const subject = path.match(/^note\/(linalg|cacu)_notes\//)?.[1];
     if (!subject) return;
-    const files = await manuscriptFiles(root);
+    const files = await publishedManuscripts(root);
     const visit = (node: MarkdownNode) => {
-      if (
-        (node.type === "link" ||
-          node.type === "definition" ||
-          node.type === "image") &&
-        node.url
-      )
-        node.url = manuscriptUrl(node.url, subject, files);
+      if ((node.type === "link" || node.type === "definition") && node.url)
+        node.url = manuscriptReaderUrl(node.url, subject, files);
       if (node.children) for (const child of node.children) visit(child);
     };
     visit(tree);
