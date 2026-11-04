@@ -1,7 +1,7 @@
 ---
 title: 微积分：数列极限的性质与收敛准则
 description: 数列极限的定义证明、四则运算、夹逼定理、单调收敛与不动点迭代。
-pubDatetime: 2026-11-04T14:15:31+08:00
+pubDatetime: 2026-11-03T15:15:00+08:00
 tags: [微积分, 课程笔记]
 draft: false
 featured: false

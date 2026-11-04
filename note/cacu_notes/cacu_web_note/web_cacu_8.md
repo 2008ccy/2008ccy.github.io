@@ -1,7 +1,7 @@
 ---
 title: 微积分：导数、反函数求导与高阶导数
 description: 导数定义、反三角函数、幂指函数求导及莱布尼茨公式的推导与例题。
-pubDatetime: 2026-11-04T14:15:31+08:00
+pubDatetime: 2026-11-04T12:15:00+08:00
 tags: [微积分, 课程笔记]
 draft: false
 featured: false

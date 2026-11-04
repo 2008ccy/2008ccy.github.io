@@ -1,7 +1,7 @@
 ---
 title: 微积分：数列极限的定义与基本例题
 description: 数列极限的ε-N定义、邻域刻画，以及几何数列、n次根、阶乘和指数比较的证明。
-pubDatetime: 2026-11-04T14:15:31+08:00
+pubDatetime: 2026-11-02T14:10:00+08:00
 tags: [微积分, 课程笔记]
 draft: false
 featured: false

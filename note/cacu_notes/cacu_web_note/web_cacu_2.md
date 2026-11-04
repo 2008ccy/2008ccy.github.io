@@ -1,7 +1,7 @@
 ---
 title: 微积分：函数、反函数与极坐标
 description: 映射和反函数、反三角函数与恒等式、复合迭代、函数性质及极坐标的知识点和例题。
-pubDatetime: 2026-11-04T14:15:31+08:00
+pubDatetime: 2026-11-02T10:00:00+08:00
 tags: [微积分, 课程笔记]
 draft: false
 featured: false

@@ -1,7 +1,7 @@
 ---
 title: 微积分：极限判别、无穷小与连续性
 description: 夹逼定理、海涅定理、两个重要极限、无穷小比较及连续性的手稿整理。
-pubDatetime: 2026-11-04T14:15:31+08:00
+pubDatetime: 2026-11-04T11:00:00+08:00
 tags: [微积分, 课程笔记]
 draft: false
 featured: false

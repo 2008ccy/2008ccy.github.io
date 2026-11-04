@@ -1,7 +1,7 @@
 ---
 title: 微积分：微分、变量代换与误差估计
 description: 可导与连续的关系、微分定义及运算、摆线、变量代换和线性误差估计。
-pubDatetime: 2026-11-04T14:15:31+08:00
+pubDatetime: 2026-11-04T14:15:00+08:00
 tags: [微积分, 课程笔记]
 draft: false
 featured: false

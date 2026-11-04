@@ -1,7 +1,7 @@
 ---
 title: 微积分：柯西准则的应用与函数极限
 description: 数列收敛和发散的证明、函数极限的定义与性质、连续性及根式渐近例题。
-pubDatetime: 2026-11-04T14:15:31+08:00
+pubDatetime: 2026-11-04T09:00:00+08:00
 tags: [微积分, 课程笔记]
 draft: false
 featured: false

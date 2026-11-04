@@ -1,7 +1,7 @@
 ---
 title: 微积分：重要极限、子列与柯西收敛准则
 description: 构造自然常数 e，证明调和数减对数收敛，整理子列、聚点定理与柯西准则。
-pubDatetime: 2026-11-04T14:15:31+08:00
+pubDatetime: 2026-11-03T15:30:00+08:00
 tags: [微积分, 课程笔记]
 draft: false
 featured: false

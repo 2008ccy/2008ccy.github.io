@@ -1,7 +1,7 @@
 ---
 title: 微积分：微分中值定理
 description: 费马定理、罗尔定理、拉格朗日与柯西中值定理及辅助函数方法，原稿尚未完成。
-pubDatetime: 2026-11-04T14:15:31+08:00
+pubDatetime: 2026-11-04T14:50:00+08:00
 tags: [微积分, 课程笔记]
 draft: false
 featured: false

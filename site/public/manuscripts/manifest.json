@@ -520,25 +520,20 @@
     ]
   },
   "cacu_notes/cacu_hand_note/note_cacu_1.pdf": {
-    "sha256": "606faeb7f5149961c4584df04c0e509f3ff9e69c0a0933e1b3d87e19bdb8eb5c",
+    "sha256": "13f28588cca9e316ecfdccf252eb318941d1584293276eed6c271d5e238e3593",
     "pages": [
       {
-        "src": "manuscripts/606faeb7f5149961/page-01.webp",
+        "src": "manuscripts/13f28588cca9e316/page-01.webp",
+        "width": 911,
+        "height": 1009
+      },
+      {
+        "src": "manuscripts/13f28588cca9e316/page-02.webp",
         "width": 911,
         "height": 1177
       },
       {
-        "src": "manuscripts/606faeb7f5149961/page-02.webp",
-        "width": 911,
-        "height": 1177
-      },
-      {
-        "src": "manuscripts/606faeb7f5149961/page-03.webp",
-        "width": 911,
-        "height": 1177
-      },
-      {
-        "src": "manuscripts/606faeb7f5149961/page-04.webp",
+        "src": "manuscripts/13f28588cca9e316/page-03.webp",
         "width": 911,
         "height": 1177
       }
