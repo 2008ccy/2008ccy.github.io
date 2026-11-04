@@ -17,11 +17,24 @@ const mediaTypes = {
 
 export async function examPapers(homepageRoot) {
   let hidden = [];
+  let titles = {};
   try {
     const catalog = JSON.parse(
       await readFile(resolve(homepageRoot, "test/catalog.json"), "utf8")
     );
     hidden = catalog.hidden ?? [];
+    titles = catalog.titles ?? {};
+    if (
+      !titles ||
+      typeof titles !== "object" ||
+      Array.isArray(titles) ||
+      Object.values(titles).some(
+        title => typeof title !== "string" || !title.trim()
+      )
+    )
+      throw new Error(
+        "test/catalog.json 的 titles 必须是文件相对路径与非空标题的对应表"
+      );
     if (!Array.isArray(hidden) || hidden.some(path => typeof path !== "string"))
       throw new Error("test/catalog.json 的 hidden 必须是文件相对路径数组");
   } catch (error) {
@@ -45,7 +58,8 @@ export async function examPapers(homepageRoot) {
       const extension = extname(source);
       papers.push({
         subject: subject.id,
-        title: basename(source, extension),
+        title:
+          titles[`${subject.id}/${filename}`] ?? basename(source, extension),
         filename,
         source,
         route: `${subject.id}/${filename}`,
