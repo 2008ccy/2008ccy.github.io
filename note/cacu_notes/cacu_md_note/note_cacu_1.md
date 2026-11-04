@@ -149,4 +149,4 @@ $\alpha=\inf A$ 表示 $\alpha$ 是最大下界；等价地，$\alpha$ 是下界
 
 ## **手写原稿**
 
-[查看手写原稿（微积分11.4.pdf，本篇对应第 2～5 页）](/notes/caculus_notes/cacu_hand_note/%E5%BE%AE%E7%A7%AF%E5%88%8611.4.pdf#page=2)
+[查看手写原稿（微积分11.4.pdf，本篇对应第 2～5 页）](/notes/cacu_notes/cacu_hand_note/%E5%BE%AE%E7%A7%AF%E5%88%8611.4.pdf#page=2)

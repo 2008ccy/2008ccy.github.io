@@ -3,7 +3,7 @@ import { resolve, relative, sep, extname } from "node:path";
 
 export const subjects = {
   linalg: { root: "linalg_notes", hand: "linalg_hand_note" },
-  caculus: { root: "caculus_notes", hand: "cacu_hand_note" },
+  cacu: { root: "cacu_notes", hand: "cacu_hand_note" },
 };
 
 export async function filesIn(directory, extensions) {
@@ -49,10 +49,11 @@ export function manuscriptUrl(url, subject, files) {
   const decoded = decodeURIComponent(pathname);
   if (!/\.pdf$/i.test(decoded)) return url;
   const canonical = decoded.match(
-    /^\/notes\/((?:linalg|caculus)_notes\/(?:linalg|cacu)_hand_note\/.+)$/
+    /^\/notes\/((?:linalg|cacu|caculus)_notes\/(?:linalg|cacu)_hand_note\/.+)$/
   );
   let route;
-  if (canonical) route = canonical[1];
+  if (canonical)
+    route = canonical[1].replace(/^caculus_notes\//, "cacu_notes/");
   else {
     const marker = decoded.match(
       /(?:^|\/)(?:handwrite_notes|handwrite_pdf|hand_note|linalg_hand_note|cacu_hand_note|web_linalg_1)\//

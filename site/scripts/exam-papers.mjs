@@ -3,7 +3,7 @@ import { basename, extname, relative, resolve, sep } from "node:path";
 import { filesIn } from "./manuscripts.mjs";
 
 export const examSubjects = [
-  { id: "caculus_test", title: "微积分" },
+  { id: "cacu_test", title: "微积分" },
   { id: "linalg_test", title: "线性代数" },
 ];
 

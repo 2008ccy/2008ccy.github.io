@@ -18,7 +18,7 @@ async function fixture() {
   const homepageRoot = await mkdtemp(join(tmpdir(), "homepage-local-notes-"));
   for (const [subject, hand] of [
     ["linalg", "linalg_hand_note"],
-    ["caculus", "cacu_hand_note"],
+    ["cacu", "cacu_hand_note"],
   ]) {
     await mkdir(join(homepageRoot, "note", `${subject}_notes`, hand), {
       recursive: true,
@@ -74,7 +74,7 @@ test("missing PDFs fail preflight before any link changes", async () => {
   const body = "[valid](../handwrite_pdf/a.pdf)\n";
   await writeFile(valid, body);
   await writeFile(
-    join(options.homepageRoot, "note/caculus_notes/b.md"),
+    join(options.homepageRoot, "note/cacu_notes/b.md"),
     "[missing](../handwrite_pdf/missing.pdf)\n"
   );
   await assert.rejects(syncNotes(options), /手稿不存在/);
@@ -84,23 +84,23 @@ test("missing PDFs fail preflight before any link changes", async () => {
 test("discovers nested manuscripts for both subjects, encodes Unicode and preserves fragments", async () => {
   const options = await fixture();
   await mkdir(
-    join(options.homepageRoot, "note/caculus_notes/cacu_hand_note/chapter")
+    join(options.homepageRoot, "note/cacu_notes/cacu_hand_note/chapter")
   );
   const path = join(
     options.homepageRoot,
-    "note/caculus_notes/cacu_hand_note/chapter/微积分 1.pdf"
+    "note/cacu_notes/cacu_hand_note/chapter/微积分 1.pdf"
   );
-  await writeFile(path, "%PDF-caculus");
+  await writeFile(path, "%PDF-cacu");
   const files = await manuscriptFiles(options.homepageRoot);
   assert.equal(files.length, 1);
   assert.equal(files[0].source, path);
   assert.equal(
     manuscriptUrl(
       "../cacu_hand_note/chapter/微积分%201.pdf#page=3",
-      "caculus",
+      "cacu",
       files
     ),
-    `/notes/caculus_notes/cacu_hand_note/chapter/${encodeURIComponent("微积分 1.pdf")}#page=3`
+    `/notes/cacu_notes/cacu_hand_note/chapter/${encodeURIComponent("微积分 1.pdf")}#page=3`
   );
   assert.equal(
     manuscriptUrl(
@@ -109,6 +109,14 @@ test("discovers nested manuscripts for both subjects, encodes Unicode and preser
       files
     ),
     "https://example.com/handwrite_pdf/missing.pdf"
+  );
+  assert.equal(
+    manuscriptUrl(
+      "/notes/caculus_notes/cacu_hand_note/chapter/微积分%201.pdf#page=3",
+      "cacu",
+      files
+    ),
+    `/notes/cacu_notes/cacu_hand_note/chapter/${encodeURIComponent("微积分 1.pdf")}#page=3`
   );
   assert.throws(
     () =>

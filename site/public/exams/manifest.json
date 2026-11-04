@@ -1,5 +1,5 @@
 {
-  "caculus_test/26-27微积分其中模拟.pdf": {
+  "cacu_test/26-27微积分其中模拟.pdf": {
     "sha256": "7fc348199511e1bbd130a90fff19b3014b5e7b12287795530e009f2b2fbff709",
     "answersStart": 8,
     "pages": [
@@ -65,7 +65,7 @@
       }
     ]
   },
-  "caculus_test/calculus-midterm-2022-2023-practice.pdf": {
+  "cacu_test/calculus-midterm-2022-2023-practice.pdf": {
     "sha256": "1715d885efc5f3f2f04a3e84b5eddfc45faccf48b792c7f1d5a8bd1e77bf162a",
     "answersStart": null,
     "pages": [
@@ -86,7 +86,7 @@
       }
     ]
   },
-  "caculus_test/calculus-midterm-2023-2024-practice.pdf": {
+  "cacu_test/calculus-midterm-2023-2024-practice.pdf": {
     "sha256": "1e745c0c0653f4179a1d447794c12fb455123bf5394571023aef871a4079c017",
     "answersStart": null,
     "pages": [
@@ -107,7 +107,7 @@
       }
     ]
   },
-  "caculus_test/calculus-midterm-2024-2025-practice.pdf": {
+  "cacu_test/calculus-midterm-2024-2025-practice.pdf": {
     "sha256": "853653fd7b777427caddc9330406b5a7bbede0bbb2a2f7611070cd1aa08ee5a2",
     "answersStart": null,
     "pages": [

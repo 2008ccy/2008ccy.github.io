@@ -317,4 +317,4 @@ $$
 
 ## **手写原稿**
 
-[查看手写原稿（本篇对应 PDF 第 27～32 页）](/notes/caculus_notes/cacu_hand_note/%E5%BE%AE%E7%A7%AF%E5%88%8611.4.pdf#page=27)
+[查看手写原稿（本篇对应 PDF 第 27～32 页）](/notes/cacu_notes/cacu_hand_note/%E5%BE%AE%E7%A7%AF%E5%88%8611.4.pdf#page=27)

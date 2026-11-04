@@ -10,7 +10,7 @@ catalog = json.loads((root / "test/catalog.json").read_text())
 output = root / "site/public/exams"
 output.mkdir(parents=True, exist_ok=True)
 manifest = {}
-for subject in ["caculus_test", "linalg_test"]:
+for subject in ["cacu_test", "linalg_test"]:
     for source in sorted((root / "test" / subject).rglob("*.pdf")):
         route = source.relative_to(root / "test").as_posix()
         if route in catalog.get("hidden", []):

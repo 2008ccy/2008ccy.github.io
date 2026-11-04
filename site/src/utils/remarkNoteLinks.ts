@@ -13,7 +13,7 @@ export default function remarkNoteLinks() {
   return async (tree: MarkdownNode, file: { path: string }) => {
     const root = fileURLToPath(new URL("../../../", import.meta.url));
     const path = relative(root, file.path).split(sep).join("/");
-    const subject = path.match(/^note\/(linalg|caculus)_notes\//)?.[1];
+    const subject = path.match(/^note\/(linalg|cacu)_notes\//)?.[1];
     if (!subject) return;
     const files = await manuscriptFiles(root);
     const visit = (node: MarkdownNode) => {
