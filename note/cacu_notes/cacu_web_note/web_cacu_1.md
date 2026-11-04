@@ -5,7 +5,7 @@ title: >-
 description: >-
   基本概念阐释
 pubDatetime: 2026-11-04T13:58:00+08:00
-tags: [课程笔记]
+tags: [微积分，课程笔记]
 # 默认允许发布；暂不公开时改为 true。
 draft: false
 featured: false
