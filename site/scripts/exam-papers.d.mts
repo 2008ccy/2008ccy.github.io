@@ -4,6 +4,7 @@ export interface ExamPaper {
   filename: string;
   source: string;
   route: string;
+  readerRoute: string;
   mediaType: string;
   hidden: boolean;
 }

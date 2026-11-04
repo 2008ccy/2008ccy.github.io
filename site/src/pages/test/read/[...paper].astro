@@ -1,0 +1,187 @@
+---
+import type { GetStaticPaths } from "astro";
+import { readFile } from "node:fs/promises";
+import { resolve } from "node:path";
+import { createHash } from "node:crypto";
+import PostLayout from "@/layouts/PostLayout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { getAssetPath } from "@/utils/withBase";
+import {
+  examPapers,
+  examSubjects,
+  type ExamPaper,
+} from "../../../../scripts/exam-papers.mjs";
+import config from "@/config";
+
+type Page = { src: string; width?: number; height?: number };
+type Reading = { sha256: string; answersStart?: number; pages: Page[] };
+type Props = { paper: ExamPaper; reading: Reading };
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const root = resolve(process.cwd(), "..");
+  const manifest: Record<string, Reading> = JSON.parse(
+    await readFile(resolve(root, "site/public/exams/manifest.json"), "utf8")
+  );
+  return Promise.all(
+    (await examPapers(root))
+      .filter(paper => !paper.hidden)
+      .map(async paper => {
+        let reading = manifest[paper.route];
+        if (paper.mediaType === "application/pdf") {
+          const digest = createHash("sha256")
+            .update(await readFile(paper.source))
+            .digest("hex");
+          if (!reading || reading.sha256 !== digest || !reading.pages.length)
+            throw new Error(
+              `请先运行 scripts/render-exam-pages.py 更新试卷阅读页：${paper.route}`
+            );
+        } else {
+          reading = {
+            sha256: "",
+            pages: [
+              {
+                src: `test/files/${paper.route.split("/").map(encodeURIComponent).join("/")}`,
+              },
+            ],
+          };
+        }
+        return {
+          params: { paper: paper.readerRoute },
+          props: { paper, reading },
+        };
+      })
+  );
+};
+
+const { paper, reading } = Astro.props;
+const subject = examSubjects.find(subject => subject.id === paper.subject)!;
+const testUrl = getAssetPath("test/");
+---
+
+<PostLayout
+  title={`${paper.title}｜${config.site.title}`}
+  description={`${paper.title}，共 ${reading.pages.length} 页，在线阅读试卷${reading.answersStart ? "与参考答案" : ""}。`}
+>
+  <Header />
+  <nav class="app-layout breadcrumb mt-8 mb-6" aria-label="面包屑">
+    <a href={getAssetPath("")}>首页</a><span aria-hidden="true">»</span>
+    <a href={testUrl}>题库</a><span aria-hidden="true">»</span>
+    <span aria-current="page">{paper.title}</span>
+  </nav>
+  <main id="main-content" class="app-layout pb-8" data-pagefind-body>
+    <h1 class="text-accent text-2xl font-bold sm:text-3xl">{paper.title}</h1>
+    <p class="reading-meta">{subject.title} · 共 {reading.pages.length} 页</p>
+    <nav class="reading-nav" aria-label="试卷页码">
+      {
+        reading.pages.map((_, index) => (
+          <a href={`#page-${index + 1}`} aria-label={`跳到第 ${index + 1} 页`}>
+            {index + 1}
+          </a>
+        ))
+      }
+      {
+        reading.answersStart && (
+          <a class="answer-link" href={`#page-${reading.answersStart}`}>
+            参考答案 ↓
+          </a>
+        )
+      }
+    </nav>
+    <article aria-label={paper.title}>
+      {
+        reading.pages.map((page, index) => (
+          <section
+            id={`page-${index + 1}`}
+            class="exam-page"
+            aria-labelledby={`page-${index + 1}-heading`}
+          >
+            <h2 id={`page-${index + 1}-heading`}>
+              第 {index + 1} 页
+              {reading.answersStart && (
+                <span>
+                  {" "}
+                  · {index + 1 >= reading.answersStart ? "参考答案" : "试卷"}
+                </span>
+              )}
+            </h2>
+            <img
+              src={getAssetPath(page.src)}
+              width={page.width}
+              height={page.height}
+              alt={`${paper.title}，第 ${index + 1} 页${reading.answersStart && index + 1 >= reading.answersStart ? "，参考答案" : ""}`}
+              loading={index === 0 ? "eager" : "lazy"}
+              decoding="async"
+            />
+          </section>
+        ))
+      }
+    </article>
+    <nav class="reading-footer" aria-label="阅读导航">
+      <a href={`${testUrl}#${paper.subject}`}>← 返回{subject.title}题库</a>
+      <a href="#main-content">回到顶部 ↑</a>
+    </nav>
+  </main>
+  <Footer />
+</PostLayout>
+
+<style>
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--muted-foreground);
+  }
+  .reading-meta {
+    margin-top: 0.75rem;
+    color: var(--muted-foreground);
+    font-size: 0.9rem;
+  }
+  .reading-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-block: 1.5rem 2rem;
+  }
+  .reading-nav a {
+    border: 1px solid var(--border);
+    border-radius: 0.25rem;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.85rem;
+  }
+  .answer-link {
+    margin-inline-start: 0.5rem;
+  }
+  .exam-page {
+    margin-bottom: 2rem;
+    scroll-margin-top: 1rem;
+  }
+  h2 {
+    font-size: 0.85rem;
+    color: var(--muted-foreground);
+    margin-bottom: 0.75rem;
+  }
+  .exam-page img {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: white;
+    border: 1px solid var(--border);
+  }
+  .reading-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.9rem;
+  }
+  a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 0.25rem;
+  }
+</style>

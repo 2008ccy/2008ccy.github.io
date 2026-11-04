@@ -46,16 +46,11 @@ const papers = (await examPapers(root)).filter(paper => !paper.hidden);
                   <li>
                     <a
                       href={getAssetPath(
-                        `test/files/${paper.route.split("/").map(encodeURIComponent).join("/")}`
+                        `test/read/${paper.readerRoute.split("/").map(encodeURIComponent).join("/")}/`
                       )}
-                      target="_blank"
-                      rel="noopener noreferrer"
                     >
                       <span class="paper-title">{paper.title}</span>
-                      <span class="paper-format">
-                        {paper.mediaType === "application/pdf" ? "PDF" : "图片"}{" "}
-                        ↗
-                      </span>
+                      <span class="paper-format">阅读 →</span>
                     </a>
                   </li>
                 ))}

@@ -63,6 +63,7 @@ export async function examPapers(homepageRoot) {
         filename,
         source,
         route: `${subject.id}/${filename}`,
+        readerRoute: `${subject.id}/${filename.slice(0, -extension.length)}`,
         mediaType: mediaTypes[extension.toLowerCase()],
         hidden: hiddenRoutes.has(`${subject.id}/${filename}`),
       });
