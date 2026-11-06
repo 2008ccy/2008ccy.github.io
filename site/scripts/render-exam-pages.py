@@ -9,6 +9,7 @@ root = Path(__file__).resolve().parents[2]
 catalog = json.loads((root / "test/catalog.json").read_text())
 output = root / "site/public/exams"
 output.mkdir(parents=True, exist_ok=True)
+previous = json.loads((output / "manifest.json").read_text()) if (output / "manifest.json").exists() else {}
 manifest = {}
 for subject in ["cacu_test", "linalg_test"]:
     for source in sorted((root / "test" / subject).rglob("*.pdf")):
@@ -33,6 +34,18 @@ for subject in ["cacu_test", "linalg_test"]:
             bitmap.close()
             page.close()
         document.close()
-        manifest[route] = {"sha256": digest, "answersStart": answer_start, "pages": pages}
+        entry = {"sha256": digest, "answersStart": answer_start, "pages": pages}
+        old = previous.get(route, {})
+        if old.get("answers"):
+            if old.get("sha256") != digest:
+                raise ValueError(f"PDF changed; regenerate answer screenshots before publishing: {route}")
+            for answer in old["answers"]:
+                asset = output.parent / answer["src"]
+                if not asset.is_file() or hashlib.sha256(asset.read_bytes()).hexdigest() != answer["sha256"]:
+                    raise ValueError(f"Missing or changed answer screenshot: {asset}")
+            for key in ["answers", "answerSource", "answerLicense"]:
+                if key in old:
+                    entry[key] = old[key]
+        manifest[route] = entry
         print(f"Rendered {route}: {len(pages)} pages", flush=True)
 (output / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")

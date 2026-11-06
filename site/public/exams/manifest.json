@@ -43,7 +43,145 @@
         "width": 1191,
         "height": 1684
       }
-    ]
+    ],
+    "answers": [
+      {
+        "id": "1",
+        "label": "第1题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/fbe4ad413a83c418/answers-v1/answer-1.webp",
+        "width": 851,
+        "height": 463,
+        "sha256": "c667db5405a03a24ab8a4db9aefa80c4dde741fa09cdd0349e456cab309ebc0d"
+      },
+      {
+        "id": "2",
+        "label": "第2题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/fbe4ad413a83c418/answers-v1/answer-2.webp",
+        "width": 750,
+        "height": 276,
+        "sha256": "80d3460b03e3ec9109dcd852873b586def040ce877e51036d8d486cc8382c899"
+      },
+      {
+        "id": "3",
+        "label": "第3题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/fbe4ad413a83c418/answers-v1/answer-3.webp",
+        "width": 788,
+        "height": 232,
+        "sha256": "0ea6f9387483053b900c2422e8b0b502c66f8508c5793d35ece9ac659dc0b3e4"
+      },
+      {
+        "id": "4",
+        "label": "第4题",
+        "sourcePages": [
+          5,
+          6
+        ],
+        "src": "exams/fbe4ad413a83c418/answers-v1/answer-4.webp",
+        "width": 592,
+        "height": 525,
+        "sha256": "a91da47a7ad501a0fee6558ec7c88696264df25d11676317485a732dffde723c"
+      },
+      {
+        "id": "5",
+        "label": "第5题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/fbe4ad413a83c418/answers-v1/answer-5.webp",
+        "width": 1007,
+        "height": 538,
+        "sha256": "db1fb658b28717aa9d6c0eaa2236167ca89d69273e6d6637e0f005461b2a7ec5"
+      },
+      {
+        "id": "6",
+        "label": "第6题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/fbe4ad413a83c418/answers-v1/answer-6.webp",
+        "width": 851,
+        "height": 360,
+        "sha256": "bd303012101f6c9379d376977250ae4f94040beddcd202b5b29ba53bb1a499bc"
+      },
+      {
+        "id": "7",
+        "label": "第7题",
+        "sourcePages": [
+          6,
+          7
+        ],
+        "src": "exams/fbe4ad413a83c418/answers-v1/answer-7.webp",
+        "width": 908,
+        "height": 615,
+        "sha256": "0cf2d16a8ff8951f1b694ea2bf90d8141632ec265be0cb688e11d4b12894477f"
+      },
+      {
+        "id": "8",
+        "label": "第8题",
+        "sourcePages": [
+          7
+        ],
+        "src": "exams/fbe4ad413a83c418/answers-v1/answer-8.webp",
+        "width": 1059,
+        "height": 623,
+        "sha256": "580eafc6dffcf67900e7223b437d6b733f7c94ffb48c2ee05342035bed81659c"
+      },
+      {
+        "id": "9",
+        "label": "第9题",
+        "sourcePages": [
+          7,
+          8
+        ],
+        "src": "exams/fbe4ad413a83c418/answers-v1/answer-9.webp",
+        "width": 1004,
+        "height": 607,
+        "sha256": "a4a2cfcef79ebce5c9f6653421f9071386e122eeb0480a9077e337f961cb5d65"
+      },
+      {
+        "id": "10",
+        "label": "第10题",
+        "sourcePages": [
+          8
+        ],
+        "src": "exams/fbe4ad413a83c418/answers-v1/answer-10.webp",
+        "width": 596,
+        "height": 339,
+        "sha256": "18f5d193f4f34d3ff9d9ed18eb457e36b89fd52937ddb8cb7f555081baf724f5"
+      },
+      {
+        "id": "11",
+        "label": "第11题",
+        "sourcePages": [
+          8
+        ],
+        "src": "exams/fbe4ad413a83c418/answers-v1/answer-11.webp",
+        "width": 913,
+        "height": 410,
+        "sha256": "8e8d5a567b7cda27dad6812998dbdb84fef18bb9f3b68621701b6d4f19764d54"
+      },
+      {
+        "id": "12",
+        "label": "第12题",
+        "sourcePages": [
+          8
+        ],
+        "src": "exams/fbe4ad413a83c418/answers-v1/answer-12.webp",
+        "width": 1130,
+        "height": 458,
+        "sha256": "ef684a660df361a804a09009a01ee3b4fd80814406890e2b657247da722e8d1c"
+      }
+    ],
+    "answerSource": "https://easoncyy.github.io/posts/20261102-calculus-midterm-mock-2022-2023/"
   },
   "cacu_test/23-24微积分模拟.pdf": {
     "sha256": "eb0d568706cfdc8c3e65064b28e6d47bb28f13a1584ecd9f13f3f601229eddd9",
@@ -94,7 +232,157 @@
         "width": 1191,
         "height": 1684
       }
-    ]
+    ],
+    "answers": [
+      {
+        "id": "1",
+        "label": "第1题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/eb0d568706cfdc8c/answers-v1/answer-1.webp",
+        "width": 847,
+        "height": 157,
+        "sha256": "9933098f15e4eac93877af249e34354d9437f665b203d0521d9270b410d16147"
+      },
+      {
+        "id": "2",
+        "label": "第2题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/eb0d568706cfdc8c/answers-v1/answer-2.webp",
+        "width": 1214,
+        "height": 226,
+        "sha256": "08c8bd86da03f4db839f40fa8b2e753f57052573dfb2a2fe9f36253b75cf15cf"
+      },
+      {
+        "id": "3",
+        "label": "第3题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/eb0d568706cfdc8c/answers-v1/answer-3.webp",
+        "width": 1204,
+        "height": 495,
+        "sha256": "415a47acf536944876c6e4b45e6c1ab70129ca53f3cad39ec728a50d07a5f3de"
+      },
+      {
+        "id": "4",
+        "label": "第4题",
+        "sourcePages": [
+          5,
+          6
+        ],
+        "src": "exams/eb0d568706cfdc8c/answers-v1/answer-4.webp",
+        "width": 1066,
+        "height": 580,
+        "sha256": "57ef5e0d207601523474aadb39d02850957eb90ee729ec21a628939b6aa56b46"
+      },
+      {
+        "id": "5",
+        "label": "第5题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/eb0d568706cfdc8c/answers-v1/answer-5.webp",
+        "width": 1084,
+        "height": 841,
+        "sha256": "13b899e6a3fc4943d4e3d4272b9895aa71256edbfe7f7e0364a4ab55379cf81b"
+      },
+      {
+        "id": "6",
+        "label": "第6题",
+        "sourcePages": [
+          6,
+          7
+        ],
+        "src": "exams/eb0d568706cfdc8c/answers-v1/answer-6.webp",
+        "width": 865,
+        "height": 648,
+        "sha256": "0dba2160625b62c02ad47f70bd89a8955eaa9fc1fd7f7161caf74c00b76617f2"
+      },
+      {
+        "id": "7",
+        "label": "第7题",
+        "sourcePages": [
+          7
+        ],
+        "src": "exams/eb0d568706cfdc8c/answers-v1/answer-7.webp",
+        "width": 982,
+        "height": 479,
+        "sha256": "28f27e6dd67d2838ac032d9e0e51821700ef9e88ae5d3aa083f875c8e96fe48e"
+      },
+      {
+        "id": "8",
+        "label": "第8题",
+        "sourcePages": [
+          7
+        ],
+        "src": "exams/eb0d568706cfdc8c/answers-v1/answer-8.webp",
+        "width": 1216,
+        "height": 468,
+        "sha256": "401e8f6e04c28a9ed6f84ac2ffd2b1456c8449e50fd51031ce662fb39a39dae1"
+      },
+      {
+        "id": "9",
+        "label": "第9题",
+        "sourcePages": [
+          7,
+          8
+        ],
+        "src": "exams/eb0d568706cfdc8c/answers-v1/answer-9.webp",
+        "width": 754,
+        "height": 347,
+        "sha256": "c946e4d7b348fb007e8b4058e73d7b69d4274617823ca6cee3e65dc278fbc5b0"
+      },
+      {
+        "id": "10",
+        "label": "第10题",
+        "sourcePages": [
+          8
+        ],
+        "src": "exams/eb0d568706cfdc8c/answers-v1/answer-10.webp",
+        "width": 1021,
+        "height": 531,
+        "sha256": "e32171d5f3f0d55e0baf0889c2eb8ffebb761a0e8a03f46955a6acb89fc24905"
+      },
+      {
+        "id": "11",
+        "label": "第11题",
+        "sourcePages": [
+          8
+        ],
+        "src": "exams/eb0d568706cfdc8c/answers-v1/answer-11.webp",
+        "width": 1226,
+        "height": 514,
+        "sha256": "e3f2ce9c8bc80655ff1c80446909d47905305f4699d6b6ec4615edb3882e2ce9"
+      },
+      {
+        "id": "12",
+        "label": "第12题",
+        "sourcePages": [
+          8,
+          9
+        ],
+        "src": "exams/eb0d568706cfdc8c/answers-v1/answer-12.webp",
+        "width": 1131,
+        "height": 629,
+        "sha256": "4c377d97149ea0b13578f9c2dc9b2627efbadcf27dcae562f5d7bef2640ab291"
+      },
+      {
+        "id": "13",
+        "label": "第13题",
+        "sourcePages": [
+          9
+        ],
+        "src": "exams/eb0d568706cfdc8c/answers-v1/answer-13.webp",
+        "width": 1165,
+        "height": 692,
+        "sha256": "b8ec38dabb57453b4c4c64d2a4677a9aae3e29a74dc6816bba83dbd29c8924cf"
+      }
+    ],
+    "answerSource": "https://easoncyy.github.io/posts/20261102-calculus-midterm-mock-2023-2024/"
   },
   "cacu_test/24-25微积分模拟.pdf": {
     "sha256": "6d1bd564fdcdc7f60708f8c5a11d625434c1b75034f31187a1818931da820440",
@@ -145,7 +433,157 @@
         "width": 1191,
         "height": 1684
       }
-    ]
+    ],
+    "answers": [
+      {
+        "id": "1",
+        "label": "第1题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/6d1bd564fdcdc7f6/answers-v1/answer-1.webp",
+        "width": 1193,
+        "height": 327,
+        "sha256": "6162d8d33545b3351ea899b48565a41f41bc10647a1db92baa01a05b35495716"
+      },
+      {
+        "id": "2",
+        "label": "第2题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/6d1bd564fdcdc7f6/answers-v1/answer-2.webp",
+        "width": 797,
+        "height": 261,
+        "sha256": "a4a2cb32cd95c35964cc269af673748754057b3788aaf16b1ec43ba8ee7f97f1"
+      },
+      {
+        "id": "3",
+        "label": "第3题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/6d1bd564fdcdc7f6/answers-v1/answer-3.webp",
+        "width": 807,
+        "height": 427,
+        "sha256": "6bace29525aa11b64200770229cb5e356ade1a22bd16fcfa4604727fa9d899b3"
+      },
+      {
+        "id": "4",
+        "label": "第4题",
+        "sourcePages": [
+          5,
+          6
+        ],
+        "src": "exams/6d1bd564fdcdc7f6/answers-v1/answer-4.webp",
+        "width": 1144,
+        "height": 460,
+        "sha256": "4e24c0c8b5d9715178f429cbd6354710b4008157807b9adb55a9e98187b20088"
+      },
+      {
+        "id": "5",
+        "label": "第5题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/6d1bd564fdcdc7f6/answers-v1/answer-5.webp",
+        "width": 1174,
+        "height": 134,
+        "sha256": "78bb95c48e8911b44bf1894df098f8e5af9cae1d31e51b6f3014923d25c3be80"
+      },
+      {
+        "id": "6",
+        "label": "第6题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/6d1bd564fdcdc7f6/answers-v1/answer-6.webp",
+        "width": 801,
+        "height": 336,
+        "sha256": "147811871b328ba1cd8e84886fb925fe9d438c26208e84ca8062a40621debee2"
+      },
+      {
+        "id": "7",
+        "label": "第7题",
+        "sourcePages": [
+          6,
+          7
+        ],
+        "src": "exams/6d1bd564fdcdc7f6/answers-v1/answer-7.webp",
+        "width": 884,
+        "height": 386,
+        "sha256": "e0807f0eed0fddbb41d27a2db6ced9cda56aa8b149a57510f11cfac674d76c16"
+      },
+      {
+        "id": "8",
+        "label": "第8题",
+        "sourcePages": [
+          7
+        ],
+        "src": "exams/6d1bd564fdcdc7f6/answers-v1/answer-8.webp",
+        "width": 1215,
+        "height": 666,
+        "sha256": "125c423362bea7ab077aa3aca8febe56d5d11b0bcdd697e599955c9cc95e14ad"
+      },
+      {
+        "id": "9",
+        "label": "第9题",
+        "sourcePages": [
+          7
+        ],
+        "src": "exams/6d1bd564fdcdc7f6/answers-v1/answer-9.webp",
+        "width": 1214,
+        "height": 345,
+        "sha256": "43dd3cb690ac257107e1d412e71104b18b9db3ea3db2141aa291b51fa7bae562"
+      },
+      {
+        "id": "10",
+        "label": "第10题",
+        "sourcePages": [
+          7,
+          8
+        ],
+        "src": "exams/6d1bd564fdcdc7f6/answers-v1/answer-10.webp",
+        "width": 1040,
+        "height": 477,
+        "sha256": "55a6d37166f8593b96029e66027ac4104844d69b47777faab60a46a1526f1709"
+      },
+      {
+        "id": "11",
+        "label": "第11题",
+        "sourcePages": [
+          8
+        ],
+        "src": "exams/6d1bd564fdcdc7f6/answers-v1/answer-11.webp",
+        "width": 945,
+        "height": 599,
+        "sha256": "183a673fc3e55b0aec43a2276076a620bddd709a989b8f826ff8b64ac48f0be2"
+      },
+      {
+        "id": "12",
+        "label": "第12题",
+        "sourcePages": [
+          8
+        ],
+        "src": "exams/6d1bd564fdcdc7f6/answers-v1/answer-12.webp",
+        "width": 954,
+        "height": 410,
+        "sha256": "9a61d55acc389593563390139777c902597ef13a270f7a562e368787bc224db4"
+      },
+      {
+        "id": "13",
+        "label": "第13题",
+        "sourcePages": [
+          8,
+          9
+        ],
+        "src": "exams/6d1bd564fdcdc7f6/answers-v1/answer-13.webp",
+        "width": 1116,
+        "height": 922,
+        "sha256": "c532aca16cef8125b6242ee8d795392cfbf36d8e016066269b1fee0080daa801"
+      }
+    ],
+    "answerSource": "https://easoncyy.github.io/posts/20261102-calculus-midterm-mock-2024-2025/"
   },
   "cacu_test/25-26微积分模拟.pdf": {
     "sha256": "db684d57560e6be0fb3de1cd75752bfa8f2a93e108720c7a91682ce2d383555e",
@@ -201,7 +639,168 @@
         "width": 1191,
         "height": 1684
       }
-    ]
+    ],
+    "answers": [
+      {
+        "id": "1",
+        "label": "第1题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/db684d57560e6be0/answers-v1/answer-1.webp",
+        "width": 1100,
+        "height": 388,
+        "sha256": "32e7353ddcdcd5d98a72f7eeb0f2363b71aff4b384fb4c80f8e8e1be6eda769d"
+      },
+      {
+        "id": "2",
+        "label": "第2题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/db684d57560e6be0/answers-v1/answer-2.webp",
+        "width": 1214,
+        "height": 331,
+        "sha256": "072cc26f08c4558e3c6473bd9eb82c8a3cfe67cc93d4824f4bdb04796e2c2520"
+      },
+      {
+        "id": "3",
+        "label": "第3题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/db684d57560e6be0/answers-v1/answer-3.webp",
+        "width": 1215,
+        "height": 217,
+        "sha256": "e395012a5870df4cb60f59b330d46876d0a10dc7f1cb447d6af95d5a34b825d6"
+      },
+      {
+        "id": "4",
+        "label": "第4题",
+        "sourcePages": [
+          5,
+          6
+        ],
+        "src": "exams/db684d57560e6be0/answers-v1/answer-4.webp",
+        "width": 1060,
+        "height": 495,
+        "sha256": "f19aaa0f915b0882dcbab1c2b028f2264be36f182b945e5551301a2c10d99b89"
+      },
+      {
+        "id": "5",
+        "label": "第5题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/db684d57560e6be0/answers-v1/answer-5.webp",
+        "width": 1214,
+        "height": 483,
+        "sha256": "b2c5a848bc318c01c651e715b55b5e09614d30eabd6aa687e036df2e0c0d5255"
+      },
+      {
+        "id": "6",
+        "label": "第6题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/db684d57560e6be0/answers-v1/answer-6.webp",
+        "width": 1214,
+        "height": 566,
+        "sha256": "be0b600d2f9570faddf9bb0b864eb72abe0cf73c01402d0d63701143eb5bf6e4"
+      },
+      {
+        "id": "7",
+        "label": "第7题",
+        "sourcePages": [
+          6,
+          7
+        ],
+        "src": "exams/db684d57560e6be0/answers-v1/answer-7.webp",
+        "width": 987,
+        "height": 627,
+        "sha256": "efd49de120648013e62a5c77bccc53e509e43440f05623abf192bde27662d6ba"
+      },
+      {
+        "id": "8",
+        "label": "第8题",
+        "sourcePages": [
+          7
+        ],
+        "src": "exams/db684d57560e6be0/answers-v1/answer-8.webp",
+        "width": 1215,
+        "height": 984,
+        "sha256": "5433042e3c8dcbb173e807b94f04494c6ecc8627418b2fe0378a3120e3aea1f8"
+      },
+      {
+        "id": "9",
+        "label": "第9题",
+        "sourcePages": [
+          7,
+          8
+        ],
+        "src": "exams/db684d57560e6be0/answers-v1/answer-9.webp",
+        "width": 1208,
+        "height": 684,
+        "sha256": "1a00c1b8dfcf255556028f9246e69fb5f4065a912379b2cd91277945824e3151"
+      },
+      {
+        "id": "10",
+        "label": "第10题",
+        "sourcePages": [
+          8
+        ],
+        "src": "exams/db684d57560e6be0/answers-v1/answer-10.webp",
+        "width": 984,
+        "height": 343,
+        "sha256": "f690b453411905353ea6e1c5fbb7e74c4d174cbbf3923fd03b47246df6a6957e"
+      },
+      {
+        "id": "11",
+        "label": "第11题",
+        "sourcePages": [
+          8
+        ],
+        "src": "exams/db684d57560e6be0/answers-v1/answer-11.webp",
+        "width": 1197,
+        "height": 538,
+        "sha256": "454de0efed25c74a659438c12201ef174201e4bef776f143dad7c337a80b8601"
+      },
+      {
+        "id": "12",
+        "label": "第12题",
+        "sourcePages": [
+          9
+        ],
+        "src": "exams/db684d57560e6be0/answers-v1/answer-12.webp",
+        "width": 945,
+        "height": 837,
+        "sha256": "4d30b4324457419e4514068594f2852b7369f47634ae1e5edd2352b2b24b886e"
+      },
+      {
+        "id": "13",
+        "label": "第13题",
+        "sourcePages": [
+          9,
+          10
+        ],
+        "src": "exams/db684d57560e6be0/answers-v1/answer-13.webp",
+        "width": 1215,
+        "height": 1139,
+        "sha256": "ad7c2a573ebfe57cf70b3256500df496d9b5ee9919e7d998a8b7255c270549c0"
+      },
+      {
+        "id": "14",
+        "label": "第14题",
+        "sourcePages": [
+          10
+        ],
+        "src": "exams/db684d57560e6be0/answers-v1/answer-14.webp",
+        "width": 1215,
+        "height": 670,
+        "sha256": "2742427110c771d584302fcc78b48b075c2a344bfb67b45b4edaa9e23eb28adf"
+      }
+    ],
+    "answerSource": "https://easoncyy.github.io/posts/20261102-calculus-midterm-mock-2025-2026/"
   },
   "cacu_test/25-26微积分真题.pdf": {
     "sha256": "f6210e53d5a1e65fa05f081f09a613a691d06170e8898ddcf2aeb88310f1d0f1",
@@ -262,7 +861,161 @@
         "width": 1190,
         "height": 1684
       }
-    ]
+    ],
+    "answers": [
+      {
+        "id": "1",
+        "label": "第1题",
+        "sourcePages": [
+          4
+        ],
+        "src": "exams/f6210e53d5a1e65f/answers-v1/answer-1.webp",
+        "width": 1920,
+        "height": 1154,
+        "sha256": "7f3baa175669816f59ee2782374b4f34308a56bd9af9182f9ab9f652d7c64fc1"
+      },
+      {
+        "id": "2",
+        "label": "第2题",
+        "sourcePages": [
+          4,
+          5
+        ],
+        "src": "exams/f6210e53d5a1e65f/answers-v1/answer-2.webp",
+        "width": 1920,
+        "height": 1320,
+        "sha256": "1ca64915070108ec0232c7028e2840fcef48dd213d2dcd8146130786afdd5cd1"
+      },
+      {
+        "id": "3",
+        "label": "第3题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/f6210e53d5a1e65f/answers-v1/answer-3.webp",
+        "width": 1920,
+        "height": 1146,
+        "sha256": "03cb5be67bbc75acae62595844fc0ddc33c6c78ebbe5a0ff8908b2f32a840571"
+      },
+      {
+        "id": "4",
+        "label": "第4题",
+        "sourcePages": [
+          5,
+          6
+        ],
+        "src": "exams/f6210e53d5a1e65f/answers-v1/answer-4.webp",
+        "width": 1920,
+        "height": 1032,
+        "sha256": "c423c1026b97b48d124c706b99f390b4627cd36ee59ffda930ba363025640e35"
+      },
+      {
+        "id": "5",
+        "label": "第5题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/f6210e53d5a1e65f/answers-v1/answer-5.webp",
+        "width": 1920,
+        "height": 1084,
+        "sha256": "58ca9baccade37d31a927d15fc926f373321f29ab8c7cdffb3027f786bc211de"
+      },
+      {
+        "id": "6",
+        "label": "第6题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/f6210e53d5a1e65f/answers-v1/answer-6.webp",
+        "width": 1920,
+        "height": 808,
+        "sha256": "0b45cfc53f257107bd7cae9d17557283c3e6eaf5a2267cd763451d93c4f5fb89"
+      },
+      {
+        "id": "7",
+        "label": "第7题",
+        "sourcePages": [
+          6,
+          7
+        ],
+        "src": "exams/f6210e53d5a1e65f/answers-v1/answer-7.webp",
+        "width": 1920,
+        "height": 1210,
+        "sha256": "f202ee0b06e6de152b2e7571b769a769c3efe46c4ae605d7c905b802880fe104"
+      },
+      {
+        "id": "8",
+        "label": "第8题",
+        "sourcePages": [
+          7
+        ],
+        "src": "exams/f6210e53d5a1e65f/answers-v1/answer-8.webp",
+        "width": 1920,
+        "height": 1276,
+        "sha256": "56136253850e83e6b197065eb9e06961385ab2385c775eb3716116c0e33dbe6f"
+      },
+      {
+        "id": "9",
+        "label": "第9题",
+        "sourcePages": [
+          7,
+          8
+        ],
+        "src": "exams/f6210e53d5a1e65f/answers-v1/answer-9.webp",
+        "width": 1920,
+        "height": 1228,
+        "sha256": "9c9c3a445e09ae7f18e686db2c68d85642a0935a6bdb0c9d38622f83c0b02219"
+      },
+      {
+        "id": "10",
+        "label": "第10题",
+        "sourcePages": [
+          8
+        ],
+        "src": "exams/f6210e53d5a1e65f/answers-v1/answer-10.webp",
+        "width": 1920,
+        "height": 890,
+        "sha256": "8713c7b8feca3cbf8be197fee3f449d3fb87b4711a96d65def75a4f3bc4f703d"
+      },
+      {
+        "id": "11",
+        "label": "第11题",
+        "sourcePages": [
+          8,
+          9
+        ],
+        "src": "exams/f6210e53d5a1e65f/answers-v1/answer-11.webp",
+        "width": 1920,
+        "height": 1254,
+        "sha256": "e2575282c995694417d5cd6ba1116a23c87da84c514886194377db9e6bee93e2"
+      },
+      {
+        "id": "12",
+        "label": "第12题",
+        "sourcePages": [
+          9
+        ],
+        "src": "exams/f6210e53d5a1e65f/answers-v1/answer-12.webp",
+        "width": 1920,
+        "height": 1096,
+        "sha256": "666eaee7dc4a716f07300aff8d8105b50a5c9f61fe2d2ef4c28591d415f6b0d1"
+      },
+      {
+        "id": "13",
+        "label": "第13题",
+        "sourcePages": [
+          9,
+          10,
+          11
+        ],
+        "src": "exams/f6210e53d5a1e65f/answers-v1/answer-13.webp",
+        "width": 1920,
+        "height": 1862,
+        "sha256": "9fa120fe13c9de96cbd5c4578413c5e62bfe23813937ad898164f096f198927e"
+      }
+    ],
+    "answerSource": "https://easoncyy.github.io/posts/20261027-calculus-midterm-2025-2026/",
+    "answerLicense": "exams/f6210e53d5a1e65f/answers-v1/LICENSE.txt"
   },
   "cacu_test/26-27微积分其中模拟.pdf": {
     "sha256": "7fc348199511e1bbd130a90fff19b3014b5e7b12287795530e009f2b2fbff709",
@@ -328,6 +1081,155 @@
         "width": 1191,
         "height": 1684
       }
+    ],
+    "answers": [
+      {
+        "id": "1",
+        "label": "第1题",
+        "sourcePages": [
+          8
+        ],
+        "src": "exams/7fc348199511e1bb/answers-v1/answer-1.webp",
+        "width": 1262,
+        "height": 538,
+        "sha256": "6a6ca839e88e227700d9c95baa656ade442dfd19ee064e52fb0f3a4f6c8d20a6"
+      },
+      {
+        "id": "2",
+        "label": "第2题",
+        "sourcePages": [
+          8,
+          9
+        ],
+        "src": "exams/7fc348199511e1bb/answers-v1/answer-2.webp",
+        "width": 1262,
+        "height": 658,
+        "sha256": "7fa1127e83551d55ea15555eb419c8a16185de7e3340dc5d367a0dea3ea924bd"
+      },
+      {
+        "id": "3",
+        "label": "第3题",
+        "sourcePages": [
+          9
+        ],
+        "src": "exams/7fc348199511e1bb/answers-v1/answer-3.webp",
+        "width": 1262,
+        "height": 658,
+        "sha256": "14bffff6aaf1ec34e40592fbd99019ec53c9c629ab36b7f81a05f7913d2ac3c3"
+      },
+      {
+        "id": "4",
+        "label": "第4题",
+        "sourcePages": [
+          9
+        ],
+        "src": "exams/7fc348199511e1bb/answers-v1/answer-4.webp",
+        "width": 1262,
+        "height": 537,
+        "sha256": "abd56efa6b72212034144c23bc15915690412f47bccf2c3870262fa3125b8bab"
+      },
+      {
+        "id": "5",
+        "label": "第5题",
+        "sourcePages": [
+          9,
+          10
+        ],
+        "src": "exams/7fc348199511e1bb/answers-v1/answer-5.webp",
+        "width": 1263,
+        "height": 739,
+        "sha256": "4f66ab5267882811978e1964f9ca79f299559286edc544877ef05e8d97365968"
+      },
+      {
+        "id": "6",
+        "label": "第6题",
+        "sourcePages": [
+          10
+        ],
+        "src": "exams/7fc348199511e1bb/answers-v1/answer-6.webp",
+        "width": 1262,
+        "height": 509,
+        "sha256": "ec02a54293c7f1f52747c52b1d39ebed19daf7562c3c21ae440f8539b12f63d2"
+      },
+      {
+        "id": "7",
+        "label": "第7题",
+        "sourcePages": [
+          10
+        ],
+        "src": "exams/7fc348199511e1bb/answers-v1/answer-7.webp",
+        "width": 1262,
+        "height": 559,
+        "sha256": "f28a65ec508b4b0baa9b9ecda7259a447cb58d29365f68bdba443bbdaa440793"
+      },
+      {
+        "id": "8",
+        "label": "第8题",
+        "sourcePages": [
+          10,
+          11
+        ],
+        "src": "exams/7fc348199511e1bb/answers-v1/answer-8.webp",
+        "width": 1260,
+        "height": 403,
+        "sha256": "8dfedf7c7ae8f41212f292ef7a2e3cea5a406c7571361fe7ae56889088aea25f"
+      },
+      {
+        "id": "9",
+        "label": "第9题",
+        "sourcePages": [
+          11
+        ],
+        "src": "exams/7fc348199511e1bb/answers-v1/answer-9.webp",
+        "width": 1260,
+        "height": 365,
+        "sha256": "855150901ce6410a4fcb399d212ac5713ec283cc06fd33e4eaf4edba0f06f981"
+      },
+      {
+        "id": "10",
+        "label": "第10题",
+        "sourcePages": [
+          11
+        ],
+        "src": "exams/7fc348199511e1bb/answers-v1/answer-10.webp",
+        "width": 1262,
+        "height": 480,
+        "sha256": "612bc3144d0a60c73ad421e759a06cff111429e4a92279f88c79a28fd72fde37"
+      },
+      {
+        "id": "11",
+        "label": "第11题",
+        "sourcePages": [
+          11,
+          12
+        ],
+        "src": "exams/7fc348199511e1bb/answers-v1/answer-11.webp",
+        "width": 1263,
+        "height": 544,
+        "sha256": "436f303f8bb73771ed2718ebb79aa6c249da7fc173c88b11a1a0dcff57fb0522"
+      },
+      {
+        "id": "12",
+        "label": "第12题",
+        "sourcePages": [
+          12
+        ],
+        "src": "exams/7fc348199511e1bb/answers-v1/answer-12.webp",
+        "width": 1278,
+        "height": 720,
+        "sha256": "5edac21cb3e0c92e50ea5b37e943dd68d494436f7c0932e6462f774416c1310c"
+      },
+      {
+        "id": "13",
+        "label": "第13题",
+        "sourcePages": [
+          12
+        ],
+        "src": "exams/7fc348199511e1bb/answers-v1/answer-13.webp",
+        "width": 1263,
+        "height": 523,
+        "sha256": "d8d7eeff70973b2f710fe8668413d425bb3a31c1a1ac933dd5a66f1ada2ccb0a"
+      }
     ]
   },
   "cacu_test/26-27微积分模拟（杨立）.pdf": {
@@ -374,7 +1276,154 @@
         "width": 1190,
         "height": 1684
       }
-    ]
+    ],
+    "answers": [
+      {
+        "id": "1",
+        "label": "第1题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/bf52bc13eb74d03f/answers-v1/answer-1.webp",
+        "width": 1920,
+        "height": 648,
+        "sha256": "07d8581f04f81255c4452c3e7c583a6b575f863e39470808a746391040f3f70a"
+      },
+      {
+        "id": "2",
+        "label": "第2题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/bf52bc13eb74d03f/answers-v1/answer-2.webp",
+        "width": 1920,
+        "height": 714,
+        "sha256": "593a9a904b7f8ff57bb6a8c5958ab81e276b178b57f774bd8f894f74a39af02b"
+      },
+      {
+        "id": "3",
+        "label": "第3题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/bf52bc13eb74d03f/answers-v1/answer-3.webp",
+        "width": 1920,
+        "height": 886,
+        "sha256": "361d76c4892381ee4907b2a808dc1116115b01795e5e31958609b9ae953617f1"
+      },
+      {
+        "id": "4",
+        "label": "第4题",
+        "sourcePages": [
+          5,
+          6
+        ],
+        "src": "exams/bf52bc13eb74d03f/answers-v1/answer-4.webp",
+        "width": 1920,
+        "height": 784,
+        "sha256": "f4745f002519becefa3eb5149ea37b3ea8e1f3bf9905fb4adecca0f94623365c"
+      },
+      {
+        "id": "5",
+        "label": "第5题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/bf52bc13eb74d03f/answers-v1/answer-5.webp",
+        "width": 1920,
+        "height": 954,
+        "sha256": "a50689cd281fc2cfb7308040f7f590ff46bf079c99e7c8270972399057ed3323"
+      },
+      {
+        "id": "6",
+        "label": "第6题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/bf52bc13eb74d03f/answers-v1/answer-6.webp",
+        "width": 1920,
+        "height": 884,
+        "sha256": "07d70c469526241d5ad33e21c21cd404a7fb8f0eba9ad668b892088ad36482a6"
+      },
+      {
+        "id": "7",
+        "label": "第7题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/bf52bc13eb74d03f/answers-v1/answer-7.webp",
+        "width": 1920,
+        "height": 348,
+        "sha256": "1971b962b2ddc36829e0d99a0c9687c1ec890129c453519563477788bac25547"
+      },
+      {
+        "id": "8",
+        "label": "第8题",
+        "sourcePages": [
+          7
+        ],
+        "src": "exams/bf52bc13eb74d03f/answers-v1/answer-8.webp",
+        "width": 1920,
+        "height": 860,
+        "sha256": "e6a6a529a0b05c874e9e8b607c69af80a63860e36647aa6d81935213c31d51fb"
+      },
+      {
+        "id": "9",
+        "label": "第9题",
+        "sourcePages": [
+          7
+        ],
+        "src": "exams/bf52bc13eb74d03f/answers-v1/answer-9.webp",
+        "width": 1920,
+        "height": 510,
+        "sha256": "79aaeb2c640e570444f81bef4825303a5c0f0b212f9e12d3655b4db996341e69"
+      },
+      {
+        "id": "10",
+        "label": "第10题",
+        "sourcePages": [
+          7
+        ],
+        "src": "exams/bf52bc13eb74d03f/answers-v1/answer-10.webp",
+        "width": 1920,
+        "height": 1324,
+        "sha256": "ef3c7d55b85adacf3eb57bc60cdce8bbba32360800a11a3b3c522a86eba98ce2"
+      },
+      {
+        "id": "11",
+        "label": "第11题",
+        "sourcePages": [
+          8
+        ],
+        "src": "exams/bf52bc13eb74d03f/answers-v1/answer-11.webp",
+        "width": 1920,
+        "height": 902,
+        "sha256": "835aa83c7baa2446ebb491e201977024355430bbdb6c150660c11680c8cee56f"
+      },
+      {
+        "id": "12",
+        "label": "第12题",
+        "sourcePages": [
+          8
+        ],
+        "src": "exams/bf52bc13eb74d03f/answers-v1/answer-12.webp",
+        "width": 1920,
+        "height": 960,
+        "sha256": "2c0bba266932c4ccf8055630fa32227b404b318a491ceece05018ae078d68842"
+      },
+      {
+        "id": "extra",
+        "label": "附加题",
+        "sourcePages": [
+          8
+        ],
+        "src": "exams/bf52bc13eb74d03f/answers-v1/answer-extra.webp",
+        "width": 1920,
+        "height": 762,
+        "sha256": "c337cdc9a5f7585cf559c33f3e3bddf9cb939639efd0e5b3cac28aadf8720e13"
+      }
+    ],
+    "answerSource": "https://easoncyy.github.io/posts/20261101-calculus-midterm-yangli-mock/"
   },
   "cacu_test/calculus-midterm-2022-2023-practice.pdf": {
     "sha256": "f5911a9954ed6970c1317ae78dee3c69e681b04430e1873f868952703d421d68",
@@ -435,7 +1484,180 @@
         "width": 1190,
         "height": 1684
       }
-    ]
+    ],
+    "answers": [
+      {
+        "id": "1",
+        "label": "第1题",
+        "sourcePages": [
+          4
+        ],
+        "src": "exams/f5911a9954ed6970/answers-v1/answer-1.webp",
+        "width": 1920,
+        "height": 930,
+        "sha256": "f077ee936b1ac37ff52486f259f6d48d2efae6435054a8906915b2dab1a59148"
+      },
+      {
+        "id": "2",
+        "label": "第2题",
+        "sourcePages": [
+          4
+        ],
+        "src": "exams/f5911a9954ed6970/answers-v1/answer-2.webp",
+        "width": 1920,
+        "height": 920,
+        "sha256": "df69b590ca648ca1a193b57551924ee7063fedbe7429c45a26feb9e3cadcec36"
+      },
+      {
+        "id": "3",
+        "label": "第3题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/f5911a9954ed6970/answers-v1/answer-3.webp",
+        "width": 1920,
+        "height": 652,
+        "sha256": "d884f10650980be784325c0f448aa43e1156323d03010a9c5c5cbf99be7657e0"
+      },
+      {
+        "id": "4",
+        "label": "第4题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/f5911a9954ed6970/answers-v1/answer-4.webp",
+        "width": 1920,
+        "height": 940,
+        "sha256": "3a447dc23ac8bfd5880d0deed9d7a93a2e8a13e7e868feb17ba93f07ed74a0f7"
+      },
+      {
+        "id": "5",
+        "label": "第5题",
+        "sourcePages": [
+          5,
+          6
+        ],
+        "src": "exams/f5911a9954ed6970/answers-v1/answer-5.webp",
+        "width": 1920,
+        "height": 1246,
+        "sha256": "40bd763f92e55a9896b0ad6daaa5593006a7818b9cab0f20e8b515668b0ed5a3"
+      },
+      {
+        "id": "6",
+        "label": "第6题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/f5911a9954ed6970/answers-v1/answer-6.webp",
+        "width": 1920,
+        "height": 882,
+        "sha256": "f1294ebda65157c2e27e826ff7639cc18b95bdcc1cb848bb2f6d787451f90739"
+      },
+      {
+        "id": "7",
+        "label": "第7题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/f5911a9954ed6970/answers-v1/answer-7.webp",
+        "width": 1920,
+        "height": 910,
+        "sha256": "8f99e6675bbd6769020bb2fea4d61432b8621f6c629ddafaa9f353a92598301c"
+      },
+      {
+        "id": "8",
+        "label": "第8题",
+        "sourcePages": [
+          7
+        ],
+        "src": "exams/f5911a9954ed6970/answers-v1/answer-8.webp",
+        "width": 1920,
+        "height": 1232,
+        "sha256": "b07d744a957af4b019ee98b5c618ea8e04eb15cb0871769277a3f6327b639cb2"
+      },
+      {
+        "id": "9",
+        "label": "第9题",
+        "sourcePages": [
+          7
+        ],
+        "src": "exams/f5911a9954ed6970/answers-v1/answer-9.webp",
+        "width": 1920,
+        "height": 1080,
+        "sha256": "82a2cdd1edc7709c0e8f4bddf4ef89a7ac4cd177de3eb6841462fd406673fbe9"
+      },
+      {
+        "id": "10",
+        "label": "第10题",
+        "sourcePages": [
+          8
+        ],
+        "src": "exams/f5911a9954ed6970/answers-v1/answer-10.webp",
+        "width": 1920,
+        "height": 922,
+        "sha256": "8914fb89d1490f09f80977079407c15947cc8727903fa97273de88d50c30894a"
+      },
+      {
+        "id": "11",
+        "label": "第11题",
+        "sourcePages": [
+          8
+        ],
+        "src": "exams/f5911a9954ed6970/answers-v1/answer-11.webp",
+        "width": 1920,
+        "height": 878,
+        "sha256": "d87fbfe8e101e080c35028a72972beac3b0c355de1954294f4c47a9b768ee9a0"
+      },
+      {
+        "id": "12",
+        "label": "第12题",
+        "sourcePages": [
+          8,
+          9
+        ],
+        "src": "exams/f5911a9954ed6970/answers-v1/answer-12.webp",
+        "width": 1920,
+        "height": 1182,
+        "sha256": "aa2d75200e9ec25905c9061250b0c5363e2d7f4a0f21834bbed3332258562f49"
+      },
+      {
+        "id": "13",
+        "label": "第13题",
+        "sourcePages": [
+          9
+        ],
+        "src": "exams/f5911a9954ed6970/answers-v1/answer-13.webp",
+        "width": 1920,
+        "height": 902,
+        "sha256": "87a39bb85fd328f1a94a3e4203038542e49876662be73834090af62d175a2866"
+      },
+      {
+        "id": "14",
+        "label": "第14题",
+        "sourcePages": [
+          9,
+          10
+        ],
+        "src": "exams/f5911a9954ed6970/answers-v1/answer-14.webp",
+        "width": 1920,
+        "height": 1016,
+        "sha256": "0f2a9efdc4553b92c978a50b017593c209637533f0e61f4c2e8f63502d1b96d7"
+      },
+      {
+        "id": "15",
+        "label": "第15题",
+        "sourcePages": [
+          10,
+          11
+        ],
+        "src": "exams/f5911a9954ed6970/answers-v1/answer-15.webp",
+        "width": 1920,
+        "height": 908,
+        "sha256": "675ea1993324474e134041bfcfa352e1527a842a1fdd7ab064fe2a551b37df96"
+      }
+    ],
+    "answerSource": "https://easoncyy.github.io/posts/20261027-calculus-midterm-2022-2023/",
+    "answerLicense": "exams/f5911a9954ed6970/answers-v1/LICENSE.txt"
   },
   "cacu_test/calculus-midterm-2023-2024-practice.pdf": {
     "sha256": "a5da23c03e2c00674d9afc53ae98e94d240eb17d2bb82003ed7227ccd0526139",
@@ -491,7 +1713,169 @@
         "width": 1190,
         "height": 1684
       }
-    ]
+    ],
+    "answers": [
+      {
+        "id": "1",
+        "label": "第1题",
+        "sourcePages": [
+          4
+        ],
+        "src": "exams/a5da23c03e2c0067/answers-v1/answer-1.webp",
+        "width": 1920,
+        "height": 846,
+        "sha256": "30abad2a9528e2ff34e558f37c98b7acf335b02ed785163b395d3010188b9fda"
+      },
+      {
+        "id": "2",
+        "label": "第2题",
+        "sourcePages": [
+          4
+        ],
+        "src": "exams/a5da23c03e2c0067/answers-v1/answer-2.webp",
+        "width": 1920,
+        "height": 908,
+        "sha256": "072ed4b3580451e95e9e42d86711c19bf45a0cb7a65c22d9149c89dc0fbd7710"
+      },
+      {
+        "id": "3",
+        "label": "第3题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/a5da23c03e2c0067/answers-v1/answer-3.webp",
+        "width": 1920,
+        "height": 842,
+        "sha256": "b32b214be80468c7e95c400beb8591039655749ffda91eef522af76995ec001b"
+      },
+      {
+        "id": "4",
+        "label": "第4题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/a5da23c03e2c0067/answers-v1/answer-4.webp",
+        "width": 1920,
+        "height": 736,
+        "sha256": "885fc528523baeeb92780a75eba70cc361f7c40a4a90484a534aa34a9075ef44"
+      },
+      {
+        "id": "5",
+        "label": "第5题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/a5da23c03e2c0067/answers-v1/answer-5.webp",
+        "width": 1920,
+        "height": 672,
+        "sha256": "2b3fd94ccdcaf6c7dd5fcabb788bd0e6abee72aabda82a3727f866dd075fb0be"
+      },
+      {
+        "id": "6",
+        "label": "第6题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/a5da23c03e2c0067/answers-v1/answer-6.webp",
+        "width": 1920,
+        "height": 878,
+        "sha256": "a9eae4a341dab151894a2e28745310a280ca09bcef9b9042ac7908f477b63604"
+      },
+      {
+        "id": "7",
+        "label": "第7题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/a5da23c03e2c0067/answers-v1/answer-7.webp",
+        "width": 1920,
+        "height": 936,
+        "sha256": "94db286ef94142081a20c75cd6a9c00ce3433bb9aa02b6a8a70d348ae95900c4"
+      },
+      {
+        "id": "8",
+        "label": "第8题",
+        "sourcePages": [
+          6,
+          7
+        ],
+        "src": "exams/a5da23c03e2c0067/answers-v1/answer-8.webp",
+        "width": 1920,
+        "height": 840,
+        "sha256": "bba24b59edd851190621ae751454c9bfa63c1b655056a390747f2990eb2be165"
+      },
+      {
+        "id": "9",
+        "label": "第9题",
+        "sourcePages": [
+          7
+        ],
+        "src": "exams/a5da23c03e2c0067/answers-v1/answer-9.webp",
+        "width": 1920,
+        "height": 1342,
+        "sha256": "58f0809a56b6d52a54f2611da99e3b12c4dfbcf2729c9a74d781b1fe43447498"
+      },
+      {
+        "id": "10",
+        "label": "第10题",
+        "sourcePages": [
+          7,
+          8
+        ],
+        "src": "exams/a5da23c03e2c0067/answers-v1/answer-10.webp",
+        "width": 1920,
+        "height": 904,
+        "sha256": "e50682aa6f44b9e1e07de78dcef6157723a0cd1986a9065c463d2cc110772288"
+      },
+      {
+        "id": "11",
+        "label": "第11题",
+        "sourcePages": [
+          8
+        ],
+        "src": "exams/a5da23c03e2c0067/answers-v1/answer-11.webp",
+        "width": 1920,
+        "height": 1022,
+        "sha256": "a661be0648f25617613f32088cd5c609d6aaf57ac49d3a72b9b35ce7926c52f9"
+      },
+      {
+        "id": "12",
+        "label": "第12题",
+        "sourcePages": [
+          8,
+          9
+        ],
+        "src": "exams/a5da23c03e2c0067/answers-v1/answer-12.webp",
+        "width": 1920,
+        "height": 1018,
+        "sha256": "de60dced72ceca12e9c22eb9df9b3d830eb1c8c5e8a695fc8743f6dc6499eefc"
+      },
+      {
+        "id": "13",
+        "label": "第13题",
+        "sourcePages": [
+          9
+        ],
+        "src": "exams/a5da23c03e2c0067/answers-v1/answer-13.webp",
+        "width": 1920,
+        "height": 990,
+        "sha256": "726976b3c1ba913077b1df432ffe99dca1eda2aca660a62c2ce6bb1df887fce4"
+      },
+      {
+        "id": "14",
+        "label": "第14题",
+        "sourcePages": [
+          9,
+          10
+        ],
+        "src": "exams/a5da23c03e2c0067/answers-v1/answer-14.webp",
+        "width": 1920,
+        "height": 1164,
+        "sha256": "9b89f8f1431f42b01142a4b39ff3a69f157f543d0031dc0f566bd01cf59490cf"
+      }
+    ],
+    "answerSource": "https://easoncyy.github.io/posts/20261027-calculus-midterm-2023-2024/",
+    "answerLicense": "exams/a5da23c03e2c0067/answers-v1/LICENSE.txt"
   },
   "cacu_test/calculus-midterm-2024-2025-practice.pdf": {
     "sha256": "a2ff1a888350e1ef45585864037cf7d73a2fac17dc0183f4d4506f54c0a25fd5",
@@ -542,7 +1926,157 @@
         "width": 1190,
         "height": 1684
       }
-    ]
+    ],
+    "answers": [
+      {
+        "id": "1",
+        "label": "第1题",
+        "sourcePages": [
+          4
+        ],
+        "src": "exams/a2ff1a888350e1ef/answers-v1/answer-1.webp",
+        "width": 1920,
+        "height": 900,
+        "sha256": "f4954df373da52ddf6dc142cf039bb0c0e42f7f74dada2d0a4942cf4abb2a6d8"
+      },
+      {
+        "id": "2",
+        "label": "第2题",
+        "sourcePages": [
+          4
+        ],
+        "src": "exams/a2ff1a888350e1ef/answers-v1/answer-2.webp",
+        "width": 1920,
+        "height": 1086,
+        "sha256": "4efca3f96c1187f7b23fa6a19ca9c0976d2dcff58e0d70fa587dc4526695cf58"
+      },
+      {
+        "id": "3",
+        "label": "第3题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/a2ff1a888350e1ef/answers-v1/answer-3.webp",
+        "width": 1920,
+        "height": 726,
+        "sha256": "1edb867d3fadd7231c0abd19bab592a0ac0df8e069f72a8f4c42b61de61d87e2"
+      },
+      {
+        "id": "4",
+        "label": "第4题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/a2ff1a888350e1ef/answers-v1/answer-4.webp",
+        "width": 1920,
+        "height": 672,
+        "sha256": "1a4617df433aedb2d8f85411861f4dc186cd762fdb893a434cff66b22a9ae7f9"
+      },
+      {
+        "id": "5",
+        "label": "第5题",
+        "sourcePages": [
+          5,
+          6
+        ],
+        "src": "exams/a2ff1a888350e1ef/answers-v1/answer-5.webp",
+        "width": 1920,
+        "height": 1176,
+        "sha256": "6831e872bc5c602ab1a7db1b2e2bd5d3399726b705ae48e60aed9f65806695d8"
+      },
+      {
+        "id": "6",
+        "label": "第6题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/a2ff1a888350e1ef/answers-v1/answer-6.webp",
+        "width": 1920,
+        "height": 904,
+        "sha256": "72c5650c7977aaf1afa2a56826b8db7f742066190a8fc07ddc8c6a0d6c523e2c"
+      },
+      {
+        "id": "7",
+        "label": "第7题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/a2ff1a888350e1ef/answers-v1/answer-7.webp",
+        "width": 1920,
+        "height": 750,
+        "sha256": "6e0df7afa26fa5761f7f05df9a4d777a5e6a04295f43f9600b87afc780e3f231"
+      },
+      {
+        "id": "8",
+        "label": "第8题",
+        "sourcePages": [
+          6,
+          7
+        ],
+        "src": "exams/a2ff1a888350e1ef/answers-v1/answer-8.webp",
+        "width": 1920,
+        "height": 808,
+        "sha256": "0b45cfc53f257107bd7cae9d17557283c3e6eaf5a2267cd763451d93c4f5fb89"
+      },
+      {
+        "id": "9",
+        "label": "第9题",
+        "sourcePages": [
+          7
+        ],
+        "src": "exams/a2ff1a888350e1ef/answers-v1/answer-9.webp",
+        "width": 1920,
+        "height": 960,
+        "sha256": "b0727b506323035e1c0a8cbf9b548b09ac72809e2d8a34323bccbb2b89b289a8"
+      },
+      {
+        "id": "10",
+        "label": "第10题",
+        "sourcePages": [
+          7
+        ],
+        "src": "exams/a2ff1a888350e1ef/answers-v1/answer-10.webp",
+        "width": 1920,
+        "height": 1110,
+        "sha256": "d34011a623026ecfa5cd9f6cbb2e021d8f34026e7b56e222ab92f28bd53fc0cc"
+      },
+      {
+        "id": "11",
+        "label": "第11题",
+        "sourcePages": [
+          8
+        ],
+        "src": "exams/a2ff1a888350e1ef/answers-v1/answer-11.webp",
+        "width": 1920,
+        "height": 904,
+        "sha256": "9fc4b99db9a09211c3d78168756770f9498135a74bd64f1fad6cc840d883bde3"
+      },
+      {
+        "id": "12",
+        "label": "第12题",
+        "sourcePages": [
+          8
+        ],
+        "src": "exams/a2ff1a888350e1ef/answers-v1/answer-12.webp",
+        "width": 1920,
+        "height": 890,
+        "sha256": "f64986632b70ee8aa23defb5df0c8a38d1b3fb57d00e26ecbe81286a43bb8689"
+      },
+      {
+        "id": "13",
+        "label": "第13题",
+        "sourcePages": [
+          8,
+          9
+        ],
+        "src": "exams/a2ff1a888350e1ef/answers-v1/answer-13.webp",
+        "width": 1920,
+        "height": 826,
+        "sha256": "a730cdb61e941a064c6385bca400ad25ca4b10f8e1d15cc5376019a1f40947b0"
+      }
+    ],
+    "answerSource": "https://easoncyy.github.io/posts/20261027-calculus-midterm-2024-2025/",
+    "answerLicense": "exams/a2ff1a888350e1ef/answers-v1/LICENSE.txt"
   },
   "linalg_test/16-17线性代数真题.pdf": {
     "sha256": "320158659e0ea5052aebecf28e233b8f1d19eece617caa5c7259ba6d38a24665",
@@ -583,7 +2117,91 @@
         "width": 1190,
         "height": 1684
       }
-    ]
+    ],
+    "answers": [
+      {
+        "id": "1",
+        "label": "第1题",
+        "sourcePages": [
+          3
+        ],
+        "src": "exams/320158659e0ea505/answers-v1/answer-1.webp",
+        "width": 1920,
+        "height": 1310,
+        "sha256": "e8bf4afa7286de24d4f198660ea0a4fad4f6c50ed9f02ace9cc78b8e84248aca"
+      },
+      {
+        "id": "2",
+        "label": "第2题",
+        "sourcePages": [
+          3,
+          4
+        ],
+        "src": "exams/320158659e0ea505/answers-v1/answer-2.webp",
+        "width": 1920,
+        "height": 1966,
+        "sha256": "f72139c5b6aa26967875f2e0fcc9dc1436e18c9f8450a7412cde4515290ba0f1"
+      },
+      {
+        "id": "3",
+        "label": "第3题",
+        "sourcePages": [
+          4
+        ],
+        "src": "exams/320158659e0ea505/answers-v1/answer-3.webp",
+        "width": 1920,
+        "height": 1478,
+        "sha256": "153014a69f7cc0cce9dc09d2184546cd6ee4973152f395c0b3852d4067c7863c"
+      },
+      {
+        "id": "4",
+        "label": "第4题",
+        "sourcePages": [
+          4,
+          5
+        ],
+        "src": "exams/320158659e0ea505/answers-v1/answer-4.webp",
+        "width": 1920,
+        "height": 1726,
+        "sha256": "0202cdeb0530eddb638b1c2e8f15f35c1981f2f31e084e16f65a5894bbc61405"
+      },
+      {
+        "id": "5",
+        "label": "第5题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/320158659e0ea505/answers-v1/answer-5.webp",
+        "width": 1920,
+        "height": 2340,
+        "sha256": "6f093b416e1402e0faf92e80fb310dc47681c7fe2f1ad664fdacfb8951ca6957"
+      },
+      {
+        "id": "6",
+        "label": "第6题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/320158659e0ea505/answers-v1/answer-6.webp",
+        "width": 1920,
+        "height": 1292,
+        "sha256": "320d969a6375a8bc55bf42e58a7791d2451c935a3c30666f9048cafb70b7d642"
+      },
+      {
+        "id": "7",
+        "label": "第7题",
+        "sourcePages": [
+          6,
+          7
+        ],
+        "src": "exams/320158659e0ea505/answers-v1/answer-7.webp",
+        "width": 1920,
+        "height": 2678,
+        "sha256": "e20a9b17c7312f3306166ab207df2efe3a8d5b54d4001cd8afc97b6cfaf23b70"
+      }
+    ],
+    "answerSource": "https://easoncyy.github.io/posts/20261027-linear-algebra-midterm-2016-2017/",
+    "answerLicense": "exams/320158659e0ea505/answers-v1/LICENSE.txt"
   },
   "linalg_test/17-18线性代数真题.pdf": {
     "sha256": "d82e909b89d2d7ee19fe2fed126e7a54400232a2d201e8202cfe530dd8119b07",
@@ -624,7 +2242,92 @@
         "width": 1190,
         "height": 1684
       }
-    ]
+    ],
+    "answers": [
+      {
+        "id": "1",
+        "label": "第1题",
+        "sourcePages": [
+          3,
+          4
+        ],
+        "src": "exams/d82e909b89d2d7ee/answers-v1/answer-1.webp",
+        "width": 1920,
+        "height": 3764,
+        "sha256": "49fd6de0699cc1d78bef22731abee6743a25d26cc43df8f18221dc8991712b7f"
+      },
+      {
+        "id": "2",
+        "label": "第2题",
+        "sourcePages": [
+          4
+        ],
+        "src": "exams/d82e909b89d2d7ee/answers-v1/answer-2.webp",
+        "width": 1920,
+        "height": 1962,
+        "sha256": "0d5f37263a68d1cf439c657e088b2f2b6bd7824aaed2ebf72688510167ceaadf"
+      },
+      {
+        "id": "3",
+        "label": "第3题",
+        "sourcePages": [
+          4,
+          5
+        ],
+        "src": "exams/d82e909b89d2d7ee/answers-v1/answer-3.webp",
+        "width": 1920,
+        "height": 1702,
+        "sha256": "872f6dd01176d8240fa325f0c927ad002e5b0351a93f877590116cca508c0c0a"
+      },
+      {
+        "id": "4",
+        "label": "第4题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/d82e909b89d2d7ee/answers-v1/answer-4.webp",
+        "width": 1920,
+        "height": 1060,
+        "sha256": "bf060f3573e3ebe50858996ad3ba913d7128552b087c4697cd109e18db9b6e54"
+      },
+      {
+        "id": "5",
+        "label": "第5题",
+        "sourcePages": [
+          5,
+          6
+        ],
+        "src": "exams/d82e909b89d2d7ee/answers-v1/answer-5.webp",
+        "width": 1920,
+        "height": 1196,
+        "sha256": "0224c036f136b26ae6d1ccab88d7aee99dd681a9ce6e70121e3f3316e27133e3"
+      },
+      {
+        "id": "6",
+        "label": "第6题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/d82e909b89d2d7ee/answers-v1/answer-6.webp",
+        "width": 1920,
+        "height": 1222,
+        "sha256": "304badc749c55461a5cc5d3c0ac721a9a4f7bbf59b796607b28108d55a071abb"
+      },
+      {
+        "id": "7",
+        "label": "第7题",
+        "sourcePages": [
+          6,
+          7
+        ],
+        "src": "exams/d82e909b89d2d7ee/answers-v1/answer-7.webp",
+        "width": 1920,
+        "height": 2336,
+        "sha256": "2fa51486be6039e60a60b97c00f586407cbf20dda3d74b31c0f4ec9ec11621b6"
+      }
+    ],
+    "answerSource": "https://easoncyy.github.io/posts/20261027-linear-algebra-midterm-2017-2018/",
+    "answerLicense": "exams/d82e909b89d2d7ee/answers-v1/LICENSE.txt"
   },
   "linalg_test/18-19线性代数真题.pdf": {
     "sha256": "d054644263283b2abb6eeaad36147c53116d35170bb9e917a3139fa65c79085a",
@@ -665,7 +2368,100 @@
         "width": 1190,
         "height": 1684
       }
-    ]
+    ],
+    "answers": [
+      {
+        "id": "1",
+        "label": "第1题",
+        "sourcePages": [
+          3
+        ],
+        "src": "exams/d054644263283b2a/answers-v1/answer-1.webp",
+        "width": 1920,
+        "height": 1014,
+        "sha256": "1d0b526ecbd70d13533c4589013bd513c44b326dd60aeaffb0dcc9715df91b9b"
+      },
+      {
+        "id": "2",
+        "label": "第2题",
+        "sourcePages": [
+          3
+        ],
+        "src": "exams/d054644263283b2a/answers-v1/answer-2.webp",
+        "width": 1920,
+        "height": 1282,
+        "sha256": "a9467fd4b59f90c46f2414b5b2293c1aa5c94265c3edb3b2ba974367e49e7e78"
+      },
+      {
+        "id": "3",
+        "label": "第3题",
+        "sourcePages": [
+          4
+        ],
+        "src": "exams/d054644263283b2a/answers-v1/answer-3.webp",
+        "width": 1920,
+        "height": 2032,
+        "sha256": "404bfdc8d4fb8e01bffcf01cc443324a249227929a4d747d1aab763bb68fdb9f"
+      },
+      {
+        "id": "4",
+        "label": "第4题",
+        "sourcePages": [
+          4
+        ],
+        "src": "exams/d054644263283b2a/answers-v1/answer-4.webp",
+        "width": 1920,
+        "height": 1152,
+        "sha256": "cdaff099770e283c274a12f87a04b3fed763412d979da6516e0e37dafa9a3820"
+      },
+      {
+        "id": "5",
+        "label": "第5题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/d054644263283b2a/answers-v1/answer-5.webp",
+        "width": 1920,
+        "height": 2186,
+        "sha256": "5c851fa215e9dea681ca36bd947855533b504c016a15899bbd7bc891775845bd"
+      },
+      {
+        "id": "6",
+        "label": "第6题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/d054644263283b2a/answers-v1/answer-6.webp",
+        "width": 1920,
+        "height": 1286,
+        "sha256": "c9c4fc8069afac37217456e85e2084f2cd34f31468b515e231e688a6ccc74183"
+      },
+      {
+        "id": "7",
+        "label": "第7题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/d054644263283b2a/answers-v1/answer-7.webp",
+        "width": 1920,
+        "height": 1160,
+        "sha256": "cc5d0b649c6400a006c305a9e9af3f9d6b67938059cd208a212bf52e59b4d125"
+      },
+      {
+        "id": "8",
+        "label": "第8题",
+        "sourcePages": [
+          6,
+          7
+        ],
+        "src": "exams/d054644263283b2a/answers-v1/answer-8.webp",
+        "width": 1920,
+        "height": 780,
+        "sha256": "7fa3512a763ceccf0fac09e6cd45a8ec0a646101a1c58b7a8e60a0103a75f53c"
+      }
+    ],
+    "answerSource": "https://easoncyy.github.io/posts/20261027-linear-algebra-midterm-2018-2019/",
+    "answerLicense": "exams/d054644263283b2a/answers-v1/LICENSE.txt"
   },
   "linalg_test/19-20线性代数真题.pdf": {
     "sha256": "19a9baac55a9ec4cc33f4801e4a3360391f134fdb869a5fc5879ec63cb48db5b",
@@ -711,7 +2507,102 @@
         "width": 1190,
         "height": 1684
       }
-    ]
+    ],
+    "answers": [
+      {
+        "id": "1",
+        "label": "第1题",
+        "sourcePages": [
+          4
+        ],
+        "src": "exams/19a9baac55a9ec4c/answers-v1/answer-1.webp",
+        "width": 1920,
+        "height": 1162,
+        "sha256": "69973d8dfc2439d6d50d954957be25a5fbbeb64ec8f7f734eb906bd56eb2fac9"
+      },
+      {
+        "id": "2",
+        "label": "第2题",
+        "sourcePages": [
+          4
+        ],
+        "src": "exams/19a9baac55a9ec4c/answers-v1/answer-2.webp",
+        "width": 1920,
+        "height": 1410,
+        "sha256": "8275b79cb0ed0fbd10d2fe6ee81723ce0a7e115888e475d446208645db4d290c"
+      },
+      {
+        "id": "3",
+        "label": "第3题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/19a9baac55a9ec4c/answers-v1/answer-3.webp",
+        "width": 1920,
+        "height": 1704,
+        "sha256": "99595247702620259616091f8816bf7537d8bf1127394e94c553e4b75f0a7e5d"
+      },
+      {
+        "id": "4",
+        "label": "第4题",
+        "sourcePages": [
+          5,
+          6
+        ],
+        "src": "exams/19a9baac55a9ec4c/answers-v1/answer-4.webp",
+        "width": 1920,
+        "height": 1804,
+        "sha256": "6618177f43dd08d0179331db6a00f3783dac0412795f70ee68ac26a084b9209d"
+      },
+      {
+        "id": "5",
+        "label": "第5题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/19a9baac55a9ec4c/answers-v1/answer-5.webp",
+        "width": 1920,
+        "height": 2536,
+        "sha256": "c7bc9d3158a0da62565eeab533eeb41d71607cc881daa003e29fe1d19f15c500"
+      },
+      {
+        "id": "6",
+        "label": "第6题",
+        "sourcePages": [
+          6,
+          7
+        ],
+        "src": "exams/19a9baac55a9ec4c/answers-v1/answer-6.webp",
+        "width": 1920,
+        "height": 1076,
+        "sha256": "94ca08df4001b57f1a17fbce0a1f25c44f2e7aef77b957e7548859a89e016165"
+      },
+      {
+        "id": "7",
+        "label": "第7题",
+        "sourcePages": [
+          7
+        ],
+        "src": "exams/19a9baac55a9ec4c/answers-v1/answer-7.webp",
+        "width": 1920,
+        "height": 808,
+        "sha256": "3ea95a4ad72b17cf098da05474ee2d7178916a6ce1e47e20ff817cc7d1a3383e"
+      },
+      {
+        "id": "8",
+        "label": "第8题",
+        "sourcePages": [
+          7,
+          8
+        ],
+        "src": "exams/19a9baac55a9ec4c/answers-v1/answer-8.webp",
+        "width": 1920,
+        "height": 1034,
+        "sha256": "91a86e691e9e211f7799ff0a8e1bed0142407b83a06c6c85b31c33f96f03be0a"
+      }
+    ],
+    "answerSource": "https://easoncyy.github.io/posts/20261027-linear-algebra-midterm-2019-2020/",
+    "answerLicense": "exams/19a9baac55a9ec4c/answers-v1/LICENSE.txt"
   },
   "linalg_test/20-21线性代数真题.pdf": {
     "sha256": "7847ee5087d462805158ec4bf046beac51ae59892e5602262610975ed0672f19",
@@ -757,7 +2648,103 @@
         "width": 1190,
         "height": 1684
       }
-    ]
+    ],
+    "answers": [
+      {
+        "id": "1",
+        "label": "第1题",
+        "sourcePages": [
+          4
+        ],
+        "src": "exams/7847ee5087d46280/answers-v1/answer-1.webp",
+        "width": 1920,
+        "height": 1164,
+        "sha256": "156be7c306eeb23a584318cd8a5e294adaac26a33f20f7cd9c39707be88991c9"
+      },
+      {
+        "id": "2",
+        "label": "第2题",
+        "sourcePages": [
+          4,
+          5
+        ],
+        "src": "exams/7847ee5087d46280/answers-v1/answer-2.webp",
+        "width": 1920,
+        "height": 1532,
+        "sha256": "fbb52eeb27b6ea3417bc7003be2989270468fed580bc0c6bb0fb420a7d426409"
+      },
+      {
+        "id": "3",
+        "label": "第3题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/7847ee5087d46280/answers-v1/answer-3.webp",
+        "width": 1920,
+        "height": 1402,
+        "sha256": "a4ae5db79e9e4c6bc1532e378c15ab85ad7274754cb0cf72bc4db1429934c9fb"
+      },
+      {
+        "id": "4",
+        "label": "第4题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/7847ee5087d46280/answers-v1/answer-4.webp",
+        "width": 1920,
+        "height": 1084,
+        "sha256": "f03be82f321aee329633bceab6cc2c37c7664dd871ff082b6071eb1da5a724b0"
+      },
+      {
+        "id": "5",
+        "label": "第5题",
+        "sourcePages": [
+          5,
+          6
+        ],
+        "src": "exams/7847ee5087d46280/answers-v1/answer-5.webp",
+        "width": 1920,
+        "height": 2502,
+        "sha256": "5e294fb79ecb18a142c13248ef534ec2823af5bf246ebb5a22fa023e16014b14"
+      },
+      {
+        "id": "6",
+        "label": "第6题",
+        "sourcePages": [
+          6,
+          7
+        ],
+        "src": "exams/7847ee5087d46280/answers-v1/answer-6.webp",
+        "width": 1920,
+        "height": 1930,
+        "sha256": "75711ad823e8463e195f1d5da2b67dfbde1de617fe7561ac6bf7d852e34dcc49"
+      },
+      {
+        "id": "7",
+        "label": "第7题",
+        "sourcePages": [
+          7
+        ],
+        "src": "exams/7847ee5087d46280/answers-v1/answer-7.webp",
+        "width": 1920,
+        "height": 1210,
+        "sha256": "bf7afa3811a4894bf0d8fceb6b08aca8e1c03e16beca426580f43abea4f74f85"
+      },
+      {
+        "id": "8",
+        "label": "第8题",
+        "sourcePages": [
+          7,
+          8
+        ],
+        "src": "exams/7847ee5087d46280/answers-v1/answer-8.webp",
+        "width": 1920,
+        "height": 948,
+        "sha256": "6089ff5a50814af9006f3be82ca934449f814d27d3fc41419a78b724b59aa4b9"
+      }
+    ],
+    "answerSource": "https://easoncyy.github.io/posts/20261027-linear-algebra-midterm-2020-2021/",
+    "answerLicense": "exams/7847ee5087d46280/answers-v1/LICENSE.txt"
   },
   "linalg_test/21-22线性代数真题.pdf": {
     "sha256": "129009264a704f60ee7d04572afcdf609237c2fe0510bfa989a8a330bf59acd3",
@@ -813,7 +2800,103 @@
         "width": 1190,
         "height": 1684
       }
-    ]
+    ],
+    "answers": [
+      {
+        "id": "1",
+        "label": "第1题",
+        "sourcePages": [
+          4
+        ],
+        "src": "exams/129009264a704f60/answers-v1/answer-1.webp",
+        "width": 1920,
+        "height": 1784,
+        "sha256": "7213a5e3eaebf995310d1c02bd4a01ec0dd33d7e4208da22600c516bb36b4700"
+      },
+      {
+        "id": "2",
+        "label": "第2题",
+        "sourcePages": [
+          4,
+          5
+        ],
+        "src": "exams/129009264a704f60/answers-v1/answer-2.webp",
+        "width": 1920,
+        "height": 2590,
+        "sha256": "c2a759a2552936df4b9d3d357c63763f44a0e131c65e3f89ecb1b8659c11995d"
+      },
+      {
+        "id": "3",
+        "label": "第3题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/129009264a704f60/answers-v1/answer-3.webp",
+        "width": 1920,
+        "height": 1328,
+        "sha256": "7a84198beed7f7a7efe555c07fddac717e7458a4d86b32fc9e959a187dfbcc2b"
+      },
+      {
+        "id": "4",
+        "label": "第4题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/129009264a704f60/answers-v1/answer-4.webp",
+        "width": 1920,
+        "height": 2702,
+        "sha256": "b52ca1fc6a45f3d744425c918d634efbd76d06f84f596706d20a7ee06bc0d023"
+      },
+      {
+        "id": "5",
+        "label": "第5题",
+        "sourcePages": [
+          6,
+          7
+        ],
+        "src": "exams/129009264a704f60/answers-v1/answer-5.webp",
+        "width": 1920,
+        "height": 1740,
+        "sha256": "906630d47ff1ba272649d38d9690b690e36489bd6040b0faee414ccb326f8d78"
+      },
+      {
+        "id": "6",
+        "label": "第6题",
+        "sourcePages": [
+          7,
+          8
+        ],
+        "src": "exams/129009264a704f60/answers-v1/answer-6.webp",
+        "width": 1920,
+        "height": 4072,
+        "sha256": "a40a0ed93cb3df9fb929e77a921f5de7206e4a0a837b2f76dfedbe3805783603"
+      },
+      {
+        "id": "7",
+        "label": "第7题",
+        "sourcePages": [
+          8
+        ],
+        "src": "exams/129009264a704f60/answers-v1/answer-7.webp",
+        "width": 1920,
+        "height": 808,
+        "sha256": "70c5d3f05d37a3ac9ed8a415ef28bff4fa98b5d8eb28c2cf588aa0bd7b67b2f6"
+      },
+      {
+        "id": "8",
+        "label": "第8题",
+        "sourcePages": [
+          9,
+          10
+        ],
+        "src": "exams/129009264a704f60/answers-v1/answer-8.webp",
+        "width": 1920,
+        "height": 1810,
+        "sha256": "5e9df7fa18691ee5be28c79964cc6951aa9f947dd666fb6fbcbe080621ae20c6"
+      }
+    ],
+    "answerSource": "https://easoncyy.github.io/posts/20261027-linear-algebra-midterm-2021-2022/",
+    "answerLicense": "exams/129009264a704f60/answers-v1/LICENSE.txt"
   },
   "linalg_test/22-23线性代数真题.pdf": {
     "sha256": "2ea099a89779e68d1ddba1c93868af974eb67fba9f1f51c6c721fe32ef93da5f",
@@ -864,7 +2947,104 @@
         "width": 1190,
         "height": 1684
       }
-    ]
+    ],
+    "answers": [
+      {
+        "id": "1",
+        "label": "第1题",
+        "sourcePages": [
+          4
+        ],
+        "src": "exams/2ea099a89779e68d/answers-v1/answer-1.webp",
+        "width": 1920,
+        "height": 1432,
+        "sha256": "18a9b7c1c73a98f5803ba84aeade8be17f152dce8998ef0fa237b93b9361f7d6"
+      },
+      {
+        "id": "2",
+        "label": "第2题",
+        "sourcePages": [
+          4,
+          5
+        ],
+        "src": "exams/2ea099a89779e68d/answers-v1/answer-2.webp",
+        "width": 1920,
+        "height": 2386,
+        "sha256": "69f00279a890bb93103a4a3fc0e272991389aa30f503e46f5419bef9134ae233"
+      },
+      {
+        "id": "3",
+        "label": "第3题",
+        "sourcePages": [
+          5,
+          6
+        ],
+        "src": "exams/2ea099a89779e68d/answers-v1/answer-3.webp",
+        "width": 1920,
+        "height": 2478,
+        "sha256": "f4d9e3ef10a0bc5325599d057028d345f49c24d330ce9a26b0b8ddca4f46668e"
+      },
+      {
+        "id": "4",
+        "label": "第4题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/2ea099a89779e68d/answers-v1/answer-4.webp",
+        "width": 1920,
+        "height": 1632,
+        "sha256": "dd06a590edb775824539322f699f070bf77e64e1d7da624bc8eab8c14177ee9a"
+      },
+      {
+        "id": "5",
+        "label": "第5题",
+        "sourcePages": [
+          6,
+          7
+        ],
+        "src": "exams/2ea099a89779e68d/answers-v1/answer-5.webp",
+        "width": 1920,
+        "height": 1996,
+        "sha256": "1da6d333a015631898f1327a05cdacebf1140a44fdb378abe7300fb37ef969df"
+      },
+      {
+        "id": "6",
+        "label": "第6题",
+        "sourcePages": [
+          7
+        ],
+        "src": "exams/2ea099a89779e68d/answers-v1/answer-6.webp",
+        "width": 1920,
+        "height": 2114,
+        "sha256": "609d4997063d089ecc46fcbe41cbcc1ab87a7f3a3e9abf90e6e854ecf531b8a7"
+      },
+      {
+        "id": "7",
+        "label": "第7题",
+        "sourcePages": [
+          7,
+          8
+        ],
+        "src": "exams/2ea099a89779e68d/answers-v1/answer-7.webp",
+        "width": 1920,
+        "height": 898,
+        "sha256": "153e94d52ee90d5444347d3905e67fa37201979865dc640c59bf8ac0bbaab38f"
+      },
+      {
+        "id": "8",
+        "label": "第8题",
+        "sourcePages": [
+          8,
+          9
+        ],
+        "src": "exams/2ea099a89779e68d/answers-v1/answer-8.webp",
+        "width": 1920,
+        "height": 1592,
+        "sha256": "e20a4fe1561a6449e73ab6fc8dc1aec972a8fcc4d2a2e55a07cbbbd47eb80e50"
+      }
+    ],
+    "answerSource": "https://easoncyy.github.io/posts/20261027-linear-algebra-midterm-2022-2023/",
+    "answerLicense": "exams/2ea099a89779e68d/answers-v1/LICENSE.txt"
   },
   "linalg_test/24-25线性代数真题.pdf": {
     "sha256": "d6acda836cd6dcd4868746018a83532028e001c4a3fde1f09eb6351bbb1a5ed2",
@@ -960,7 +3140,251 @@
         "width": 1190,
         "height": 1684
       }
-    ]
+    ],
+    "answers": [
+      {
+        "id": "1",
+        "label": "第1题",
+        "sourcePages": [
+          7
+        ],
+        "src": "exams/d6acda836cd6dcd4/answers-v1/answer-1.webp",
+        "width": 1920,
+        "height": 2154,
+        "sha256": "6ef6df6245e2b54a39fd5d120757adaaf9507ceaef075358a76581676e1ad77c"
+      },
+      {
+        "id": "2",
+        "label": "第2题",
+        "sourcePages": [
+          7,
+          8
+        ],
+        "src": "exams/d6acda836cd6dcd4/answers-v1/answer-2.webp",
+        "width": 1920,
+        "height": 776,
+        "sha256": "50bbd4ac5c9f4b0d278d358c562d5b415b818bcee97db651b4f96afbd4ab39c3"
+      },
+      {
+        "id": "3",
+        "label": "第3题",
+        "sourcePages": [
+          8
+        ],
+        "src": "exams/d6acda836cd6dcd4/answers-v1/answer-3.webp",
+        "width": 1920,
+        "height": 1060,
+        "sha256": "cecc0592211b6da444bf24b11aa9a81b4261a16753ef8922bc53000e1a312e5b"
+      },
+      {
+        "id": "4",
+        "label": "第4题",
+        "sourcePages": [
+          8,
+          9
+        ],
+        "src": "exams/d6acda836cd6dcd4/answers-v1/answer-4.webp",
+        "width": 1920,
+        "height": 1944,
+        "sha256": "9e9ac444d1bd0287981e700f8f33b329465a48e92083312b8acf21e843c89ae4"
+      },
+      {
+        "id": "5",
+        "label": "第5题",
+        "sourcePages": [
+          9
+        ],
+        "src": "exams/d6acda836cd6dcd4/answers-v1/answer-5.webp",
+        "width": 1920,
+        "height": 808,
+        "sha256": "5417a2c7d333f70a9335f1624e0850d63a12ba05ca5a9a751e4469101bde5dcf"
+      },
+      {
+        "id": "6",
+        "label": "第6题",
+        "sourcePages": [
+          9
+        ],
+        "src": "exams/d6acda836cd6dcd4/answers-v1/answer-6.webp",
+        "width": 1920,
+        "height": 1294,
+        "sha256": "e6020a690bbea8bd18cb2d63e5b9cba7effc06fd7f2cbc5c6966b519ef00fda9"
+      },
+      {
+        "id": "7",
+        "label": "第7题",
+        "sourcePages": [
+          9,
+          10
+        ],
+        "src": "exams/d6acda836cd6dcd4/answers-v1/answer-7.webp",
+        "width": 1920,
+        "height": 838,
+        "sha256": "1195e7ff154f59ef80e59b1017fdbcdcc5dc97a7c56fc146f9db881867a7ae93"
+      },
+      {
+        "id": "8",
+        "label": "第8题",
+        "sourcePages": [
+          10
+        ],
+        "src": "exams/d6acda836cd6dcd4/answers-v1/answer-8.webp",
+        "width": 1920,
+        "height": 1736,
+        "sha256": "9d0f5a617d2aca1d2e66dc247313502e22f2ecd501c689732504d41a8eaffb69"
+      },
+      {
+        "id": "9",
+        "label": "第9题",
+        "sourcePages": [
+          10,
+          11
+        ],
+        "src": "exams/d6acda836cd6dcd4/answers-v1/answer-9.webp",
+        "width": 1920,
+        "height": 1826,
+        "sha256": "eecb1f8b10f07aba8609352df3ad2a27312879ab3f3a954f5d0330ba4ecdd31a"
+      },
+      {
+        "id": "10",
+        "label": "第10题",
+        "sourcePages": [
+          11
+        ],
+        "src": "exams/d6acda836cd6dcd4/answers-v1/answer-10.webp",
+        "width": 1920,
+        "height": 1244,
+        "sha256": "d0dd7909cb3904618100ab41abc20e9bed86028131e4434a935a18b130672bd5"
+      },
+      {
+        "id": "11",
+        "label": "第11题",
+        "sourcePages": [
+          11
+        ],
+        "src": "exams/d6acda836cd6dcd4/answers-v1/answer-11.webp",
+        "width": 1920,
+        "height": 878,
+        "sha256": "1f77f1e4989eca6e4934a2352b16b9464e0a2757d867818d98e6441061fd0191"
+      },
+      {
+        "id": "12",
+        "label": "第12题",
+        "sourcePages": [
+          11,
+          12
+        ],
+        "src": "exams/d6acda836cd6dcd4/answers-v1/answer-12.webp",
+        "width": 1920,
+        "height": 946,
+        "sha256": "34f359517ef5d0fe3047d35d6eec63d6f03f054408b64813b4c0f3772042c010"
+      },
+      {
+        "id": "13",
+        "label": "第13题",
+        "sourcePages": [
+          12
+        ],
+        "src": "exams/d6acda836cd6dcd4/answers-v1/answer-13.webp",
+        "width": 1920,
+        "height": 1228,
+        "sha256": "abf341260d4368b93e5960fbfa1a68b2522a2e5788956116508be76adc63daef"
+      },
+      {
+        "id": "14",
+        "label": "第14题",
+        "sourcePages": [
+          12,
+          13
+        ],
+        "src": "exams/d6acda836cd6dcd4/answers-v1/answer-14.webp",
+        "width": 1920,
+        "height": 2170,
+        "sha256": "9f5a169f9bedf7bbb97ecebc2e9b77526f256a17ec1c01f39dfde1258d186624"
+      },
+      {
+        "id": "15",
+        "label": "第15题",
+        "sourcePages": [
+          13
+        ],
+        "src": "exams/d6acda836cd6dcd4/answers-v1/answer-15.webp",
+        "width": 1920,
+        "height": 2414,
+        "sha256": "96c2d1ae93c3e64eb0d78949295887aa8ea084ac13050676863f43d90a32c36c"
+      },
+      {
+        "id": "16",
+        "label": "第16题",
+        "sourcePages": [
+          14
+        ],
+        "src": "exams/d6acda836cd6dcd4/answers-v1/answer-16.webp",
+        "width": 1920,
+        "height": 2062,
+        "sha256": "0a8bbf8b530f057d07af15061525f95657fd530c68147f9d5c04d9ae5a2d6a46"
+      },
+      {
+        "id": "17",
+        "label": "第17题",
+        "sourcePages": [
+          14
+        ],
+        "src": "exams/d6acda836cd6dcd4/answers-v1/answer-17.webp",
+        "width": 1920,
+        "height": 960,
+        "sha256": "57016e7f75ffe00794ae9a393443a8899e38a30dad08c9d72e10b4027b39044b"
+      },
+      {
+        "id": "18",
+        "label": "第18题",
+        "sourcePages": [
+          15
+        ],
+        "src": "exams/d6acda836cd6dcd4/answers-v1/answer-18.webp",
+        "width": 1920,
+        "height": 2334,
+        "sha256": "056b33b0f1c1ee70ae7be9c019e982b1af8da427c997e116aea60882a19fc948"
+      },
+      {
+        "id": "19",
+        "label": "第19题",
+        "sourcePages": [
+          15,
+          16
+        ],
+        "src": "exams/d6acda836cd6dcd4/answers-v1/answer-19.webp",
+        "width": 1920,
+        "height": 1814,
+        "sha256": "e586ef32c1ee336f006b1dbc96508a572dc142de2e9303d8820dcc73609a730d"
+      },
+      {
+        "id": "20",
+        "label": "第20题",
+        "sourcePages": [
+          16,
+          17
+        ],
+        "src": "exams/d6acda836cd6dcd4/answers-v1/answer-20.webp",
+        "width": 1920,
+        "height": 2334,
+        "sha256": "84ce936ab1c672f1fd97958676046e99428d81061a78fe96156718668457c6dc"
+      },
+      {
+        "id": "21",
+        "label": "第21题",
+        "sourcePages": [
+          17,
+          18
+        ],
+        "src": "exams/d6acda836cd6dcd4/answers-v1/answer-21.webp",
+        "width": 1920,
+        "height": 1474,
+        "sha256": "0f1f34486862637811c80d9dbfffef3c69d23036922ac94f76804d5f64b3edce"
+      }
+    ],
+    "answerSource": "https://easoncyy.github.io/posts/20261027-linear-algebra-midterm-2024-2025/",
+    "answerLicense": "exams/d6acda836cd6dcd4/answers-v1/LICENSE.txt"
   },
   "linalg_test/25-26线性代数真题.pdf": {
     "sha256": "a8995a109a401631c3c4308a99f84bf4cbe8626c682659164631dad89bbbaeed",
@@ -1011,7 +3435,115 @@
         "width": 1190,
         "height": 1684
       }
-    ]
+    ],
+    "answers": [
+      {
+        "id": "1",
+        "label": "第1题",
+        "sourcePages": [
+          4
+        ],
+        "src": "exams/a8995a109a401631/answers-v1/answer-1.webp",
+        "width": 1920,
+        "height": 2130,
+        "sha256": "017873983cb42211e052b69968e07f809042282cad30532b95aea70ecb16c08c"
+      },
+      {
+        "id": "2",
+        "label": "第2题",
+        "sourcePages": [
+          4,
+          5
+        ],
+        "src": "exams/a8995a109a401631/answers-v1/answer-2.webp",
+        "width": 1920,
+        "height": 2102,
+        "sha256": "2e6829e4593f3c4a668a4b626d3771778b6aabec4472d4c65392466fb333a434"
+      },
+      {
+        "id": "3",
+        "label": "第3题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/a8995a109a401631/answers-v1/answer-3.webp",
+        "width": 1920,
+        "height": 1042,
+        "sha256": "d2a4df98cdb418c8d52a3b62310b94b0cf1ae53037528716b1c238a6597ff02b"
+      },
+      {
+        "id": "4",
+        "label": "第4题",
+        "sourcePages": [
+          5,
+          6
+        ],
+        "src": "exams/a8995a109a401631/answers-v1/answer-4.webp",
+        "width": 1920,
+        "height": 1528,
+        "sha256": "bf1b3f8bdaa2dd391ffda51ab94dd9e6e2cfe5afd849cc10ee744e2b7a079496"
+      },
+      {
+        "id": "5",
+        "label": "第5题",
+        "sourcePages": [
+          6
+        ],
+        "src": "exams/a8995a109a401631/answers-v1/answer-5.webp",
+        "width": 1920,
+        "height": 1392,
+        "sha256": "0be19fd90f433998e2891798edc5c7c5c447d97c559eaa60d9de2ee0e0feb0da"
+      },
+      {
+        "id": "6",
+        "label": "第6题",
+        "sourcePages": [
+          6,
+          7
+        ],
+        "src": "exams/a8995a109a401631/answers-v1/answer-6.webp",
+        "width": 1920,
+        "height": 2504,
+        "sha256": "422b4043e2891aff86e7a2edcebd62a35730c7b9ebb8f8add72f4ce9d1f82f1f"
+      },
+      {
+        "id": "7",
+        "label": "第7题",
+        "sourcePages": [
+          7
+        ],
+        "src": "exams/a8995a109a401631/answers-v1/answer-7.webp",
+        "width": 1920,
+        "height": 984,
+        "sha256": "600411d1f13aa8d6082a311fb45fa558a69f60be5c226254df9d841f11a3c72b"
+      },
+      {
+        "id": "8",
+        "label": "第8题",
+        "sourcePages": [
+          7,
+          8
+        ],
+        "src": "exams/a8995a109a401631/answers-v1/answer-8.webp",
+        "width": 1920,
+        "height": 850,
+        "sha256": "1a8b24cf57d86f3363ee852bfba8a8290d3306e386fce8882e68819d9e1115a9"
+      },
+      {
+        "id": "9",
+        "label": "第9题",
+        "sourcePages": [
+          8,
+          9
+        ],
+        "src": "exams/a8995a109a401631/answers-v1/answer-9.webp",
+        "width": 1920,
+        "height": 1694,
+        "sha256": "e6d9e91c4991f85f6d2fecce951fd42da167520df64faf80a2ee2dab190f5662"
+      }
+    ],
+    "answerSource": "https://easoncyy.github.io/posts/20261027-linear-algebra-midterm-2025-2026/",
+    "answerLicense": "exams/a8995a109a401631/answers-v1/LICENSE.txt"
   },
   "linalg_test/26-27线性代数期中模拟卷.pdf": {
     "sha256": "3f964be64d108d4977227960362870063caf7fef22bbd25d43a90b823552354f",
@@ -1076,6 +3608,114 @@
         "src": "exams/3f964be64d108d49/page-12.webp",
         "width": 1191,
         "height": 1684
+      }
+    ],
+    "answers": [
+      {
+        "id": "1",
+        "label": "第1题",
+        "sourcePages": [
+          5
+        ],
+        "src": "exams/3f964be64d108d49/answers-v1/answer-1.webp",
+        "width": 1209,
+        "height": 1086,
+        "sha256": "8357f3ebb960f7c1f095dd0ae522423e9745e6f3dfd820c91e796ef61b89aad3"
+      },
+      {
+        "id": "2",
+        "label": "第2题",
+        "sourcePages": [
+          5,
+          6
+        ],
+        "src": "exams/3f964be64d108d49/answers-v1/answer-2.webp",
+        "width": 944,
+        "height": 1445,
+        "sha256": "bad2396d5c28703c5cda4d91ec02c31ff6b02bd49af86d371d5bb815a90d0b07"
+      },
+      {
+        "id": "3",
+        "label": "第3题",
+        "sourcePages": [
+          6,
+          7
+        ],
+        "src": "exams/3f964be64d108d49/answers-v1/answer-3.webp",
+        "width": 1002,
+        "height": 894,
+        "sha256": "951d3da0556c1c4ab185aa7acded899b888191a2bc065f8d6fb64444b67fd8fd"
+      },
+      {
+        "id": "4",
+        "label": "第4题",
+        "sourcePages": [
+          7,
+          8
+        ],
+        "src": "exams/3f964be64d108d49/answers-v1/answer-4.webp",
+        "width": 1275,
+        "height": 1330,
+        "sha256": "2e2fdd094774f451f4d12847ade1c5fafb7d14ccfdee51fa279890e2bb44dccd"
+      },
+      {
+        "id": "5",
+        "label": "第5题",
+        "sourcePages": [
+          8
+        ],
+        "src": "exams/3f964be64d108d49/answers-v1/answer-5.webp",
+        "width": 1113,
+        "height": 1024,
+        "sha256": "9ca4cf43ebf9087e440915dd03a0beda5b3a8992bba427107ba6f865ad1bd152"
+      },
+      {
+        "id": "6",
+        "label": "第6题",
+        "sourcePages": [
+          8,
+          9
+        ],
+        "src": "exams/3f964be64d108d49/answers-v1/answer-6.webp",
+        "width": 1069,
+        "height": 1537,
+        "sha256": "2f9627f43353de03d7b6fd86bb054e1db7213822d64628cb55becffdff0aa30f"
+      },
+      {
+        "id": "7",
+        "label": "第7题",
+        "sourcePages": [
+          9,
+          10
+        ],
+        "src": "exams/3f964be64d108d49/answers-v1/answer-7.webp",
+        "width": 1275,
+        "height": 961,
+        "sha256": "e6598486b5b1fd7de6aa1c1fda9a8f22bef105c701f29c21b6e1336da6d16c87"
+      },
+      {
+        "id": "8",
+        "label": "第8题",
+        "sourcePages": [
+          10,
+          11
+        ],
+        "src": "exams/3f964be64d108d49/answers-v1/answer-8.webp",
+        "width": 1277,
+        "height": 2934,
+        "sha256": "11ddd3e8db601fd6552ca60867f23c396fe638f0b07cd9a5b621984117eb01a2"
+      },
+      {
+        "id": "9",
+        "label": "第9题",
+        "sourcePages": [
+          11,
+          12
+        ],
+        "src": "exams/3f964be64d108d49/answers-v1/answer-9.webp",
+        "width": 1040,
+        "height": 1830,
+        "sha256": "b73e4fae2f816010f9c6dc1e6e1626552ec7a59710e6791abb6de2169694406e"
       }
     ]
   }
