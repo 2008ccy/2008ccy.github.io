@@ -52,6 +52,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
             );
           if (!reading.answers?.length)
             throw new Error(`缺少逐题答案截图：${paper.route}`);
+          if (
+            !reading.answersStart ||
+            reading.answersStart <= 1 ||
+            reading.answersStart > reading.pages.length
+          )
+            throw new Error(`缺少题目与答案的有效分界页：${paper.route}`);
+          await Promise.all(
+            reading.pages
+              .slice(0, reading.answersStart - 1)
+              .map(page => access(resolve(publicRoot, page.src)))
+          );
           const ids = new Set<string>();
           await Promise.all(
             reading.answers.map(async answer => {
@@ -103,6 +114,9 @@ const pdfUrl = getAssetPath(
   `test/files/${paper.route.split("/").map(encodeURIComponent).join("/")}`
 );
 const answers = reading.answers ?? [];
+const questionPages = answers.length
+  ? reading.pages.slice(0, (reading.answersStart ?? 1) - 1)
+  : reading.pages;
 // Keep old page bookmarks useful: an answer-page bookmark lands on its first answer.
 const pageAnchors = new Map<string, number[]>();
 for (
@@ -118,7 +132,7 @@ for (
 
 <PostLayout
   title={`${paper.title}｜${config.site.title}`}
-  description={`${paper.title}参考答案，按题号查看${answers.length}道题的详细解答。`}
+  description={`${paper.title}，在线阅读完整试卷题目，按题号查看${answers.length}道题的参考答案。`}
 >
   <Header />
   <nav class="app-layout breadcrumb mt-8 mb-6" aria-label="面包屑">
@@ -129,7 +143,9 @@ for (
   <main id="main-content" class="app-layout pb-8" data-pagefind-body>
     <h1 class="text-accent text-2xl font-bold sm:text-3xl">{paper.title}</h1>
     <div class="reading-meta">
-      <p>{subject.title} · 参考答案 · {answers.length} 题</p>
+      <p>
+        {subject.title} · 题目 {questionPages.length} 页 · 答案 {answers.length} 题
+      </p>
       {
         paper.mediaType === "application/pdf" && (
           <a class="pdf-download" href={pdfUrl} download={`${paper.title}.pdf`}>
@@ -140,8 +156,13 @@ for (
     </div>
     {
       answers.length > 0 && (
-        <nav class="answer-nav" aria-label="按题号查看答案">
-          <span class="nav-label">题号</span>
+        <nav class="answer-nav" aria-label="题目与答案导航">
+          <a class="section-link" href="#questions">
+            题目
+          </a>
+          <a class="section-link" href="#answers">
+            答案
+          </a>
           <div class="question-links">
             {answers.map(answer => (
               <a
@@ -155,63 +176,104 @@ for (
         </nav>
       )
     }
-    <article aria-label={`${paper.title}参考答案`}>
+    <article aria-label={`${paper.title}题目与参考答案`}>
       {
-        answers.map((answer, index) => (
+        questionPages.length > 0 && (
           <section
-            id={`answer-${answer.id}`}
-            class="answer-card"
-            aria-labelledby={`answer-${answer.id}-heading`}
+            id="questions"
+            class="reading-section"
+            aria-labelledby="questions-heading"
           >
-            {(pageAnchors.get(answer.id) ?? []).map(page => (
-              <span
-                id={`page-${page}`}
-                class="legacy-anchor"
-                aria-hidden="true"
-              />
-            ))}
-            <div class="answer-heading">
-              <h2 id={`answer-${answer.id}-heading`}>{answer.label}</h2>
-              <a
-                href={getAssetPath(answer.src)}
-                target="_blank"
-                rel="noopener"
-                aria-label={`单独查看${answer.label}答案图`}
+            <h2 id="questions-heading" class="section-heading">
+              试卷题目
+            </h2>
+            <nav class="paper-pages" aria-label="题目页码">
+              {questionPages.map((_, index) => (
+                <a href={`#page-${index + 1}`}>第{index + 1}页</a>
+              ))}
+            </nav>
+            {questionPages.map((page, index) => (
+              <section
+                id={`page-${index + 1}`}
+                class="question-page"
+                aria-labelledby={`page-${index + 1}-heading`}
               >
-                单题查看 ↗
-              </a>
-            </div>
-            <a
-              class="answer-image-link"
-              href={getAssetPath(answer.src)}
-              target="_blank"
-              rel="noopener"
-              aria-label={`放大${answer.label}答案图`}
-            >
-              <img
-                src={getAssetPath(answer.src)}
-                width={answer.width}
-                height={answer.height}
-                alt={`${paper.title}，${answer.label}解答`}
-                loading={index === 0 ? "eager" : "lazy"}
-                decoding="async"
-              />
-            </a>
+                <h3 id={`page-${index + 1}-heading`}>题目 · 第{index + 1}页</h3>
+                <a
+                  class="answer-image-link"
+                  href={getAssetPath(page.src)}
+                  target="_blank"
+                  rel="noopener"
+                  aria-label={`放大题目第${index + 1}页`}
+                >
+                  <img
+                    src={getAssetPath(page.src)}
+                    width={page.width}
+                    height={page.height}
+                    alt={`${paper.title}，题目第${index + 1}页`}
+                    loading={index === 0 ? "eager" : "lazy"}
+                    decoding="async"
+                  />
+                </a>
+              </section>
+            ))}
           </section>
-        ))
+        )
       }
       {
-        !answers.length &&
-          reading.pages.map((page, index) => (
-            <section id={`page-${index + 1}`} class="answer-card">
-              <img
-                src={getAssetPath(page.src)}
-                width={page.width}
-                height={page.height}
-                alt={paper.title}
-              />
-            </section>
-          ))
+        answers.length > 0 && (
+          <section
+            id="answers"
+            class="reading-section"
+            aria-labelledby="answers-heading"
+          >
+            <h2 id="answers-heading" class="section-heading">
+              逐题参考答案
+            </h2>
+            {answers.map(answer => (
+              <section
+                id={`answer-${answer.id}`}
+                class="answer-card"
+                aria-labelledby={`answer-${answer.id}-heading`}
+              >
+                {(pageAnchors.get(answer.id) ?? []).map(page => (
+                  <span
+                    id={`page-${page}`}
+                    class="legacy-anchor"
+                    aria-hidden="true"
+                  />
+                ))}
+                <div class="answer-heading">
+                  <h3 id={`answer-${answer.id}-heading`}>{answer.label}</h3>
+                  <a
+                    href={getAssetPath(answer.src)}
+                    target="_blank"
+                    rel="noopener"
+                    aria-label={`单独查看${answer.label}答案图`}
+                  >
+                    单题查看 ↗
+                  </a>
+                </div>
+                <a
+                  class="answer-image-link"
+                  href={getAssetPath(answer.src)}
+                  target="_blank"
+                  rel="noopener"
+                  aria-label={`放大${answer.label}答案图`}
+                >
+                  <img
+                    src={getAssetPath(answer.src)}
+                    width={answer.width}
+                    height={answer.height}
+                    alt={`${paper.title}，${answer.label}解答`}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </a>
+              </section>
+            ))}
+          </section>
+        )
       }
     </article>
     {
@@ -277,10 +339,10 @@ for (
     border-block: 1px solid var(--border);
     background: var(--background);
   }
-  .nav-label {
+  .section-link {
     flex: none;
     font-size: 0.8rem;
-    color: var(--muted-foreground);
+    font-weight: 600;
   }
   .question-links {
     display: flex;
@@ -305,6 +367,30 @@ for (
     color: var(--accent);
     border-color: var(--accent);
   }
+  .reading-section {
+    scroll-margin-top: 5rem;
+  }
+  .section-heading {
+    font-size: 1.15rem;
+    margin-bottom: 1rem;
+  }
+  .paper-pages {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--muted-foreground);
+  }
+  .question-page {
+    margin-bottom: 2.25rem;
+    scroll-margin-top: 5rem;
+  }
+  .question-page h3 {
+    margin-bottom: 0.75rem;
+    color: var(--muted-foreground);
+    font-size: 0.85rem;
+  }
   .answer-card {
     position: relative;
     margin-bottom: 2.25rem;
@@ -322,7 +408,8 @@ for (
     gap: 1rem;
     margin-bottom: 0.75rem;
   }
-  h2 {
+  h2,
+  .answer-heading h3 {
     font-size: 1rem;
     font-weight: 600;
   }
@@ -337,7 +424,8 @@ for (
     border-radius: 0.4rem;
     overflow: hidden;
   }
-  .answer-card img {
+  .answer-card img,
+  .question-page img {
     display: block;
     width: 100%;
     height: auto;
