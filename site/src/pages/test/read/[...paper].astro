@@ -57,6 +57,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 const { paper, reading } = Astro.props;
 const subject = examSubjects.find(subject => subject.id === paper.subject)!;
 const testUrl = getAssetPath("test/");
+const pdfUrl = getAssetPath(`test/files/${paper.route.split("/").map(encodeURIComponent).join("/")}`);
 ---
 
 <PostLayout
@@ -87,6 +88,11 @@ const testUrl = getAssetPath("test/");
           </a>
         )
       }
+      {paper.mediaType === "application/pdf" && (
+        <a href={pdfUrl} download={`${paper.title}.pdf`}>
+          {reading.answersStart ? "下载试卷与答案 PDF ↓" : "下载试卷 PDF ↓"}
+        </a>
+      )}
     </nav>
     <article aria-label={paper.title}>
       {

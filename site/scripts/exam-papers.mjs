@@ -70,6 +70,6 @@ export async function examPapers(homepageRoot) {
     }
   }
   return papers.sort((a, b) =>
-    a.filename.localeCompare(b.filename, "zh-CN", { numeric: true })
+    a.title.localeCompare(b.title, "zh-CN", { numeric: true })
   );
 }
