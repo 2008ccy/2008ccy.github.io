@@ -19,7 +19,8 @@
     "linalg_test/21-22线性代数真题.pdf": 4,
     "linalg_test/22-23线性代数真题.pdf": 4,
     "linalg_test/24-25线性代数真题.pdf": 7,
-    "linalg_test/25-26线性代数真题.pdf": 4
+    "linalg_test/25-26线性代数真题.pdf": 4,
+    "linalg_test/linear-algebra-midterm-2025-2026-spring-summer.pdf": 4
   },
   "titles": {
     "cacu_test/26-27微积分其中模拟.pdf": "26-27微积分模拟",
@@ -41,7 +42,8 @@
     "linalg_test/21-22线性代数真题.pdf": "21-22线性代数真题",
     "linalg_test/22-23线性代数真题.pdf": "22-23线性代数真题",
     "linalg_test/24-25线性代数真题.pdf": "24-25线性代数真题",
-    "linalg_test/25-26线性代数真题.pdf": "25-26线性代数真题"
+    "linalg_test/25-26线性代数真题.pdf": "25-26线性代数真题",
+    "linalg_test/linear-algebra-midterm-2025-2026-spring-summer.pdf": "25-26线性代数春夏期中真题（附参考解析）"
   },
   "hidden": [
     "cacu_test/微积分期中模拟试卷.pdf",
