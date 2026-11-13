@@ -589,6 +589,46 @@
       }
     ]
   },
+  "cacu_notes/cacu_hand_note/note_cacu_11.pdf": {
+    "sha256": "b0eac5c447f630319454462cee45ea8f534e91e665f3e28c4215c38a02625147",
+    "pages": [
+      {
+        "src": "manuscripts/b0eac5c447f63031/page-01.webp",
+        "width": 1190,
+        "height": 1684
+      },
+      {
+        "src": "manuscripts/b0eac5c447f63031/page-02.webp",
+        "width": 1190,
+        "height": 1684
+      },
+      {
+        "src": "manuscripts/b0eac5c447f63031/page-03.webp",
+        "width": 1190,
+        "height": 1684
+      },
+      {
+        "src": "manuscripts/b0eac5c447f63031/page-04.webp",
+        "width": 1190,
+        "height": 1684
+      },
+      {
+        "src": "manuscripts/b0eac5c447f63031/page-05.webp",
+        "width": 1190,
+        "height": 1684
+      },
+      {
+        "src": "manuscripts/b0eac5c447f63031/page-06.webp",
+        "width": 1190,
+        "height": 1684
+      },
+      {
+        "src": "manuscripts/b0eac5c447f63031/page-07.webp",
+        "width": 1190,
+        "height": 1684
+      }
+    ]
+  },
   "cacu_notes/cacu_hand_note/note_cacu_2.pdf": {
     "sha256": "cd6579f8996f4736e6d28d01e006c4b548bd3c7fd57ea2c8a5b431b3b458fe52",
     "pages": [
@@ -1234,43 +1274,133 @@
       }
     ]
   },
-  "cacu_notes/cacu_hand_note/note_cacu_11.pdf": {
-    "sha256": "b0eac5c447f630319454462cee45ea8f534e91e665f3e28c4215c38a02625147",
+  "linalg_notes/linalg_hand_note/note_linalg_10.pdf": {
+    "sha256": "fd7bfd341291b7dd3c0232f43947e09030d25156f702c3fc6690aafeb83fa3d3",
     "pages": [
       {
-        "src": "manuscripts/b0eac5c447f63031/page-01.webp",
-        "width": 1190,
-        "height": 1684
+        "src": "manuscripts/fd7bfd341291b7dd/page-01.webp",
+        "width": 911,
+        "height": 1177
       },
       {
-        "src": "manuscripts/b0eac5c447f63031/page-02.webp",
-        "width": 1190,
-        "height": 1684
+        "src": "manuscripts/fd7bfd341291b7dd/page-02.webp",
+        "width": 911,
+        "height": 1177
       },
       {
-        "src": "manuscripts/b0eac5c447f63031/page-03.webp",
-        "width": 1190,
-        "height": 1684
+        "src": "manuscripts/fd7bfd341291b7dd/page-03.webp",
+        "width": 911,
+        "height": 1177
       },
       {
-        "src": "manuscripts/b0eac5c447f63031/page-04.webp",
-        "width": 1190,
-        "height": 1684
+        "src": "manuscripts/fd7bfd341291b7dd/page-04.webp",
+        "width": 911,
+        "height": 1177
       },
       {
-        "src": "manuscripts/b0eac5c447f63031/page-05.webp",
-        "width": 1190,
-        "height": 1684
+        "src": "manuscripts/fd7bfd341291b7dd/page-05.webp",
+        "width": 911,
+        "height": 1177
       },
       {
-        "src": "manuscripts/b0eac5c447f63031/page-06.webp",
-        "width": 1190,
-        "height": 1684
+        "src": "manuscripts/fd7bfd341291b7dd/page-06.webp",
+        "width": 911,
+        "height": 1177
       },
       {
-        "src": "manuscripts/b0eac5c447f63031/page-07.webp",
-        "width": 1190,
-        "height": 1684
+        "src": "manuscripts/fd7bfd341291b7dd/page-07.webp",
+        "width": 911,
+        "height": 1177
+      },
+      {
+        "src": "manuscripts/fd7bfd341291b7dd/page-08.webp",
+        "width": 911,
+        "height": 1177
+      }
+    ]
+  },
+  "linalg_notes/linalg_hand_note/note_linalg_11.pdf": {
+    "sha256": "8d206d3254d2029ac6d9b19b9f7c53726b8ddda5231bb8e89c5ec5652db66f2e",
+    "pages": [
+      {
+        "src": "manuscripts/8d206d3254d2029a/page-01.webp",
+        "width": 911,
+        "height": 1177
+      },
+      {
+        "src": "manuscripts/8d206d3254d2029a/page-02.webp",
+        "width": 911,
+        "height": 1177
+      },
+      {
+        "src": "manuscripts/8d206d3254d2029a/page-03.webp",
+        "width": 911,
+        "height": 1177
+      },
+      {
+        "src": "manuscripts/8d206d3254d2029a/page-04.webp",
+        "width": 911,
+        "height": 1177
+      },
+      {
+        "src": "manuscripts/8d206d3254d2029a/page-05.webp",
+        "width": 911,
+        "height": 1177
+      }
+    ]
+  },
+  "linalg_notes/linalg_hand_note/note_linalg_8.pdf": {
+    "sha256": "184555c3ed4c97c01d45b4dff1bfd8557466ecd61d2515b183e84a9e95529dc2",
+    "pages": [
+      {
+        "src": "manuscripts/184555c3ed4c97c0/page-01.webp",
+        "width": 911,
+        "height": 1177
+      },
+      {
+        "src": "manuscripts/184555c3ed4c97c0/page-02.webp",
+        "width": 911,
+        "height": 1177
+      },
+      {
+        "src": "manuscripts/184555c3ed4c97c0/page-03.webp",
+        "width": 911,
+        "height": 1177
+      },
+      {
+        "src": "manuscripts/184555c3ed4c97c0/page-04.webp",
+        "width": 911,
+        "height": 1177
+      }
+    ]
+  },
+  "linalg_notes/linalg_hand_note/note_linalg_9.pdf": {
+    "sha256": "c825cf687c50c2b2305af9558253c8dd8af2d7932e2f2e915bafb73d6d4ec0ed",
+    "pages": [
+      {
+        "src": "manuscripts/c825cf687c50c2b2/page-01.webp",
+        "width": 911,
+        "height": 1177
+      },
+      {
+        "src": "manuscripts/c825cf687c50c2b2/page-02.webp",
+        "width": 911,
+        "height": 1177
+      },
+      {
+        "src": "manuscripts/c825cf687c50c2b2/page-03.webp",
+        "width": 911,
+        "height": 1177
+      },
+      {
+        "src": "manuscripts/c825cf687c50c2b2/page-04.webp",
+        "width": 911,
+        "height": 1177
+      },
+      {
+        "src": "manuscripts/c825cf687c50c2b2/page-05.webp",
+        "width": 911,
+        "height": 1177
       }
     ]
   }
